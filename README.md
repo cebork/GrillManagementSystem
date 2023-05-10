@@ -1,2 +1,2 @@
 # GrillFront
-<h1> Siema robimy Grilla </h1>
+<h2> Siema robimy Grilla </h2>
