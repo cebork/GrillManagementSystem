@@ -19,7 +19,9 @@ namespace GrillBackend.Logic
         }
         public void AddNewGrill(Grill grill)
         {
+
             grillList.Add(grill);
+            
         }
         public void RemoveGrill(Grill grill)
         {

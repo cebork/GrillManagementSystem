@@ -1,18 +1,30 @@
-﻿namespace GrillBackend.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
+
+namespace GrillBackend.Models
 {
+    public enum Status
+    {
+        preparing,
+        [Display(Name = "in proggres")]
+        in_progress,
+        Ended
+
+    }
     public class Grill
     {
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime DateOfGrillStart { get; set; }
         public List<GrillMember> GrillMembers { get; set; }
-
+        public Status Status { get; set; }
         public Grill() { }
-        public Grill(string name, DateTime dateOfGrillStart, List<GrillMember> grillMembers)
+        public Grill(string name, DateTime dateOfGrillStart, Status status)
         {
             Name = name;
             DateOfGrillStart = dateOfGrillStart;
-            GrillMembers = grillMembers;
+            GrillMembers = new List<GrillMember>();
+            Status = status;
         }
 
         public override bool Equals(object? obj)
@@ -30,7 +42,8 @@
             string toString =  "GRILL" +
                 $"Name: {Name}" +
                 $"Description: {Description}" +
-                $"DateOfGrillStart: {DateOfGrillStart}";
+                $"DateOfGrillStart: {DateOfGrillStart}" +
+                $"Status: {Status}";
             foreach (var member in GrillMembers)
             {
                 toString += member.ToString();
