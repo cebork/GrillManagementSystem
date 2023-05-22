@@ -1,5 +1,4 @@
-﻿using GrillBackend.Logic;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,17 +23,6 @@ namespace GrillFrontend
         public MainWindow()
         {
             InitializeComponent();
-            GrillLogic grillLogic=new GrillLogic();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            //MessageBox.Show("grill u kefirka :ooo");
-            NewGrillWindow newGrill= new NewGrillWindow(this);
-            Opacity = 0.4;
-            newGrill.ShowDialog();
-            Opacity = 1;
-            
         }
     }
 }

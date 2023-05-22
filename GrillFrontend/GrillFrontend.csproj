@@ -7,8 +7,4 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\GrillBackend\GrillBackend.csproj" />
-  </ItemGroup>
-
 </Project>

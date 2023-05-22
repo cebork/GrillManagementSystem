@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Nowy Grill" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Click" Height="61" Width="162"/>
+
     </Grid>
 </Window>
