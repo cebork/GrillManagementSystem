@@ -10,27 +10,30 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace GrillFrontend
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Logika interakcji dla klasy NewGrillWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class NewGrillWindow : Window
     {
-        public MainWindow()
+        public NewGrillWindow(Window parentWindow)
         {
+            Owner = parentWindow;
             InitializeComponent();
         }
 
-        private void ButtonNewGrill_Click(object sender, RoutedEventArgs e)
+        private void ButtonOK_Click(object sender, RoutedEventArgs e)
         {
-            NewGrillWindow newGrillWindow = new NewGrillWindow(this);
-            Opacity = 0.4;
-            newGrillWindow.ShowDialog();
-            Opacity = 1;
+            Close();
         }
+
+        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
     }
 }
