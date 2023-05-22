@@ -1,0 +1,18 @@
+﻿<Window x:Class="GrillFrontend.NewGrillWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GrillFrontend"
+        mc:Ignorable="d" WindowStyle="None"
+        WindowStartupLocation="CenterOwner"
+        Title="NewGrillWindow" Height="250" Width="400">
+    <Grid>
+        <TextBox HorizontalAlignment="Center" Margin="0,76,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="294" Height="68" TextChanged="TextBox_TextChanged"/>
+        <Button Content="OK" HorizontalAlignment="Left" Margin="79,172,0,0" VerticalAlignment="Top" Height="47" Width="72"
+                Click="btnOK_Click"/>
+        <Button Content="Jednak nie robie grilla:((" HorizontalAlignment="Left" Margin="189,172,0,0" VerticalAlignment="Top" Height="47" Width="147"
+                Click="btnCancel_Click"/>
+
+    </Grid>
+</Window>
