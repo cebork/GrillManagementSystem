@@ -19,12 +19,12 @@ namespace GrillBackend.Models
         public List<GrillMember> GrillMembers { get; set; }
         public Status Status { get; set; }
         public Grill() { }
-        public Grill(string name, DateTime dateOfGrillStart, Status status)
+        public Grill(string name, DateTime dateOfGrillStart)
         {
             Name = name;
             DateOfGrillStart = dateOfGrillStart;
             GrillMembers = new List<GrillMember>();
-            Status = status;
+            Status = Status.preparing;
         }
 
         public override bool Equals(object? obj)
