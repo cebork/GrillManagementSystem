@@ -1,5 +1,5 @@
 using GrillBackend.Logic;
-using GrillBackend.Models;
+using GrillBackend.Models.GrillStuff;
 
 namespace BackendTests
 {
