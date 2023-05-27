@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GrillBackend.Models
+namespace GrillBackend.Models.GrillStuff
 {
     public class GrillMember
     {

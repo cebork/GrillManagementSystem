@@ -1,5 +1,6 @@
 ﻿using GrillBackend.Exceptions;
-using GrillBackend.Models;
+using GrillBackend.Models.Abstractions;
+using GrillBackend.Models.GrillStuff;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,10 @@ namespace GrillBackend.Logic
 {
     public class GrillLogic
     {
-        List<Grill> grillList = new List<Grill>();
-        Grill currentGrill;
+        private List<Grill> grillList = new List<Grill>();
+        private Grill currentGrill;
+        private Dictionary<Grillable, Thread> GrillableThreadDict = new Dictionary<Grillable, Thread>();
+
         public GrillLogic() { }
         public List<Grill> GetGrillList()
         {
@@ -65,5 +68,24 @@ namespace GrillBackend.Logic
                 throw new GrillMemeberNotExistException("Ten uczestnik grilla nie istnieje");
             }
         }
+        public void PutMealOnGrill(Grillable grillable)
+        {
+
+            ThreadStart threadStart = new ThreadStart(grillable.GrillFood);
+            Thread thread = new Thread(threadStart);
+            GrillableThreadDict.Add(grillable, thread);
+            thread.Start();
+        }
+
+        public void TakeMealFromGrill(Grillable grillable)
+        {
+            if (GrillableThreadDict.ContainsKey(grillable))
+            {
+                GrillableThreadDict.Remove(grillable);
+                GrillableThreadDict.TryGetValue(grillable, out Thread thread);
+                thread.Abort();
+            }
+        }
+
     }
 }
