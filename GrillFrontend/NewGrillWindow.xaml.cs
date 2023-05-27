@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using GrillBackend;
 using GrillBackend.Logic;
 using GrillBackend.Models;
+using GrillBackend.Models.GrillStuff;
 
 namespace GrillFrontend
 {
