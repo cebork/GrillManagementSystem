@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GrillBackend;
+using GrillBackend.Logic;
 
 namespace GrillFrontend
 {
@@ -20,6 +22,7 @@ namespace GrillFrontend
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static GrillLogic grillLogic= new GrillLogic();
         public MainWindow()
         {
             InitializeComponent();
@@ -30,6 +33,14 @@ namespace GrillFrontend
             NewGrillWindow newGrillWindow = new NewGrillWindow(this);
             Opacity = 0.4;
             newGrillWindow.ShowDialog();
+            Opacity = 1;
+        }
+
+        private void ButtonGrillList_Click(object sender, RoutedEventArgs e)
+        {
+            ListOfGrills listOfGrills = new ListOfGrills(this);
+            Opacity = 0.4;
+            listOfGrills.ShowDialog();
             Opacity = 1;
         }
     }
