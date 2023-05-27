@@ -40,10 +40,10 @@ namespace GrillBackend.Models
         public override string? ToString()
         {
             string toString =  "GRILL" +
-                $"\nName: {Name}" +
-                $"\nDescription: {Description}" +
-                $"\nDateOfGrillStart: {DateOfGrillStart}" +
-                $"\nStatus: {Status}";
+                $"Name: {Name}" +
+                $"Description: {Description}" +
+                $"DateOfGrillStart: {DateOfGrillStart}" +
+                $"Status: {Status}";
             foreach (var member in GrillMembers)
             {
                 toString += member.ToString();
