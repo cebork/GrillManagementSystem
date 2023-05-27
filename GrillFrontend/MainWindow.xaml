@@ -5,9 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GrillFrontend"
         mc:Ignorable="d"
-        Title="GRILL" Height="450" Width="800">
-    <Grid>
-        <Button Content="Chce grilla" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="-0.373,0.341" Height="68" Width="160" Click="ButtonNewGrill_Click"/>
-
+        Title="GRILL" Height="500" Width="800">
+    <Grid Margin="0,0,0,-6">
+        <Grid.Background>
+            <ImageBrush ImageSource="/4708354.jpg"/>
+        </Grid.Background>
+        <Button Content="Dodaj nowy grill" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="-0.373,0.341" Height="49" Width="224" Click="ButtonNewGrill_Click" Margin="0,177,0,0"/>
+        <Button Content="Lista grilli" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="-0.373,0.341" Height="48" Width="224" Click="ButtonGrillList_Click" Margin="0,260,0,0"/>
     </Grid>
 </Window>

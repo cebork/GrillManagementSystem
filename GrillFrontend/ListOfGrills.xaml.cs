@@ -11,35 +11,30 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using GrillBackend;
-using GrillBackend.Logic;
-using GrillBackend.Models;
 
 namespace GrillFrontend
 {
     /// <summary>
-    /// Logika interakcji dla klasy NewGrillWindow.xaml
+    /// Logika interakcji dla klasy ListOfGrills.xaml
     /// </summary>
-    public partial class NewGrillWindow : Window
+    public partial class ListOfGrills : Window
     {
-        public NewGrillWindow(Window parentWindow)
+        public ListOfGrills(Window parentWindow)
         {
             Owner = parentWindow;
             InitializeComponent();
+            
+            lista.ItemsSource=MainWindow.grillLogic.GetGrillList();
         }
 
-        private void ButtonOK_Click(object sender, RoutedEventArgs e)
-        {
-            Grill grill = new Grill(Name.Text, DateTime.Now);
-            MainWindow.grillLogic.AddNewGrill(grill);
-            MessageBox.Show(grill.ToString());
-            Close();
-        }
-
-        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
+        private void ButtonClose_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
