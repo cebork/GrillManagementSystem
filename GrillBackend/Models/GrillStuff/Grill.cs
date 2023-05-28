@@ -9,13 +9,13 @@ namespace GrillBackend.Models.GrillStuff
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public DateTime DateOfGrillStart { get; set; }
+        public DateTime? DateOfGrillStart { get; set; }
         public List<GrillMember> GrillMembers { get; set; }
         public Status Status { get; set; }
         public List<Meal> MealsAtGrill { get; set; }
         
         public Grill() { }
-        public Grill(string name, DateTime dateOfGrillStart)
+        public Grill(string name, DateTime? dateOfGrillStart)
         {
             Name = name;
             DateOfGrillStart = dateOfGrillStart;

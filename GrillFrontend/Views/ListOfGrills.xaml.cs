@@ -1,6 +1,11 @@
-﻿using System;
+﻿using GrillFrontend.Views;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,8 +28,9 @@ namespace GrillFrontend
         {
             Owner = parentWindow;
             InitializeComponent();
-            
-            lista.ItemsSource=MainWindow.grillLogic.GetGrillList();
+
+
+            lista.ItemsSource = MainWindow.grillLogic.GetGrillList();
         }
 
         private void ButtonClose_Click(object sender, RoutedEventArgs e)
@@ -36,5 +42,15 @@ namespace GrillFrontend
         {
 
         }
+
+        private void ButtonDetails_Click(object sender, RoutedEventArgs e)
+        {
+            //lista.SelectedItem();
+            GrillDetailsWindow grillDetailsWindow = new GrillDetailsWindow(this);
+            grillDetailsWindow.ShowDialog();
+            //Close();
+
+        }
     }
+
 }
