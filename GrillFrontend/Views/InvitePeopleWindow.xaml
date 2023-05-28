@@ -7,7 +7,7 @@
         mc:Ignorable="d" WindowStyle="None" WindowStartupLocation="CenterOwner"
         Title="InvitePeopleWindow" Height="400" Width="600" ResizeMode="NoResize">
     <Grid>
-        <Button Content="Zapisz" HorizontalAlignment="Center" Margin="0,349,0,0" VerticalAlignment="Top" Height="31" Width="100" Click="Button_Click"/>
+        <Button Content="Zapisz" HorizontalAlignment="Center" Margin="0,349,0,0" VerticalAlignment="Top" Height="31" Width="100" Click="ButtonInvite_Click"/>
         <ListBox Name="Goscie" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="18,74,18,83" SelectionMode="Multiple"/>
         <Label Content="Kogo chciałbyś zaprosić na grilla?" HorizontalAlignment="Center" Margin="0,21,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
 
