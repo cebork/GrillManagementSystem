@@ -15,9 +15,10 @@ namespace GrillBackend.Logic
         private Grill currentGrill;
         private Dictionary<Grillable, Thread> GrillableThreadDict = new Dictionary<Grillable, Thread>();
 
-        public GrillLogic() {
-            grillList.Add(new Grill("test1",DateTime.Now));
-            grillList.Add(new Grill("test2", DateTime.Now));
+        public GrillLogic()
+        {
+            grillList.Add(new Grill("test1", DateTime.Now, "opis1"));
+            grillList.Add(new Grill("test2", DateTime.Now, "opis2"));
         }
         public List<Grill> GetGrillList()
         {
@@ -27,7 +28,7 @@ namespace GrillBackend.Logic
         {
 
             grillList.Add(grill);
-            
+
         }
         public void RemoveGrill(Grill grill)
         {

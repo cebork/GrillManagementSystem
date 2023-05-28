@@ -1,31 +1,28 @@
-﻿<Window x:Class="GrillFrontend.ListOfGrills"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GrillFrontend" 
-        xmlns:src="clr-namespace:GrillFrontend.Converters"
-        mc:Ignorable="d" WindowStyle="None" WindowStartupLocation="CenterOwner"
-        Title="ListOfGrills" Height="435"  Width="700">
-    <Window.Resources>
-        <src:StatusConverter x:Key="statusConverter"/>
-    </Window.Resources>
-
+﻿<UserControl x:Class="GrillFrontend.Views.UserControl1"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GrillFrontend.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Button Content="Powrót" HorizontalAlignment="Left" Margin="512,390,0,0" VerticalAlignment="Top" Height="32" Width="140" Click="ButtonClose_Click"/>
         <DataGrid Name="lista" AutoGenerateColumns="False" d:ItemsSource="{d:SampleData ItemCount=25}" SelectionChanged="DataGrid_SelectionChanged" Margin="0,0,0,81" IsReadOnly="True">
             <DataGrid.Columns>
+                <DataGridTextColumn Header="Lp" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Nazwa" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Data" Binding="{Binding DateOfGrillStart}" SortDirection="Ascending"/>
-                <DataGridTextColumn Header="Status" Binding="{Binding Path=Status, Converter={StaticResource statusConverter}}"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
                 <DataGridTextColumn Header="Opis" Binding="{Binding Description}"/>
 
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="ButtonDetails_Click">Szczegóły</Button>
+                            <Button Click="ButtonDetails_Click">Details</Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
+
                 </DataGridTemplateColumn>
 
                 <DataGridTemplateColumn  >
@@ -34,9 +31,9 @@
                             <Button Click="ButtonDelete_Click">Usuń</Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
+
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-
     </Grid>
-</Window>
+</UserControl>

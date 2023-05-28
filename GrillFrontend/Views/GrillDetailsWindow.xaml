@@ -4,16 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GrillFrontend.Views"
+        xmlns:src="clr-namespace:GrillFrontend.Converters"
         mc:Ignorable="d"
         Title="GrillDetailsWindow" Height="450" Width="800">
+    <Window.Resources>
+        <src:StatusConverter x:Key="statusConverter"/>
+    </Window.Resources>
     <Grid>
         <Button Content="Powrót" HorizontalAlignment="Left" Margin="537,391,0,0" VerticalAlignment="Top" Height="33" Width="112" Click="ButtonClose_Click"/>
         <Label Content="Nazwa" HorizontalAlignment="Left" Margin="103,71,0,0" VerticalAlignment="Top" Width="87"/>
-        <Label Content="Data" HorizontalAlignment="Left" Margin="132,158,0,0" VerticalAlignment="Top"/>
-        <Label Content="Opis" HorizontalAlignment="Left" Margin="132,0,0,0" VerticalAlignment="Center"/>
-        <TextBlock HorizontalAlignment="Left" Margin="122,102,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="171,194,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="171,252,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+        <Label Content="Data" HorizontalAlignment="Left" Margin="103,97,0,0" VerticalAlignment="Top"/>
+        <Label Content="Opis" HorizontalAlignment="Left" Margin="104,148,0,0" VerticalAlignment="Top"/>
+        <Label Content="Status" HorizontalAlignment="Left" Margin="104,128,0,0" VerticalAlignment="Top"/>
+        <TextBlock Text="{Binding Name}" HorizontalAlignment="Left" Margin="171,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131"/>
+        <TextBlock Text="{Binding DateOfGrillStart}" HorizontalAlignment="Left" Margin="154,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223"/>
+        <TextBlock Text="{Binding Description}" HorizontalAlignment="Left" Margin="179,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="286" Height="64"/>
+        <TextBlock Text="{Binding Path=Status, Converter={StaticResource statusConverter}}" HorizontalAlignment="Left" Margin="171,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="275"/>
+        
 
     </Grid>
 </Window>

@@ -36,7 +36,7 @@ namespace GrillFrontend
             //MessageBox.Show("\"" + grillDate + "\"");
             if (Name.Text != null && Date.SelectedDate.HasValue && Time.Value.HasValue)
             { 
-                Grill grill = new Grill(Name.Text, Date.SelectedDate.Value + Time.Value.Value.TimeOfDay);
+                Grill grill = new Grill(Name.Text, Date.SelectedDate.Value + Time.Value.Value.TimeOfDay,Description.Text);
                 MainWindow.grillLogic.AddNewGrill(grill);
                 //MessageBox.Show(grill.ToString());
 

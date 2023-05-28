@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using GrillBackend;
+using GrillBackend.Models.GrillStuff;
 
 namespace GrillFrontend.Views
 {
@@ -20,13 +20,14 @@ namespace GrillFrontend.Views
     /// </summary>
     public partial class GrillDetailsWindow : Window
     {
-        public GrillDetailsWindow(Window parent)
+        public GrillDetailsWindow(Window parent,Grill grill)
         {
-            var vm = parent.DataContext;
-            //MessageBox.Show(vm.ToString());
-            this.DataContext = vm;
             Owner = parent;
             InitializeComponent();
+            //MessageBox.Show(grill.ToString());
+            DataContext = grill;
+            //MessageBox.Show(DataContext.ToString());
+            
         }
 
         private void ButtonClose_Click(object sender, RoutedEventArgs e)
