@@ -18,16 +18,6 @@ namespace GrillBackend.Logic
         private XmlSerializer serializer = new XmlSerializer(typeof(List<Grill>));
         public GrillLogic()
         {
-            //grillList.Add(new Grill("test1", DateTime.Now, "opis1"));
-            //grillList.Add(new Grill("test2", DateTime.Now, "opis2"));
-            //CurrentGrill = grillList[0];
-            //AddNewMemeberToGrill(new GrillMember("Ala", "R", "alal@mail.com"));
-            //AddNewMemeberToGrill(new GrillMember("Czarek", "B", "czarek@mail.com"));
-            //AddNewMemeberToGrill(new GrillMember("Patrycja", "Z", "patrycja@mail.com"));
-            //AddNewMemeberToGrill(new GrillMember("Paulina", "O", "paulina@mail.com"));
-            //AddNewMemeberToGrill(new GrillMember("Kamil", "K", "kamil@mail.com"));
-            //CurrentGrill = grillList[1];
-            //AddNewMemeberToGrill(new GrillMember("Ala", "R", "alal@mail.com"));
             try
             {
                 using (FileStream fileStream = new FileStream("output.xml", FileMode.Open))
@@ -79,6 +69,11 @@ namespace GrillBackend.Logic
             {
                 throw new GrillMemeberNotExistException("Ten uczestnik grilla nie istnieje");
             }
+        }
+        public List<GrillMember> getAllGrillMembersDistincted()
+        {
+            var result = grillList.SelectMany(grill => grill.GrillMembers).Distinct().ToList();
+            return result;
         }
 
         public void PutMealOnGrill(Grillable grillable)
