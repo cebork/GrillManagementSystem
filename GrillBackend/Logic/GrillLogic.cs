@@ -18,10 +18,29 @@ namespace GrillBackend.Logic
         private XmlSerializer serializer = new XmlSerializer(typeof(List<Grill>));
         public GrillLogic()
         {
-            using (FileStream fileStream = new FileStream(Constants.Constants.DATA_XML_URI, FileMode.Open))
+            //grillList.Add(new Grill("test1", DateTime.Now, "opis1"));
+            //grillList.Add(new Grill("test2", DateTime.Now, "opis2"));
+            //CurrentGrill = grillList[0];
+            //AddNewMemeberToGrill(new GrillMember("Ala", "R", "alal@mail.com"));
+            //AddNewMemeberToGrill(new GrillMember("Czarek", "B", "czarek@mail.com"));
+            //AddNewMemeberToGrill(new GrillMember("Patrycja", "Z", "patrycja@mail.com"));
+            //AddNewMemeberToGrill(new GrillMember("Paulina", "O", "paulina@mail.com"));
+            //AddNewMemeberToGrill(new GrillMember("Kamil", "K", "kamil@mail.com"));
+            //CurrentGrill = grillList[1];
+            //AddNewMemeberToGrill(new GrillMember("Ala", "R", "alal@mail.com"));
+            try
             {
-                grillList = (List<Grill>)serializer.Deserialize(fileStream);
+                using (FileStream fileStream = new FileStream("output.xml", FileMode.Open))
+                {
+                    grillList = (List<Grill>)serializer.Deserialize(fileStream);
+                }
             }
+            catch(FileNotFoundException ex)
+            {
+                saveUpdatedData();
+            }
+            
+            
         }
 
         public void AddNewGrill(Grill grill)
@@ -83,7 +102,8 @@ namespace GrillBackend.Logic
 
         public void saveUpdatedData()
         {
-            using (TextWriter writer = new StreamWriter(Constants.Constants.DATA_XML_URI))
+
+            using (TextWriter writer = new StreamWriter("output.xml"))
             {
                 serializer.Serialize(writer, grillList);
             }
