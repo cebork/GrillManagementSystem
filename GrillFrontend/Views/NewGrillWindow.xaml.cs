@@ -31,25 +31,17 @@ namespace GrillFrontend
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
         {
-           
-            //MessageBox.Show("\""+Date.SelectedDate.Value.GetType() + "\n"+Time.Value.Value.TimeOfDay.GetType());
-            //MessageBox.Show("\"" + grillDate + "\"");
             if (Name.Text != null && Date.SelectedDate.HasValue && Time.Value.HasValue)
-            { 
-                Grill grill = new Grill(Name.Text, Date.SelectedDate.Value + Time.Value.Value.TimeOfDay,Description.Text);
+            {
+                Grill grill = new Grill(Name.Text, Date.SelectedDate.Value + Time.Value.Value.TimeOfDay, Description.Text);
                 MainWindow.grillLogic.AddNewGrill(grill);
-                //MessageBox.Show(grill.ToString());
-
-                InvitePeopleWindow invitePeopleWindow = new InvitePeopleWindow(Owner);
+                InvitePeopleWindow invitePeopleWindow = new InvitePeopleWindow(Owner, grill);
                 Opacity = 0.4;
                 Close();
                 invitePeopleWindow.ShowDialog();
-
             }
             else
                 MessageBox.Show("Wprowadź wymagane dane");
-
-            //todo dodac description, liste osob(?)
         }
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)

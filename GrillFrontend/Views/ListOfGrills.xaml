@@ -6,21 +6,21 @@
         xmlns:local="clr-namespace:GrillFrontend" 
         xmlns:src="clr-namespace:GrillFrontend.Converters"
         mc:Ignorable="d" WindowStyle="None" WindowStartupLocation="CenterOwner"
-        Title="ListOfGrills" Height="435"  Width="700">
+        Title="ListOfGrills" Height="500"  Width="700" ResizeMode="NoResize">
     <Window.Resources>
         <src:StatusConverter x:Key="statusConverter"/>
     </Window.Resources>
 
     <Grid>
-        <Button Content="Powrót" HorizontalAlignment="Left" Margin="512,390,0,0" VerticalAlignment="Top" Height="32" Width="140" Click="ButtonClose_Click"/>
-        <DataGrid Name="lista" AutoGenerateColumns="False" d:ItemsSource="{d:SampleData ItemCount=25}" SelectionChanged="DataGrid_SelectionChanged" Margin="0,0,0,81" IsReadOnly="True">
+        <Button Content="Powrót" HorizontalAlignment="Center" Margin="0,458,0,0" VerticalAlignment="Top" Height="32" Width="124" Click="ButtonClose_Click"/>
+        <DataGrid Name="lista" AutoGenerateColumns="False" d:ItemsSource="{d:SampleData ItemCount=25}" Margin="5,58,5,58" IsReadOnly="True" CanUserResizeRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nazwa" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Data" Binding="{Binding DateOfGrillStart}" SortDirection="Ascending"/>
                 <DataGridTextColumn Header="Status" Binding="{Binding Path=Status, Converter={StaticResource statusConverter}}"/>
-                <DataGridTextColumn Header="Opis" Binding="{Binding Description}"/>
+                <DataGridTextColumn Header="Opis" Binding="{Binding Description}" CanUserResize="False" MaxWidth="100" MinWidth="11"/>
 
-                <DataGridTemplateColumn>
+                <DataGridTemplateColumn CanUserResize="False">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Click="ButtonDetails_Click">Szczegóły</Button>
@@ -28,7 +28,7 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn  >
+                <DataGridTemplateColumn CanUserResize="False">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Click="ButtonDelete_Click">Usuń</Button>
@@ -37,6 +37,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <Label Content="Wszystkie grille" HorizontalAlignment="Center" Margin="0,14,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
 
     </Grid>
 </Window>
