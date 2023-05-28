@@ -13,14 +13,15 @@ namespace GrillBackend.Models.GrillStuff
         public List<GrillMember> GrillMembers { get; set; }
         public Status Status { get; set; }
         public List<Meal> MealsAtGrill { get; set; }
-        
+
         public Grill() { }
-        public Grill(string name, DateTime? dateOfGrillStart)
+        public Grill(string name, DateTime? dateOfGrillStart, string description)
         {
             Name = name;
             DateOfGrillStart = dateOfGrillStart;
             GrillMembers = new List<GrillMember>();
             Status = Status.preparing;
+            Description = description;
             MealsAtGrill = new List<Meal>();
         }
 

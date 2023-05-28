@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GrillBackend;
 using GrillBackend.Logic;
+using GrillFrontend.Views;
 
 namespace GrillFrontend
 {
@@ -38,6 +39,7 @@ namespace GrillFrontend
 
         private void ButtonGrillList_Click(object sender, RoutedEventArgs e)
         {
+            //UserControl1 userControl1 = new UserControl1();
             ListOfGrills listOfGrills = new ListOfGrills(this);
             Opacity = 0.4;
             listOfGrills.ShowDialog();
