@@ -58,6 +58,12 @@ namespace GrillBackend.Logic
             saveUpdatedData();
         }
 
+        public void AddMultipleMembersToGrill(List<GrillMember> grillMembers)
+        {
+            CurrentGrill.GrillMembers.AddRange(grillMembers);
+            saveUpdatedData();
+        }
+
         public void RemoveMemberFromGrill(GrillMember grillMember)
         {
             if (CurrentGrill.GrillMembers.Contains(grillMember))
