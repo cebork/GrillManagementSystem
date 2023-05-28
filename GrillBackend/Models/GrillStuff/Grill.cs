@@ -5,6 +5,7 @@ using GrillBackend.Models.Enums;
 
 namespace GrillBackend.Models.GrillStuff
 {
+    [Serializable]
     public class Grill
     {
         public string Name { get; set; }
