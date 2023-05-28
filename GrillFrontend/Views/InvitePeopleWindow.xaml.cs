@@ -25,12 +25,19 @@ namespace GrillFrontend
         {
             Owner = parentWindow;
             InitializeComponent();
-            Goscie.ItemsSource = grill.GrillMembers;
-            //Goscie.ItemsSource = MainWindow.grillLogic.GetGrillList();//zmienic na dostepne osob!!!!!!!!!
+            MainWindow.grillLogic.CurrentGrill= grill;
+            Goscie.ItemsSource = MainWindow.grillLogic.getAllGrillMembersDistincted();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ButtonInvite_Click(object sender, RoutedEventArgs e)
         {
+            
+            foreach (GrillMember item in Goscie.SelectedItems)
+            {
+                MainWindow.grillLogic.AddNewMemeberToGrill(item);
+                //MessageBox.Show(item.GetType().Name);
+            }
+            //MainWindow.grillLogic.AddMultipleMembersToGrill((List<GrillMember>)Goscie.SelectedItems);
             Close();
         }
     }
