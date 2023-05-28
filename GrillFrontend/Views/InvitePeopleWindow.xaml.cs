@@ -31,6 +31,11 @@ namespace GrillFrontend
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            
+            foreach (GrillMember item in Goscie.SelectedItems)
+            {
+                MainWindow.grillLogic.AddNewMemeberToGrill(item);
+            }
             Close();
         }
     }
