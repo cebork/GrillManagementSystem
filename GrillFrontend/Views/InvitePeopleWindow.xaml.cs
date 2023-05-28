@@ -35,9 +35,7 @@ namespace GrillFrontend
             foreach (GrillMember item in Goscie.SelectedItems)
             {
                 MainWindow.grillLogic.AddNewMemeberToGrill(item);
-                //MessageBox.Show(item.GetType().Name);
             }
-            //MainWindow.grillLogic.AddMultipleMembersToGrill((List<GrillMember>)Goscie.SelectedItems);
             Close();
         }
     }
