@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using GrillBackend.Models.GrillStuff;
 
 namespace GrillFrontend
 {
@@ -20,17 +21,16 @@ namespace GrillFrontend
     /// </summary>
     public partial class InvitePeopleWindow : Window
     {
-        public InvitePeopleWindow(Window parentWindow)
+        public InvitePeopleWindow(Window parentWindow,Grill grill)
         {
             Owner = parentWindow;
             InitializeComponent();
-            Goscie.ItemsSource = MainWindow.grillLogic.GetGrillList();//zmienic na dostepne osob!!!!!!!!!
+            Goscie.ItemsSource = grill.GrillMembers;
+            //Goscie.ItemsSource = MainWindow.grillLogic.GetGrillList();//zmienic na dostepne osob!!!!!!!!!
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
-            //parent.ShowDialog();
             Close();
         }
     }

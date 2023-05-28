@@ -26,6 +26,7 @@ namespace GrillFrontend
         public static GrillLogic grillLogic= new GrillLogic();
         public MainWindow()
         {
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
         }
 

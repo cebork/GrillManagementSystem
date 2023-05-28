@@ -24,19 +24,14 @@ namespace GrillFrontend.Views
         {
             Owner = parent;
             InitializeComponent();
-            //MessageBox.Show(grill.ToString());
             DataContext = grill;
-            //MessageBox.Show(DataContext.ToString());
-            
+            Goscie.ItemsSource = grill.GrillMembers;
+            //Goscie.ItemsSource = MainWindow.grillLogic.GetGrillList();            
         }
 
         private void ButtonClose_Click(object sender, RoutedEventArgs e)
         {
             Close();
-            //ListOfGrills listOfGrills = new ListOfGrills(this);
-            //Opacity = 0.4;
-            //listOfGrills.ShowDialog();
-            //Opacity = 1;
         }
     }
 }

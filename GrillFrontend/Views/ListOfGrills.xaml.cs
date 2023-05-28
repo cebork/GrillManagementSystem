@@ -33,8 +33,6 @@ namespace GrillFrontend
         {
             Owner = parentWindow;
             InitializeComponent();
-
-
             lista.ItemsSource = MainWindow.grillLogic.GetGrillList();
         }
 
@@ -43,20 +41,14 @@ namespace GrillFrontend
             Close();
         }
 
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void ButtonDetails_Click(object sender, RoutedEventArgs e)
         {
             Grill selectedGrill = ((FrameworkElement)sender).DataContext as Grill;
             GrillDetailsWindow grillDetailsWindow = new GrillDetailsWindow(this, selectedGrill);
             grillDetailsWindow.ShowDialog();
-            Close();
-
-
+            //Close();
         }
+
         private void ButtonDelete_Click(object sender, RoutedEventArgs e)
         {
             Grill selectedGrill = ((FrameworkElement)sender).DataContext as Grill;
