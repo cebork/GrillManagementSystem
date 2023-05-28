@@ -6,54 +6,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace GrillBackend.Logic
 {
     public class GrillLogic
     {
-        private List<Grill> grillList = new List<Grill>();
-        private Grill currentGrill;
+        public List<Grill> grillList { get; set; } = new List<Grill>();
+        public Grill CurrentGrill { get; set; }
         private Dictionary<Grillable, Thread> GrillableThreadDict = new Dictionary<Grillable, Thread>();
-
+        private XmlSerializer serializer = new XmlSerializer(typeof(List<Grill>));
         public GrillLogic()
         {
-            grillList.Add(new Grill("test1", DateTime.Now, "opis1"));
-            grillList.Add(new Grill("test2", DateTime.Now, "opis2"));
-            ChooseGrill(grillList[0]);
-            AddNewMemeberToGrill(new GrillMember("Ala", "R", "alal@mail.com"));
-            AddNewMemeberToGrill(new GrillMember("Czarek", "B", "czarek@mail.com"));
-            AddNewMemeberToGrill(new GrillMember("Patrycja", "Z", "patrycja@mail.com"));
-            AddNewMemeberToGrill(new GrillMember("Paulina", "O", "paulina@mail.com"));
-            AddNewMemeberToGrill(new GrillMember("Kamil", "K", "kamil@mail.com"));
-            ChooseGrill(grillList[1]);
-            AddNewMemeberToGrill(new GrillMember("Ala", "R", "alal@mail.com"));
+            using (FileStream fileStream = new FileStream(Constants.Constants.DATA_XML_URI, FileMode.Open))
+            {
+                grillList = (List<Grill>)serializer.Deserialize(fileStream);
+            }
         }
-        public List<Grill> GetGrillList()
-        {
-            return grillList;
-        }
+
         public void AddNewGrill(Grill grill)
         {
-
             grillList.Add(grill);
-
+            saveUpdatedData();
         }
+
         public void RemoveGrill(Grill grill)
         {
             if (grillList.Contains(grill))
             {
                 grillList.Remove(grill);
-            }
-            else
-            {
-                throw new GrillNotExistException("Grill nie istnieje");
-            }
-        }
-        public void ChooseGrill(Grill grill)
-        {
-            if (grillList.Contains(grill))
-            {
-                currentGrill = grill;
+                saveUpdatedData();
             }
             else
             {
@@ -61,25 +43,25 @@ namespace GrillBackend.Logic
             }
         }
 
-        public List<GrillMember> GetGrillMembers()
-        {
-            return currentGrill.GrillMembers;
-        }
         public void AddNewMemeberToGrill(GrillMember grillMember)
         {
-            currentGrill.GrillMembers.Add(grillMember);
+            CurrentGrill.GrillMembers.Add(grillMember);
+            saveUpdatedData();
         }
+
         public void RemoveMemberFromGrill(GrillMember grillMember)
         {
-            if (currentGrill.GrillMembers.Contains(grillMember))
+            if (CurrentGrill.GrillMembers.Contains(grillMember))
             {
-                currentGrill.GrillMembers.Remove(grillMember);
+                CurrentGrill.GrillMembers.Remove(grillMember);
+                saveUpdatedData();
             }
             else
             {
                 throw new GrillMemeberNotExistException("Ten uczestnik grilla nie istnieje");
             }
         }
+
         public void PutMealOnGrill(Grillable grillable)
         {
 
@@ -99,5 +81,12 @@ namespace GrillBackend.Logic
             }
         }
 
+        public void saveUpdatedData()
+        {
+            using (TextWriter writer = new StreamWriter(Constants.Constants.DATA_XML_URI))
+            {
+                serializer.Serialize(writer, grillList);
+            }
+        }
     }
 }

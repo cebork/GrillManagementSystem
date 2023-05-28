@@ -26,7 +26,7 @@ namespace GrillFrontend.Views
             InitializeComponent();
 
 
-            lista.ItemsSource = MainWindow.grillLogic.GetGrillList();
+            lista.ItemsSource = MainWindow.grillLogic.grillList;
         }
 
         private void ButtonClose_Click(object sender, RoutedEventArgs e)

@@ -23,10 +23,15 @@ namespace GrillFrontend
     /// </summary>
     public partial class NewGrillWindow : Window
     {
+        public delegate void ButtonClickHandler(object sender, RoutedEventArgs e);
+        public event ButtonClickHandler onButtonClicked;
+        //Opacity = 0.4;
         public NewGrillWindow(Window parentWindow)
         {
             Owner = parentWindow;
             InitializeComponent();
+
+            //onButtonClicked += ButtonOK_Click;
         }
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
@@ -36,7 +41,6 @@ namespace GrillFrontend
                 Grill grill = new Grill(Name.Text, Date.SelectedDate.Value + Time.Value.Value.TimeOfDay, Description.Text);
                 MainWindow.grillLogic.AddNewGrill(grill);
                 InvitePeopleWindow invitePeopleWindow = new InvitePeopleWindow(Owner, grill);
-                Opacity = 0.4;
                 Close();
                 invitePeopleWindow.ShowDialog();
             }
@@ -48,6 +52,5 @@ namespace GrillFrontend
         {
             Close();
         }
-
     }
 }
