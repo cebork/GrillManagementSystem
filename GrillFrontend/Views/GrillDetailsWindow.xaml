@@ -21,10 +21,19 @@
         <TextBlock Text="{Binding Description}" HorizontalAlignment="Left" Margin="104,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="555" Height="84"/>
         <TextBlock Text="{Binding Path=Status, Converter={StaticResource statusConverter}}" HorizontalAlignment="Left" Margin="104,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="555" Height="26"/>
         <Label Content="Szczegóły grilla" HorizontalAlignment="Center" Margin="0,8,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Width="112"/>
-        <DataGrid Name="Goscie" d:ItemsSource="{d:SampleData ItemCount=15}" Margin="5,255,5,69" IsReadOnly="True" CanUserDeleteRows="False" CanUserResizeRows="False" CanUserAddRows="False" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Grillowicze" Binding="{Binding Name}"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <ListBox Name="Goscie" d:ItemsSource="{d:SampleData ItemCount=15}" Margin="18,275,18,83">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}"/>
+                        <TextBlock Text=" "/>
+                        <TextBlock Text="{Binding Surname}"/>
+                        <TextBlock Text=" "/>
+                        <TextBlock Text="{Binding Email}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Label Content="Grillowicze" HorizontalAlignment="Center" Margin="0,246,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Width="84"/>
     </Grid>
 </Window>

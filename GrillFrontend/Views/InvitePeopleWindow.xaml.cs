@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using GrillBackend.Models.GrillStuff;
+using GrillFrontend.ViewModels;
 
 namespace GrillFrontend
 {
@@ -21,21 +23,40 @@ namespace GrillFrontend
     /// </summary>
     public partial class InvitePeopleWindow : Window
     {
+        public ObservableCollection<ViewModels.ListBoxItem> Items { get; set; }
+
         public InvitePeopleWindow(Window parentWindow,Grill grill)
         {
             Owner = parentWindow;
             InitializeComponent();
             MainWindow.grillLogic.CurrentGrill= grill;
-            Goscie.ItemsSource = MainWindow.grillLogic.getAllGrillMembersDistincted();
+            Items = new ObservableCollection<ViewModels.ListBoxItem>();
+            List<GrillMember> members = MainWindow.grillLogic.getAllGrillMembersDistincted();
+            foreach (GrillMember member in members)
+            {
+                Items.Add(new ViewModels.ListBoxItem(member,false));
+            }
+            
+            Goscie.ItemsSource = Items;
         }
 
         private void ButtonInvite_Click(object sender, RoutedEventArgs e)
         {
-            
-            foreach (GrillMember item in Goscie.SelectedItems)
+            List<ViewModels.ListBoxItem> checkedItems = new List<ViewModels.ListBoxItem>();
+
+            foreach (ViewModels.ListBoxItem item in Items)
             {
-                MainWindow.grillLogic.AddNewMemeberToGrill(item);
+                if (item.IsSelected)
+                {
+                    checkedItems.Add(item);
+                }
             }
+
+            foreach (ViewModels.ListBoxItem item in checkedItems)
+            {
+                MainWindow.grillLogic.AddNewMemeberToGrill((GrillMember)item.Item);
+            }
+
             Close();
         }
     }

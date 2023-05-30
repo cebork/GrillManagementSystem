@@ -15,23 +15,18 @@
         <Button Content="Powrót" HorizontalAlignment="Center" Margin="0,458,0,0" VerticalAlignment="Top" Height="32" Width="124" Click="ButtonClose_Click"/>
         <DataGrid Name="lista" AutoGenerateColumns="False" d:ItemsSource="{d:SampleData ItemCount=25}" Margin="5,58,5,58" IsReadOnly="True" CanUserResizeRows="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nazwa" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Data" Binding="{Binding DateOfGrillStart}" SortDirection="Ascending"/>
-                <DataGridTextColumn Header="Status" Binding="{Binding Path=Status, Converter={StaticResource statusConverter}}"/>
-                <DataGridTextColumn Header="Opis" Binding="{Binding Description}" CanUserResize="False" MaxWidth="100" MinWidth="11"/>
+                <DataGridTextColumn Header="Nazwa" Binding="{Binding Name}" Width="1*"/>
+                <DataGridTextColumn Header="Data" Binding="{Binding DateOfGrillStart}" SortDirection="Ascending" Width="1*"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Path=Status, Converter={StaticResource statusConverter}}" Width="auto"/>
+                <DataGridTextColumn Header="Opis" Binding="{Binding Description}" CanUserResize="False" MaxWidth="100" Width="1*"/>
 
-                <DataGridTemplateColumn CanUserResize="False">
+                <DataGridTemplateColumn CanUserResize="False" Width="1*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="ButtonDetails_Click">Szczegóły</Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-
-                <DataGridTemplateColumn CanUserResize="False">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Click="ButtonDelete_Click">Usuń</Button>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Click="ButtonDetails_Click" Margin="0,0,10,0">Szczegóły</Button>
+                                <Button Click="ButtonDelete_Click">Usuń</Button>
+                            </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
