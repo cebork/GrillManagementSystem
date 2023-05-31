@@ -6,10 +6,15 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationIcon>grill_icon_212228.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="4708354.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="grill_icon_212228.ico" />
   </ItemGroup>
 
   <ItemGroup>
