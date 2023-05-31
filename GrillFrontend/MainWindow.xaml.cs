@@ -50,5 +50,14 @@ namespace GrillFrontend
             listOfGrills.ShowDialog();
             Opacity = 1;
         }
+
+        private void ButtonMembersList_Click(object sender, RoutedEventArgs e)
+        {
+            ListOfMembers listOfMembers = new ListOfMembers(this);
+            Opacity = 0.4;
+            listOfMembers.ShowDialog();
+            Opacity = 1;
+        }
+    
     }
 }

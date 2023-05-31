@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GrillBackend.Constants.Constants">
+    <Position X="8.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Constants\Constants.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GrillBackend.Exceptions.GrillNotExistException">
+    <Position X="8.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\Exceptions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GrillBackend.Exceptions.GrillMemeberNotExistException">
+    <Position X="8.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\Exceptions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GrillBackend.Logic.GrillLogic">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAIAABAAIAAAAAAAEACAAAAAGQIAAAIAEAAAA=</HashCode>
+      <FileName>Logic\GrillLogic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GrillBackend.Models.Abstractions.Meal">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAgAAAAAAQAACAAAAABAAAAABQAAAA=</HashCode>
+      <FileName>Models\Abstractions\Meal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GrillBackend.Models.GrillStuff.Grill">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAggAAEgAAAAAQAAAAAIIAAAAAAQAAAAAA=</HashCode>
+      <FileName>Models\GrillStuff\Grill.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GrillBackend.Models.GrillStuff.GrillMember">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAEgAAAAAQgBAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\GrillStuff\GrillMember.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GrillBackend.Models.Meals.Sausage">
+    <Position X="0.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Meals\Sausage.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.144" />
+  </Class>
+  <Interface Name="GrillBackend.Models.Abstractions.Grillable">
+    <Position X="0.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Abstractions\Grillable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GrillBackend.Models.Abstractions.NotGrillAble">
+    <Position X="2.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Abstractions\NotGrillAble.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="GrillBackend.Models.Enums.DonenessLevel">
+    <Position X="10.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAACAAQAAAAAAAAAA=</HashCode>
+      <FileName>Models\Enums\DonenessLevel.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GrillBackend.Models.Enums.SpicyLevel">
+    <Position X="10.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Enums\SpicyLevel.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GrillBackend.Models.Enums.Status">
+    <Position X="10.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAEAAAAAAAAAAAAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Enums\Status.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
