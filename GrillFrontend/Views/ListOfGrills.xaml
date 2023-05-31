@@ -23,7 +23,7 @@
                 <DataGridTemplateColumn CanUserResize="False" Width="1*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Button Click="ButtonDetails_Click" Margin="0,0,10,0">Szczegóły</Button>
                                 <Button Click="ButtonDelete_Click">Usuń</Button>
                             </StackPanel>

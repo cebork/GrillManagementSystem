@@ -6,17 +6,33 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:GrillFrontend"
         mc:Ignorable="d" WindowStyle="None" WindowStartupLocation="CenterOwner"
-        Title="NewGrillWindow" Height="400" Width="600" ResizeMode="NoResize">
-    <Grid HorizontalAlignment="Center" Width="600" Height="400" VerticalAlignment="Center" >
-        <TextBox Name="Name" Margin="44,86,45,0" TextWrapping="Wrap" Text="Grill u kefirka:ooo" Height="24" VerticalAlignment="Top"/>
-        <Button Content="Dalej" Margin="126,0,0,25" Click="ButtonOK_Click" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="138"/>
+        Title="NewGrillWindow" Height="500" Width="600" ResizeMode="NoResize">
+    <Grid HorizontalAlignment="Center" Width="600" Height="500" VerticalAlignment="Center" >
+        <TextBox Name="Name" Margin="44,78,45,0" TextWrapping="Wrap" Text="Grill u kefirka:ooo" Height="24" VerticalAlignment="Top"/>
+        <Button Content="Zapisz" Margin="126,0,0,25" Click="ButtonOK_Click" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="138"/>
         <Button Content="Anuluj" Margin="0,0,127,25" Click="ButtonCancel_Click" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="135"/>
-        <DatePicker Name="Date" Margin="44,141,313,0" VerticalAlignment="Top" Height="29"/>
-        <xctk:TimePicker Name="Time" Format="LongTime" Margin="311,141,45,0" VerticalAlignment="Top" Height="29"/>
-        <Label Content="Nazwa grilla" HorizontalAlignment="Left" Margin="44,60,0,0" Width="396" Height="26" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <DatePicker Name="Date" Margin="44,138,313,0" VerticalAlignment="Top" Height="29"/>
+        <xctk:TimePicker Name="Time" Format="LongTime" Margin="311,138,45,0" VerticalAlignment="Top" Height="29"/>
+        <Label Content="Nazwa grilla" HorizontalAlignment="Left" Margin="44,52,0,0" Width="396" Height="26" VerticalAlignment="Top"/>
         <Label Content="DODAJ NOWY GRILL" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <Label Content="Kiedy grill?" HorizontalAlignment="Left" Margin="44,115,0,0" Width="396" Height="26" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-        <TextBox Name="Description" Margin="44,205,45,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="100"/>
-        <Label Content="Opis" HorizontalAlignment="Left" Margin="44,180,0,0" Width="396" Height="25" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Label Content="Kiedy grill?" HorizontalAlignment="Left" Margin="44,107,0,0" Width="396" Height="26" VerticalAlignment="Top"/>
+        <TextBox Name="Description" Margin="44,197,45,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="54"/>
+        <Label Content="Opis" HorizontalAlignment="Left" Margin="44,172,0,0" Width="396" Height="25" VerticalAlignment="Top"/>
+        <ListBox Name="Goscie" d:ItemsSource="{d:SampleData ItemCount=15}" Margin="44,286,45,68" SelectionMode="Multiple">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox IsChecked="{Binding IsSelected}" Margin="0,0,5,0"/>
+                        <TextBlock Text="{Binding Item.Name}" />
+                        <TextBlock Text=" " />
+                        <TextBlock Text="{Binding Item.Surname}" />
+                        <TextBlock Text=" [" />
+                        <TextBlock Text="{Binding Item.Email}" />
+                        <TextBlock Text="]" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Label Content="Kogo chciałbyś zaprosić na grilla?" HorizontalAlignment="Left" Margin="44,256,0,0" Width="396" Height="30" VerticalAlignment="Top"/>
     </Grid>
 </Window>

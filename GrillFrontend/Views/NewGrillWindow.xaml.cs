@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,26 +24,46 @@ namespace GrillFrontend
     /// </summary>
     public partial class NewGrillWindow : Window
     {
+        public ObservableCollection<ViewModels.ListBoxItem> Items { get; set; }
         public delegate void ButtonClickHandler(object sender, RoutedEventArgs e);
         public event ButtonClickHandler onButtonClicked;
-        //Opacity = 0.4;
         public NewGrillWindow(Window parentWindow)
         {
             Owner = parentWindow;
             InitializeComponent();
+            //MainWindow.grillLogic.CurrentGrill = grill;
+            Items = new ObservableCollection<ViewModels.ListBoxItem>();
+            List<GrillMember> members = MainWindow.grillLogic.getAllGrillMembersDistincted();
+            foreach (GrillMember member in members)
+            {
+                Items.Add(new ViewModels.ListBoxItem(member, false));
+            }
 
+            Goscie.ItemsSource = Items;
             //onButtonClicked += ButtonOK_Click;
         }
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
         {
+
             if (Name.Text != null && Date.SelectedDate.HasValue && Time.Value.HasValue)
             {
+                List<ViewModels.ListBoxItem> checkedItems = new List<ViewModels.ListBoxItem>();
                 Grill grill = new Grill(Name.Text, Date.SelectedDate.Value + Time.Value.Value.TimeOfDay, Description.Text);
                 MainWindow.grillLogic.AddNewGrill(grill);
-                InvitePeopleWindow invitePeopleWindow = new InvitePeopleWindow(Owner, grill);
+                foreach (ViewModels.ListBoxItem item in Items)
+                {
+                    if (item.IsSelected)
+                    {
+                        checkedItems.Add(item);
+                    }
+                }
+                MainWindow.grillLogic.CurrentGrill = grill;
+                foreach (ViewModels.ListBoxItem item in checkedItems)
+                {
+                    MainWindow.grillLogic.AddNewMemeberToGrill((GrillMember)item.Item);
+                }
                 Close();
-                invitePeopleWindow.ShowDialog();
             }
             else
                 MessageBox.Show("Wprowadź wymagane dane");

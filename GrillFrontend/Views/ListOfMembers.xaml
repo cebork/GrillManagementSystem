@@ -1,0 +1,32 @@
+﻿<Window x:Class="GrillFrontend.Views.ListOfMembers"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GrillFrontend.Views"
+        mc:Ignorable="d" WindowStyle="None" WindowStartupLocation="CenterOwner"
+        Title="ListOfMembers" Height="500"  Width="700" ResizeMode="NoResize">
+    <Grid>
+        <Button Content="Powrót" Margin="402,453,174,0" VerticalAlignment="Top" Height="32" Click="ButtonClose_Click"/>
+        <DataGrid Name="members" AutoGenerateColumns="False" d:ItemsSource="{d:SampleData ItemCount=25}" Margin="5,47,5,69" IsReadOnly="True" CanUserResizeRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Imie" Binding="{Binding Name}" Width="3*"/>
+                <DataGridTextColumn Header="Nazwisko" Binding="{Binding Surname}" Width="3*"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" CanUserResize="False" Width="3*"/>
+
+                <DataGridTemplateColumn CanUserResize="False" Width="1*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">-->
+                                <Button Click="ButtonEdit_Click" Margin="0,0,10,0">Edytuj</Button>
+                            <!--</StackPanel>-->
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Lista wszystkich grillowiczy" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
+        <Button Content="Dodaj grillowicza" Margin="174,453,0,0" VerticalAlignment="Top" Height="32" Click="ButtonClose_Click" HorizontalAlignment="Left" Width="124"/>
+
+    </Grid>
+</Window>
