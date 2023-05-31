@@ -82,6 +82,15 @@ namespace GrillBackend.Logic
             return result;
         }
 
+        public void EditGrill(string name, string description, DateTime grillStart, List<GrillMember> grillMembers)
+        {
+            CurrentGrill.Name = name;
+            CurrentGrill.Description = description;
+            CurrentGrill.DateOfGrillStart = grillStart;
+            CurrentGrill.GrillMembers = grillMembers;
+            saveUpdatedData();
+        }
+
         public void PutMealOnGrill(Grillable grillable)
         {
 
