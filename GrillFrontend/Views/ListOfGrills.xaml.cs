@@ -46,7 +46,7 @@ namespace GrillFrontend
             Grill selectedGrill = ((FrameworkElement)sender).DataContext as Grill;
             GrillDetailsWindow grillDetailsWindow = new GrillDetailsWindow(this, selectedGrill);
             grillDetailsWindow.ShowDialog();
-            //Close();
+            lista.Items.Refresh();
         }
 
         private void ButtonDelete_Click(object sender, RoutedEventArgs e)

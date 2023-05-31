@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,12 +27,23 @@ namespace GrillFrontend.Views
             InitializeComponent();
             DataContext = grill;
             Goscie.ItemsSource = grill.GrillMembers;
+            MainWindow.grillLogic.CurrentGrill = grill;
             //Goscie.ItemsSource = MainWindow.grillLogic.GetGrillList();            
         }
 
         private void ButtonClose_Click(object sender, RoutedEventArgs e)
         {
             Close();
+            
+        }
+
+        private void ButtonEdit_Click(object sender, RoutedEventArgs e)
+        {
+            EditGrillWindow editGrillWindow = new EditGrillWindow(this, MainWindow.grillLogic.CurrentGrill);
+            editGrillWindow.ShowDialog();
+            //Goscie.Items.Refresh();
+            
+            //Close();
         }
     }
 }
