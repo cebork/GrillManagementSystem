@@ -33,11 +33,8 @@
                     <Setter Property="Background" Value="orange"/>
                     <Setter Property="Foreground" Value="Black" />
                     <Setter Property="BorderBrush" Value="Transparent" />
-
-
                 </Trigger>
             </Style.Triggers>
-
         </Style>
     </Application.Resources>
 </Application>
