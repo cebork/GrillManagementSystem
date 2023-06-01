@@ -68,5 +68,15 @@ namespace GrillFrontend.Views
             Close();
             Owner.Close();
         }
+
+        private void ButtonNewMember_Click(object sender, RoutedEventArgs e)
+        {
+            NewMember newMember = new NewMember(this);
+            Opacity = 0.4;
+            newMember.ShowDialog();
+            Goscie.Items.Refresh();
+            
+            Opacity = 1;
+        }
     }
 }

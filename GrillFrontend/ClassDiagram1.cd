@@ -18,7 +18,7 @@
   <Class Name="GrillFrontend.Views.GrillDetailsWindow" BaseTypeListCollapsed="true">
     <Position X="2.5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Views\GrillDetailsWindow.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -68,6 +68,22 @@
       <FileName>MainWindow.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GrillFrontend.Views.EditGrillWindow" Collapsed="true">
+    <Position X="9.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAQAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\EditGrillWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GrillFrontend.Views.ListOfMembers" Collapsed="true">
+    <Position X="11.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ListOfMembers.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

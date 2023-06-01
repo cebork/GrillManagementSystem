@@ -34,5 +34,6 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <Label Content="Kogo chciałbyś zaprosić na grilla?" HorizontalAlignment="Left" Margin="44,256,0,0" Width="396" Height="30" VerticalAlignment="Top"/>
+        <!--<Button Content="Dodaj nowego grillowicza" Margin="393,0,0,219" Click="ButtonNewMember_Click" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="162"/>-->
     </Grid>
 </Window>

@@ -16,6 +16,7 @@ using GrillBackend;
 using GrillBackend.Logic;
 using GrillBackend.Models;
 using GrillBackend.Models.GrillStuff;
+using GrillFrontend.Views;
 
 namespace GrillFrontend
 {
@@ -72,6 +73,14 @@ namespace GrillFrontend
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void ButtonNewMember_Click(object sender, RoutedEventArgs e)
+        {
+            NewMember newMember = new NewMember(this);
+            Opacity = 0.4;
+            newMember.ShowDialog();
+            Opacity = 1;
         }
     }
 }
