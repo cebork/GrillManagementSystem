@@ -17,5 +17,15 @@ namespace GrillFrontend.ViewModels
             Item = item;
             IsSelected = isSelected;
         }
+
+        public override string? ToString()
+        {
+            return Item.ToString();
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return ToString().Equals(obj.ToString());
+        }
     }
 }

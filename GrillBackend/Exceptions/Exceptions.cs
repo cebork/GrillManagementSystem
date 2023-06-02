@@ -28,4 +28,16 @@ namespace GrillBackend.Exceptions
 		  System.Runtime.Serialization.SerializationInfo info,
 		  System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
 	}
+
+
+	[Serializable]
+	public class GrillMemberAlreadyExistsException : Exception
+	{
+		public GrillMemberAlreadyExistsException() { }
+		public GrillMemberAlreadyExistsException(string message) : base(message) { }
+		public GrillMemberAlreadyExistsException(string message, Exception inner) : base(message, inner) { }
+		protected GrillMemberAlreadyExistsException(
+		  System.Runtime.Serialization.SerializationInfo info,
+		  System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+	}
 }

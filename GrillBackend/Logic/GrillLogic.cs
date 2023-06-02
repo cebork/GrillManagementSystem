@@ -14,6 +14,8 @@ namespace GrillBackend.Logic
     {
         public List<Grill> grillList { get; set; } = new List<Grill>();
         public Grill CurrentGrill { get; set; }
+        public List<GrillMember> MemberList { get; set; }
+
         private Dictionary<Grillable, Thread> GrillableThreadDict = new Dictionary<Grillable, Thread>();
         private XmlSerializer serializer = new XmlSerializer(typeof(List<Grill>));
         public GrillLogic()
@@ -32,7 +34,6 @@ namespace GrillBackend.Logic
             
             
         }
-
         public void AddNewGrill(Grill grill)
         {
             grillList.Add(grill);
@@ -51,35 +52,31 @@ namespace GrillBackend.Logic
                 throw new GrillNotExistException("Grill nie istnieje");
             }
         }
-
+        public void AddNewMember(GrillMember grillMember)
+        {
+            if (!CurrentGrill.GrillMembers.Contains(grillMember))
+            {
+                CurrentGrill.GrillMembers.Add(grillMember);
+            }
+            if (!MemberList.Contains(grillMember))
+            {
+                MemberList.Add(grillMember);
+            }
+            else
+            {
+                throw new GrillMemberAlreadyExistsException("Member już istniej");
+            }
+            saveUpdatedData();
+        }
         public void AddNewMemeberToGrill(GrillMember grillMember)
         {
             CurrentGrill.GrillMembers.Add(grillMember);
             saveUpdatedData();
         }
 
-        public void AddMultipleMembersToGrill(List<GrillMember> grillMembers)
+        public void GetAllGrillMembersDistincted()
         {
-            CurrentGrill.GrillMembers.AddRange(grillMembers);
-            saveUpdatedData();
-        }
-
-        public void RemoveMemberFromGrill(GrillMember grillMember)
-        {
-            if (CurrentGrill.GrillMembers.Contains(grillMember))
-            {
-                CurrentGrill.GrillMembers.Remove(grillMember);
-                saveUpdatedData();
-            }
-            else
-            {
-                throw new GrillMemeberNotExistException("Ten uczestnik grilla nie istnieje");
-            }
-        }
-        public List<GrillMember> getAllGrillMembersDistincted()
-        {
-            var result = grillList.SelectMany(grill => grill.GrillMembers).Distinct().ToList();
-            return result;
+            MemberList = grillList.SelectMany(grill => grill.GrillMembers).Distinct().ToList();
         }
 
         public void EditGrill(string name, string description, DateTime grillStart, List<GrillMember> grillMembers)

@@ -43,7 +43,7 @@ namespace GrillFrontend
 
         private void ButtonDetails_Click(object sender, RoutedEventArgs e)
         {
-            Grill selectedGrill = ((FrameworkElement)sender).DataContext as Grill;
+            Grill selectedGrill = ((FrameworkElement)sender).DataContext as Grill; // wyciaganie elementu z data gridu : D
             GrillDetailsWindow grillDetailsWindow = new GrillDetailsWindow(this, selectedGrill);
             grillDetailsWindow.ShowDialog();
             lista.Items.Refresh();
