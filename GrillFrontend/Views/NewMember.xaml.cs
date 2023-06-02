@@ -13,7 +13,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using GrillBackend.Models.GrillStuff;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace GrillFrontend.Views
 {
@@ -34,7 +33,7 @@ namespace GrillFrontend.Views
             {
                 
                 MainWindow.grillLogic.AddNewMemeberToGrill(new GrillMember(Name.Text, Surname.Text, Email.Text));
-                MessageBox.Show(MainWindow.grillLogic.CurrentGrill.ToString());
+                //MessageBox.Show(MainWindow.grillLogic.CurrentGrill.ToString());
                 Close();
             }
             else

@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
-    <ApplicationIcon>grill_icon_212228.ico</ApplicationIcon>
+    <ApplicationIcon>Img\grill_icon_212228.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="grill_icon_212228.ico" />
+    <Content Include="Img\grill_icon_212228.ico" />
   </ItemGroup>
 
   <ItemGroup>
