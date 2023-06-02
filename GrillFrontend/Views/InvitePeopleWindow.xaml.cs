@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using GrillBackend.Models.GrillStuff;
 using GrillFrontend.ViewModels;
+using GrillFrontend.Views;
 
 namespace GrillFrontend
 {
@@ -58,6 +59,24 @@ namespace GrillFrontend
             }
 
             Close();
+        }
+
+        private void ButtonNewMember_Click(object sender, RoutedEventArgs e)
+        {
+            NewMember newMember = new NewMember(this);
+            Opacity = 0.4;
+            newMember.ShowDialog();
+            //Items = new ObservableCollection<ViewModels.ListBoxItem>();
+            //List<GrillMember> members = MainWindow.grillLogic.getAllGrillMembersDistincted();
+            //foreach (GrillMember member in members)
+            //{
+            //    Items.Add(new ViewModels.ListBoxItem(member, false));
+            //}
+
+            //Goscie.ItemsSource = Items;
+            //Goscie.Items.Refresh();
+
+            Opacity = 1;
         }
     }
 }

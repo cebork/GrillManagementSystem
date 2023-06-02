@@ -20,7 +20,8 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Label Content="Kogo chciałbyś zaprosić na grilla?" HorizontalAlignment="Center" Margin="0,21,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+        <Label Content="Kogo chciałbyś zaprosić na grilla?" HorizontalAlignment="Left" Margin="18,23,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+        <Button Content="Dodaj innego grillowicza" Margin="407,0,0,348" Click="ButtonNewMember_Click" Height="29" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="175"/>
 
     </Grid>
 </Window>
