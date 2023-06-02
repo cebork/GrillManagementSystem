@@ -10,8 +10,6 @@
         Title="GrillDetailsWindow" Height="500" Width="700" ResizeMode="NoResize">
     <Window.Resources>
         <src:StatusConverter x:Key="statusConverter"/>
-        <!--<src:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-        <src:CheckBoxConverter x:Key="CheckBoxConverter" />-->
     </Window.Resources>
 
     <Grid>
@@ -30,11 +28,6 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <!--<CheckBox Checked="{Binding IsSelected, Converter={StaticResource BooleanToVisibilityConverter}}"/>-->
-                        <!--<CheckBox x:Name="myCheckBox" IsChecked="{Binding BooleanToVisibilityConverter}" Content="Zaznaczony CheckBox" Loaded="myCheckBox_Loaded" />-->
-                        <!--<CheckBox Content="{Binding}" Loaded="myCheckBox_Loaded"></CheckBox>-->
-                        <!--<CheckBox IsChecked="{Binding myCheckBox_Loaded}" Loaded="myCheckBox_Loaded"/>-->
-                        <!--<CheckBox IsChecked="{Binding Path=., Converter={StaticResource CheckBoxConverter}}"/>-->
                         <CheckBox IsChecked="{Binding IsSelected}" Margin="0,0,5,0"/>
                         <TextBlock Text="{Binding Item.Name}" />
                         <TextBlock Text=" " />
@@ -47,7 +40,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <Label Content="Grillowicze" HorizontalAlignment="Left" Margin="44,250,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Width="84"/>
-        <Button Content="Zapisz" HorizontalAlignment="Left" Margin="199,442,0,0" VerticalAlignment="Top" Height="28" Width="112" Click="ButtonEdit_Click"/>
+        <Button Content="Zapisz" HorizontalAlignment="Left" Margin="199,442,0,0" VerticalAlignment="Top" Height="28" Width="112" Click="ButtonSave_Click"/>
         <Button Content="Dodaj innego grillowicza" Margin="0,250,45,0" Click="ButtonNewMember_Click" Height="25" VerticalAlignment="Top" HorizontalAlignment="Right" Width="273"/>
     </Grid>
 </Window>

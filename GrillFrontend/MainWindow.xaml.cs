@@ -25,13 +25,12 @@ namespace GrillFrontend
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static GrillLogic grillLogic= new GrillLogic();
+        public static GrillLogic grillLogic = new GrillLogic();
         public MainWindow()
         {
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
-
-            
+            grillLogic.GetAllGrillMembersDistincted();
         }
 
         private void ButtonNewGrill_Click(object sender, RoutedEventArgs e)
@@ -44,7 +43,6 @@ namespace GrillFrontend
 
         private void ButtonGrillList_Click(object sender, RoutedEventArgs e)
         {
-            //UserControl1 userControl1 = new UserControl1();
             ListOfGrills listOfGrills = new ListOfGrills(this);
             Opacity = 0.4;
             listOfGrills.ShowDialog();

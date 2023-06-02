@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using GrillBackend.Exceptions;
 using GrillBackend.Models.GrillStuff;
 
 namespace GrillFrontend.Views
@@ -31,9 +32,14 @@ namespace GrillFrontend.Views
         {
             if (Name.Text != null && Surname.Text != null && Email.Text != null)
             {
-                
-                MainWindow.grillLogic.AddNewMemeberToGrill(new GrillMember(Name.Text, Surname.Text, Email.Text));
-                //MessageBox.Show(MainWindow.grillLogic.CurrentGrill.ToString());
+                try
+                {
+                    MainWindow.grillLogic.AddNewMember(new GrillMember(Name.Text, Surname.Text, Email.Text));
+                }
+                catch(GrillMemberAlreadyExistsException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
                 Close();
             }
             else

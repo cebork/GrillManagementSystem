@@ -28,16 +28,19 @@ namespace GrillFrontend.Views
             Owner = parent;
             InitializeComponent();
             Items = new ObservableCollection<ViewModels.ListBoxItem>();
-            List<GrillMember> members = MainWindow.grillLogic.getAllGrillMembersDistincted();
-            foreach (GrillMember member in members)
+            foreach (GrillMember member in MainWindow.grillLogic.MemberList)
             {
-                Items.Add(new ViewModels.ListBoxItem(member, false));
+                if (MainWindow.grillLogic.CurrentGrill.GrillMembers.Contains(member))
+                {
+                    Items.Add(new ViewModels.ListBoxItem(member, true));
+                }
+                else
+                {
+                    Items.Add(new ViewModels.ListBoxItem(member, false));
+                }
             }
-            //MainWindow.grillLogic.CurrentGrill = grill;
             Goscie.ItemsSource = Items;
-            DataContext = grill;
-            //Goscie.ItemsSource = grill.GrillMembers;
-            //Goscie.ItemsSource = MainWindow.grillLogic.GetGrillList();            
+            DataContext = grill;        
         }
 
         private void ButtonClose_Click(object sender, RoutedEventArgs e)
@@ -45,7 +48,7 @@ namespace GrillFrontend.Views
             Close();
         }
 
-        private void ButtonEdit_Click(object sender, RoutedEventArgs e)
+        private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
             DateTime? data1 = (Date.SelectedDate.HasValue ? Date.SelectedDate.Value : MainWindow.grillLogic.CurrentGrill.DateOfGrillStart);
             TimeSpan time1 = (Time.Value.HasValue ? Time.Value.Value.TimeOfDay : MainWindow.grillLogic.CurrentGrill.DateOfGrillStart.Value.TimeOfDay);
@@ -57,14 +60,12 @@ namespace GrillFrontend.Views
                     checkedItems.Add(item);
                 }
             }
-            //MainWindow.grillLogic.CurrentGrill = grill;
             List<GrillMember> pom = new List<GrillMember>();
             foreach (ViewModels.ListBoxItem item in checkedItems)
             {
                 pom.Add((GrillMember)item.Item);
             }
             MainWindow.grillLogic.EditGrill(Name.Text, Description.Text, data1.Value.Date + time1, pom);
-            //MessageBox.Show(MainWindow.grillLogic.CurrentGrill.ToString());
             Close();
             Owner.Close();
         }
@@ -74,26 +75,29 @@ namespace GrillFrontend.Views
             NewMember newMember = new NewMember(this);
             Opacity = 0.4;
             newMember.ShowDialog();
-            Items = new ObservableCollection<ViewModels.ListBoxItem>();
-            List<GrillMember> members = MainWindow.grillLogic.getAllGrillMembersDistincted();
-            foreach (GrillMember member in members)
+            foreach (ViewModels.ListBoxItem item in Items)
             {
-                Items.Add(new ViewModels.ListBoxItem(member, false));
+                if (item.IsSelected)
+                {
+                    MainWindow.grillLogic.CurrentGrill.GrillMembers.Add((GrillMember)item.Item);
+                }
             }
-            //MainWindow.grillLogic.CurrentGrill = grill;
-            Goscie.ItemsSource = Items;
-            //DataContext = grill;
-            Goscie.Items.Refresh();
+            Items.Clear();
 
+            foreach (GrillMember member in MainWindow.grillLogic.MemberList)
+            {
+                if (MainWindow.grillLogic.CurrentGrill.GrillMembers.Contains(member))
+                {
+                    Items.Add(new ViewModels.ListBoxItem(member, true));
+                }
+                else
+                {
+                    Items.Add(new ViewModels.ListBoxItem(member, false));
+                }
+            }
+            Goscie.ItemsSource = Items;
+            Goscie.Items.Refresh();
             Opacity = 1;
         }
-
-        //private void myCheckBox_Loaded(object sender, RoutedEventArgs e)
-        //{
-        //    CheckBox checkBox = (CheckBox)sender;
-        //    GrillMember member = (GrillMember)checkBox.DataContext;
-
-        //    checkBox.IsChecked = MainWindow.grillLogic.CurrentGrill.GrillMembers.Contains(member) ? true : false;
-        //}
     }
 }

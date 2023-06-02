@@ -25,23 +25,10 @@ namespace GrillFrontend
     /// </summary>
     public partial class NewGrillWindow : Window
     {
-        //public ObservableCollection<ViewModels.ListBoxItem> Items { get; set; }
-        //public delegate void ButtonClickHandler(object sender, RoutedEventArgs e);
-        //public event ButtonClickHandler onButtonClicked;
         public NewGrillWindow(Window parentWindow)
         {
             Owner = parentWindow;
             InitializeComponent();
-            //MainWindow.grillLogic.CurrentGrill = grill;
-            //Items = new ObservableCollection<ViewModels.ListBoxItem>();
-            //List<GrillMember> members = MainWindow.grillLogic.getAllGrillMembersDistincted();
-            //foreach (GrillMember member in members)
-            //{
-            //    Items.Add(new ViewModels.ListBoxItem(member, false));
-            //}
-
-            //Goscie.ItemsSource = Items;
-            //onButtonClicked += ButtonOK_Click;
         }
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
@@ -49,23 +36,10 @@ namespace GrillFrontend
 
             if (Name.Text != null && Date.SelectedDate.HasValue && Time.Value.HasValue)
             {
-                //List<ViewModels.ListBoxItem> checkedItems = new List<ViewModels.ListBoxItem>();
                 Grill grill = new Grill(Name.Text, Date.SelectedDate.Value + Time.Value.Value.TimeOfDay, Description.Text);
                 MainWindow.grillLogic.AddNewGrill(grill);
-                //foreach (ViewModels.ListBoxItem item in Items)
-                //{
-                //    if (item.IsSelected)
-                //    {
-                //        checkedItems.Add(item);
-                //    }
-                //}
-                //MainWindow.grillLogic.CurrentGrill = grill;
-                //foreach (ViewModels.ListBoxItem item in checkedItems)
-                //{
-                //    MainWindow.grillLogic.AddNewMemeberToGrill((GrillMember)item.Item);
-                //}
-                
-                InvitePeopleWindow invitePeopleWindow = new InvitePeopleWindow(this, grill);
+                MainWindow.grillLogic.CurrentGrill = grill;
+                InvitePeopleWindow invitePeopleWindow = new InvitePeopleWindow(this);
                 invitePeopleWindow.ShowDialog();
                 Close();
             }
@@ -77,13 +51,5 @@ namespace GrillFrontend
         {
             Close();
         }
-
-        //private void ButtonNewMember_Click(object sender, RoutedEventArgs e)
-        //{
-        //    NewMember newMember = new NewMember(this);
-        //    Opacity = 0.4;
-        //    newMember.ShowDialog();
-        //    Opacity = 1;
-        //}
     }
 }

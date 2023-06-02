@@ -13,14 +13,14 @@ namespace TestowaAplikacja
             grillLogic.AddNewGrill(new Grill("test1", DateTime.Now, "opis1"));
             grillLogic.AddNewGrill(new Grill("test2", DateTime.Now, "opis2"));
             grillLogic.CurrentGrill = grillLogic.grillList[0];
-            grillLogic.AddNewMemeberToGrill(new GrillMember("Ala", "R", "alal@mail.com"));
-            grillLogic.AddNewMemeberToGrill(new GrillMember("Czarek", "B", "czarek@mail.com"));
-            grillLogic.AddNewMemeberToGrill(new GrillMember("Patrycja", "Z", "patrycja@mail.com"));
-            grillLogic.AddNewMemeberToGrill(new GrillMember("Paulina", "O", "paulina@mail.com"));
-            grillLogic.AddNewMemeberToGrill(new GrillMember("Kamil", "K", "kamil@mail.com"));
+            //grillLogic.AddNewMemeberToGrill(new GrillMember("Ala", "R", "alal@mail.com"));
+            //grillLogic.AddNewMemeberToGrill(new GrillMember("Czarek", "B", "czarek@mail.com"));
+            //grillLogic.AddNewMemeberToGrill(new GrillMember("Patrycja", "Z", "patrycja@mail.com"));
+            //grillLogic.AddNewMemeberToGrill(new GrillMember("Paulina", "O", "paulina@mail.com"));
+            //grillLogic.AddNewMemeberToGrill(new GrillMember("Kamil", "K", "kamil@mail.com"));
             grillLogic.CurrentGrill = grillLogic.grillList[1];
-            grillLogic.AddNewMemeberToGrill(new GrillMember("Paulina", "O", "paulina@mail.com"));
-            grillLogic.AddNewMemeberToGrill(new GrillMember("Kamil", "K", "kamil@mail.com"));
+            //grillLogic.AddNewMemeberToGrill(new GrillMember("Paulina", "O", "paulina@mail.com"));
+            //grillLogic.AddNewMemeberToGrill(new GrillMember("Kamil", "K", "kamil@mail.com"));
 
             
             //Sausage x = new Sausage("123", SpicyLevel.spicy, 2 , 3);

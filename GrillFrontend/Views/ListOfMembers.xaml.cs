@@ -25,7 +25,7 @@ namespace GrillFrontend.Views
         {
             Owner = parentWindow;
             InitializeComponent();
-            members.ItemsSource = MainWindow.grillLogic.getAllGrillMembersDistincted();
+            members.ItemsSource = MainWindow.grillLogic.MemberList;
         }
 
         private void ButtonClose_Click(object sender, RoutedEventArgs e)

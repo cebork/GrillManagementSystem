@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using GrillBackend.Logic;
 using GrillBackend.Models.GrillStuff;
 using GrillFrontend.ViewModels;
 using GrillFrontend.Views;
@@ -25,26 +26,23 @@ namespace GrillFrontend
     public partial class InvitePeopleWindow : Window
     {
         public ObservableCollection<ViewModels.ListBoxItem> Items { get; set; }
-
-        public InvitePeopleWindow(Window parentWindow,Grill grill)
+        public List<GrillMember> TempGrillMembers { get; set; }
+        public InvitePeopleWindow(Window parentWindow)
         {
             Owner = parentWindow;
             InitializeComponent();
-            MainWindow.grillLogic.CurrentGrill= grill;
             Items = new ObservableCollection<ViewModels.ListBoxItem>();
-            List<GrillMember> members = MainWindow.grillLogic.getAllGrillMembersDistincted();
-            foreach (GrillMember member in members)
+            foreach (GrillMember member in MainWindow.grillLogic.MemberList)
             {
                 Items.Add(new ViewModels.ListBoxItem(member,false));
             }
-            
             Goscie.ItemsSource = Items;
+            TempGrillMembers = new List<GrillMember>();
         }
 
         private void ButtonInvite_Click(object sender, RoutedEventArgs e)
         {
             List<ViewModels.ListBoxItem> checkedItems = new List<ViewModels.ListBoxItem>();
-
             foreach (ViewModels.ListBoxItem item in Items)
             {
                 if (item.IsSelected)
@@ -53,6 +51,7 @@ namespace GrillFrontend
                 }
             }
 
+            MainWindow.grillLogic.CurrentGrill.GrillMembers.Clear();
             foreach (ViewModels.ListBoxItem item in checkedItems)
             {
                 MainWindow.grillLogic.AddNewMemeberToGrill((GrillMember)item.Item);
@@ -66,16 +65,28 @@ namespace GrillFrontend
             NewMember newMember = new NewMember(this);
             Opacity = 0.4;
             newMember.ShowDialog();
-            //Items = new ObservableCollection<ViewModels.ListBoxItem>();
-            //List<GrillMember> members = MainWindow.grillLogic.getAllGrillMembersDistincted();
-            //foreach (GrillMember member in members)
-            //{
-            //    Items.Add(new ViewModels.ListBoxItem(member, false));
-            //}
+            foreach (ViewModels.ListBoxItem item in Items)
+            {
+                if (item.IsSelected)
+                {
+                    MainWindow.grillLogic.CurrentGrill.GrillMembers.Add((GrillMember)item.Item);
+                }
+            }
+            Items.Clear();
 
-            //Goscie.ItemsSource = Items;
-            //Goscie.Items.Refresh();
-
+            foreach (GrillMember member in MainWindow.grillLogic.MemberList)
+            {
+                if (MainWindow.grillLogic.CurrentGrill.GrillMembers.Contains(member))
+                {
+                    Items.Add(new ViewModels.ListBoxItem(member, true));
+                }
+                else
+                {
+                    Items.Add(new ViewModels.ListBoxItem(member, false));
+                }
+            }
+            Goscie.ItemsSource = Items;
+            Goscie.Items.Refresh();
             Opacity = 1;
         }
     }
