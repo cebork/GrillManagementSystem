@@ -55,6 +55,15 @@ namespace GrillFrontend
             MainWindow.grillLogic.RemoveGrill(selectedGrill);
             lista.Items.Refresh();
         }
+
+        private void ButtonSimulation_Click(object sender, RoutedEventArgs e)
+        {
+            SimulationWindow simulationWindow = new SimulationWindow(this);
+            MainWindow.grillLogic.CurrentGrill = ((FrameworkElement)sender).DataContext as Grill;
+            MainWindow.grillLogic.ChangeStatus(Status.in_progress);
+            simulationWindow.ShowDialog();
+            lista.Items.Refresh();
+        }
     }
 
 }
