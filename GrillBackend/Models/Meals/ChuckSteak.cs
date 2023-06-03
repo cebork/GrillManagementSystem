@@ -9,7 +9,7 @@ namespace GrillBackend.Models.Meals
 {
     public class ChuckSteak : Meal, IGrillable
     {
-        public ChuckSteak(string name, int weight, int price) : base(name, weight, price) { }
+        public ChuckSteak(string name, int weight) : base(name, weight) { }
         public void GrillFood()
         {
             throw new NotImplementedException();
