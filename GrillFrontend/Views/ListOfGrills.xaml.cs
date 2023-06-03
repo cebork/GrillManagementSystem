@@ -21,6 +21,7 @@ using GrillBackend.Models.GrillStuff;
 using GrillBackend.Models.Enums;
 using System.Configuration;
 using Microsoft.VisualBasic;
+using GrillBackend.Logic;
 
 namespace GrillFrontend
 {
@@ -34,6 +35,7 @@ namespace GrillFrontend
             Owner = parentWindow;
             InitializeComponent();
             lista.ItemsSource = MainWindow.grillLogic.grillList;
+            
         }
 
         private void ButtonClose_Click(object sender, RoutedEventArgs e)
@@ -60,6 +62,7 @@ namespace GrillFrontend
         {
             SimulationWindow simulationWindow = new SimulationWindow(this);
             MainWindow.grillLogic.CurrentGrill = ((FrameworkElement)sender).DataContext as Grill;
+            MainWindow.grillLogic.CurrentGrill.CreateRandomMealsList();
             MainWindow.grillLogic.ChangeStatus(Status.in_progress);
             simulationWindow.ShowDialog();
             lista.Items.Refresh();

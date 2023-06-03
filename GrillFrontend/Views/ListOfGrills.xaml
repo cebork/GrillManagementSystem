@@ -9,6 +9,7 @@
         Title="ListOfGrills" Height="500"  Width="700" ResizeMode="NoResize">
     <Window.Resources>
         <src:StatusConverter x:Key="statusConverter"/>
+        <!--<src:ButtonVisibilityConverter x:Key="buttonVisibilityConverter"/>-->
     </Window.Resources>
 
     <Grid>
@@ -18,13 +19,42 @@
                 <DataGridTextColumn Header="Nazwa" Binding="{Binding Name}" Width="1*"/>
                 <DataGridTextColumn Header="Data" Binding="{Binding DateOfGrillStart}" SortDirection="Ascending" Width="1*"/>
                 <DataGridTextColumn Header="Status" Binding="{Binding Path=Status, Converter={StaticResource statusConverter}}" Width="auto"/>
-                <DataGridTextColumn Header="Opis" Binding="{Binding Description}" CanUserResize="False" MaxWidth="100" Width="1*"/>
-
                 <DataGridTemplateColumn CanUserResize="False" Width="1*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Click="ButtonSimulation_Click"  Margin="0,0,10,0">Symulacja</Button>
+                                <Button Name="Sym" Click="ButtonSimulation_Click"  Margin="0,0,10,0">Symulacja
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=Status, Converter={StaticResource statusConverter}}" Value="W trakcie przygotowania">
+                                                    <Setter Property="Background" Value="DarkRed" />
+                                                    <Setter Property="Foreground" Value="White" />
+                                                    <Setter Property="FontWeight" Value="Bold"/>
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                                <Border Background="{TemplateBinding Background}" BorderBrush="Transparent" CornerRadius="5">
+                                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                    <Setter Property="Visibility" Value="Visible" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=Status, Converter={StaticResource statusConverter}}" Value="Zakończono">
+                                                    <Setter Property="Background" Value="DarkRed" />
+                                                    <Setter Property="Foreground" Value="White" />
+                                                    <Setter Property="Visibility" Value="Hidden" />
+                                                </DataTrigger>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="OrangeRed"/>
+                                                    <Setter Property="Foreground" Value="White"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
                                 <Button Click="ButtonDetails_Click" Margin="0,0,10,0">Szczegóły</Button>
                                 <Button Click="ButtonDelete_Click">Usuń</Button>
                             </StackPanel>

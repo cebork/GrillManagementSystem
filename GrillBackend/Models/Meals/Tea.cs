@@ -9,6 +9,7 @@ namespace GrillBackend.Models.Meals
 {
     public class Tea : Meal, INotGrillable
     {
-        public Tea(string name, int weight) : base(name, weight) { }
+        public Tea() { }
+        public Tea(string name, int amount) : base(name, amount) { }
     }
 }

@@ -1,4 +1,4 @@
-﻿using GrillBackend.Models.Abstractions;
+﻿    using GrillBackend.Models.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +9,7 @@ namespace GrillBackend.Models.Meals
 {
     public class Water : Meal, INotGrillable
     {
-        public Water(string name, int weight) : base(name, weight) { }
+        public Water() { }
+        public Water(string name, int amount) : base(name, amount) { }
     }
 }
