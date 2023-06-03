@@ -24,6 +24,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button Click="ButtonSimulation_Click"  Margin="0,0,10,0">Symulacja</Button>
                                 <Button Click="ButtonDetails_Click" Margin="0,0,10,0">Szczegóły</Button>
                                 <Button Click="ButtonDelete_Click">Usuń</Button>
                             </StackPanel>

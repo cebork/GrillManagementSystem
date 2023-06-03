@@ -8,7 +8,7 @@ namespace GrillBackend.Models.Abstractions
 {
     public abstract class Meal
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public SpicyLevel SpicyLevel { get; set; }
         public int Weight { get; set; }
         public int Price { get; set; }
@@ -29,7 +29,6 @@ namespace GrillBackend.Models.Abstractions
             DonenessLevel = DonenessLevel.notReady;
         }
 
-        
 
     }
 }

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace GrillBackend.Models.Abstractions
 {
-    public interface NotGrillAble
+    public interface IGrillable
     {
+        public abstract void GrillFood();
     }
 }

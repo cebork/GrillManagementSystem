@@ -1,5 +1,6 @@
 ﻿using GrillBackend.Exceptions;
 using GrillBackend.Models.Abstractions;
+using GrillBackend.Models.Enums;
 using GrillBackend.Models.GrillStuff;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace GrillBackend.Logic
         public Grill CurrentGrill { get; set; }
         public List<GrillMember> MemberList { get; set; }
 
-        private Dictionary<Grillable, Thread> GrillableThreadDict = new Dictionary<Grillable, Thread>();
+        private Dictionary<IGrillable, Thread> GrillableThreadDict = new Dictionary<IGrillable, Thread>();
         private XmlSerializer serializer = new XmlSerializer(typeof(List<Grill>));
         public GrillLogic()
         {
@@ -31,9 +32,8 @@ namespace GrillBackend.Logic
             {
                 saveUpdatedData();
             }
-            
-            
         }
+
         public void AddNewGrill(Grill grill)
         {
             grillList.Add(grill);
@@ -52,6 +52,7 @@ namespace GrillBackend.Logic
                 throw new GrillNotExistException("Grill nie istnieje");
             }
         }
+
         public void AddNewMember(GrillMember grillMember)
         {
             if (!CurrentGrill.GrillMembers.Contains(grillMember))
@@ -68,6 +69,7 @@ namespace GrillBackend.Logic
             }
             saveUpdatedData();
         }
+
         public void AddNewMemeberToGrill(GrillMember grillMember)
         {
             CurrentGrill.GrillMembers.Add(grillMember);
@@ -88,7 +90,14 @@ namespace GrillBackend.Logic
             saveUpdatedData();
         }
 
-        public void PutMealOnGrill(Grillable grillable)
+        public void ChangeStatus(Status status)
+        {
+            CurrentGrill.Status = status;
+            saveUpdatedData();
+        }
+
+
+        public void PutMealOnGrill(IGrillable grillable)
         {
 
             ThreadStart threadStart = new ThreadStart(grillable.GrillFood);
@@ -97,7 +106,7 @@ namespace GrillBackend.Logic
             thread.Start();
         }
 
-        public void TakeMealFromGrill(Grillable grillable)
+        public void TakeMealFromGrill(IGrillable grillable)
         {
             if (GrillableThreadDict.ContainsKey(grillable))
             {

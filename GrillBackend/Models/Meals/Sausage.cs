@@ -8,7 +8,7 @@ using GrillBackend.Models.Enums;
 
 namespace GrillBackend.Models.Meals
 {
-    public class Sausage : Meal, Grillable
+    public class Sausage : Meal, IGrillable
     {
         public Sausage(string name, SpicyLevel spicyLevel, int weight, int price) : base(name, spicyLevel, weight, price) { }
         public void GrillFood()
