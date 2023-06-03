@@ -10,7 +10,12 @@ namespace GrillBackend.Models.Meals
 {
     public class Sausage : Meal, IGrillable
     {
-        public Sausage(string name, int weight) : base(name, weight) { }
+        public int Weight { get; set; }
+        public Sausage() { }
+        public Sausage(string name, int amount, int weight) : base(name, amount)
+        {
+            Weight = weight;
+        }
         public void GrillFood()
         {
             IsOnGrill = true;
