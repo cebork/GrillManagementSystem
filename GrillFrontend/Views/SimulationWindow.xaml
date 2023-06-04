@@ -9,6 +9,7 @@
         Title="Symulacja" Height="720" Width="1280" ResizeMode="NoResize">
     <Window.Resources>
         <src:GreaterThanZeroConverter x:Key="greaterThanZeroConverter" />
+        <src:ImplementsInterfaceConverter x:Key="implementsInterfaceConverter" />
     </Window.Resources>
     <Grid>
         <Button Content="Zakończ grilla" HorizontalAlignment="Center" Margin="0,635,0,0" VerticalAlignment="Top" Height="44" Width="194" Click="ButtonEndGrill_Click" RenderTransformOrigin="0.5,0.5">
@@ -25,7 +26,15 @@
                                     <Button.Style>
                                         <Style TargetType="{x:Type Button}">
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Amount, Converter={StaticResource greaterThanZeroConverter}}" Value="True">
+                                                <DataTrigger Binding="{Binding Converter={StaticResource implementsInterfaceConverter}}" Value="True">
+                                                    <Setter Property="Visibility" Value="Visible" />
+                                                    <Setter Property="Background" Value="DarkRed" />
+                                                    <Setter Property="Foreground" Value="White" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Converter={StaticResource implementsInterfaceConverter}}" Value="False">
+                                                    <Setter Property="Visibility" Value="Hidden" />
+                                                </DataTrigger>
+                                                <!--<DataTrigger Binding="{Binding Amount, Converter={StaticResource greaterThanZeroConverter}}" Value="True">
                                                     <Setter Property="Visibility" Value="Visible" />
 
                                                     <Setter Property="Background" Value="DarkRed" />
@@ -44,7 +53,7 @@
                                                 </DataTrigger>
                                                 <DataTrigger Binding="{Binding Amount, Converter={StaticResource greaterThanZeroConverter}}" Value="False">
                                                     <Setter Property="Visibility" Value="Hidden" />
-                                                </DataTrigger>
+                                                </DataTrigger>-->
                                                 <Trigger Property="IsMouseOver" Value="True">
                                                     <Setter Property="Background" Value="OrangeRed"/>
                                                     <Setter Property="Foreground" Value="White"/>
