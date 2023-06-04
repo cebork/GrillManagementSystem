@@ -195,14 +195,14 @@ namespace GrillBackend.Logic
 
         public int GetCurrentGrillWeight()
         {
-            var result = CurrentGrill.MealsAtGrill.Sum(g => g.Weight);
+            var result = CurrentGrill.MealsAtGrill.Sum(g => g.Weight * g.Amount);
             return result;
         }
 
         public void ChangeStack(IGrillable sourceMeal, List<Food> destinationMeals)
         {
             List<Food> mealsToAdd = new List<Food>();
-            var result = CurrentGrill.MealsAtGrill.Sum(g => g.Weight);
+            var result = GetCurrentGrillWeight();
             if (result <= CurrentGrill.MaxGrillCap)
             {
                 if (((Food)sourceMeal).Amount != 0)

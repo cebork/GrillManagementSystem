@@ -52,7 +52,7 @@ namespace GrillBackend.Models.GrillStuff
             MealsAtGrill = new List<Food>();
             MealsGrilled = new List<Food>();
             //MaxGrillCap = random.Next(2500,7500);
-            MaxGrillCap = 5000;
+            MaxGrillCap = 4850;
             CreateRandomMealsList();
         }
 

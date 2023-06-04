@@ -17,6 +17,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Xceed.Wpf.Toolkit.Primitives;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace GrillFrontend.Views
@@ -40,7 +41,7 @@ namespace GrillFrontend.Views
             //    }
             //}
             //allMealsList.ItemsSource = list;
-            
+
             allMealsList.ItemsSource = MainWindow.grillLogic.CurrentGrill.MealsPrepared;
             atGrillList.ItemsSource = MainWindow.grillLogic.CurrentGrill.MealsAtGrill;
             readyList.ItemsSource = MainWindow.grillLogic.CurrentGrill.MealsGrilled;
@@ -48,6 +49,7 @@ namespace GrillFrontend.Views
             selectMeal.ItemsSource = MainWindow.grillLogic.CurrentGrill.MealsPrepared;
             Closing += SimulationWindow_Closing;
             closeButton.Click += ButtonEndGrill_Click;
+            weight.Text = "0 / " + (MainWindow.grillLogic.CurrentGrill.MaxGrillCap+150).ToString() + " g";
         }
 
         private void ButtonEndGrill_Click(object sender, RoutedEventArgs e)
@@ -63,8 +65,13 @@ namespace GrillFrontend.Views
                 MainWindow.grillLogic.ChangeStack((IGrillable)((FrameworkElement)sender).DataContext, MainWindow.grillLogic.CurrentGrill.MealsAtGrill);
                 allMealsList.Items.Refresh();
                 atGrillList.Items.Refresh();
+                weight.Text = MainWindow.grillLogic.GetCurrentGrillWeight().ToString() + " / " + (MainWindow.grillLogic.CurrentGrill.MaxGrillCap + 150).ToString() + " g";
             }
             catch (NoFoodException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (GrillOverflowException ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -77,18 +84,13 @@ namespace GrillFrontend.Views
                 MainWindow.grillLogic.ChangeStack((IGrillable)((FrameworkElement)sender).DataContext, MainWindow.grillLogic.CurrentGrill.MealsGrilled);
                 atGrillList.Items.Refresh();
                 readyList.Items.Refresh();
+                weight.Text = MainWindow.grillLogic.GetCurrentGrillWeight().ToString() + " / " + (MainWindow.grillLogic.CurrentGrill.MaxGrillCap + 150).ToString() + " g";
             }
             catch (NoFoodException ex)
             {
                 MessageBox.Show(ex.Message);
             }
 
-        }
-
-        private void MoveWindow(object sender, MouseButtonEventArgs e)
-        {
-            this.DragMove();
-            e.Handled = true;
         }
 
         private void ButtonFeedAll_Click(object sender, RoutedEventArgs e)
