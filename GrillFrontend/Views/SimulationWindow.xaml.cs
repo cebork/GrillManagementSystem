@@ -51,16 +51,16 @@ namespace GrillFrontend.Views
 
         private void ButtonToGrill_Click(object sender, RoutedEventArgs e)
         {
-            //metoda
+            MainWindow.grillLogic.PutMealOnGrill((IGrillable)((FrameworkElement)sender).DataContext);
             allMealsList.Items.Refresh();
             atGrillList.Items.Refresh();
         }
 
         private void ButtonGetFromGrill_Click(object sender, RoutedEventArgs e)
         {
-            //metoda
-            allMealsList.Items.Refresh();
+            MainWindow.grillLogic.TakeMealFromGrill((IGrillable)((FrameworkElement)sender).DataContext);
             atGrillList.Items.Refresh();
+            readyList.Items.Refresh();
 
         }
 
