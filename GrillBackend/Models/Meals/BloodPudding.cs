@@ -45,7 +45,7 @@ namespace GrillBackend.Models.Meals
         {
             if (Amount > 0)
             {
-                Amount -= 0;
+                Amount -= 1;
             }
             else
             {
