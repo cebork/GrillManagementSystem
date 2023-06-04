@@ -52,4 +52,15 @@ namespace GrillBackend.Exceptions
 		  System.Runtime.Serialization.SerializationInfo info,
 		  System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
 	}
+
+	[Serializable]
+	public class GrillOverflowException : Exception
+	{
+		public GrillOverflowException() { }
+		public GrillOverflowException(string message) : base(message) { }
+		public GrillOverflowException(string message, Exception inner) : base(message, inner) { }
+		protected GrillOverflowException(
+		  System.Runtime.Serialization.SerializationInfo info,
+		  System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+	}
 }
