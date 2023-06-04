@@ -34,7 +34,7 @@ namespace GrillFrontend
             Items = new ObservableCollection<ViewModels.ListBoxItem>();
             foreach (GrillMember member in MainWindow.grillLogic.MemberList)
             {
-                Items.Add(new ViewModels.ListBoxItem(member,false));
+                Items.Add(new ViewModels.ListBoxItem(member, false));
             }
             Goscie.ItemsSource = Items;
             TempGrillMembers = new List<GrillMember>();
@@ -50,14 +50,19 @@ namespace GrillFrontend
                     checkedItems.Add(item);
                 }
             }
-
-            MainWindow.grillLogic.CurrentGrill.GrillMembers.Clear();
-            foreach (ViewModels.ListBoxItem item in checkedItems)
+            if (checkedItems.Count != 0)
             {
-                MainWindow.grillLogic.AddNewMemeberToGrill((GrillMember)item.Item);
+                MainWindow.grillLogic.CurrentGrill.GrillMembers.Clear();
+                foreach (ViewModels.ListBoxItem item in checkedItems)
+                {
+                    MainWindow.grillLogic.AddNewMemeberToGrill((GrillMember)item.Item);
+                }
+                Close();
             }
-
-            Close();
+            else
+            {
+                MessageBox.Show("Zaproś kogoś :)");
+            }
         }
 
         private void ButtonNewMember_Click(object sender, RoutedEventArgs e)
