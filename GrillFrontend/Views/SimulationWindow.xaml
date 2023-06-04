@@ -6,15 +6,18 @@
         xmlns:local="clr-namespace:GrillFrontend.Views"
         xmlns:src="clr-namespace:GrillFrontend.Converters"
         mc:Ignorable="d"  MouseDown="MoveWindow" WindowStartupLocation="CenterOwner"
-        Title="Symulacja" Height="720" Width="1280" ResizeMode="NoResize">
+        Title="Symulacja" Height="696" Width="1280" ResizeMode="NoResize">
     <Window.Resources>
         <src:GreaterThanZeroConverter x:Key="greaterThanZeroConverter" />
         <src:ImplementsInterfaceConverter x:Key="implementsInterfaceConverter" />
     </Window.Resources>
-    <Grid>
-        <Button Content="Zakończ grilla" HorizontalAlignment="Center" Margin="0,635,0,0" VerticalAlignment="Top" Height="44" Width="194" Click="ButtonEndGrill_Click" RenderTransformOrigin="0.5,0.5">
+    <Grid Height="686" VerticalAlignment="Top">
+        <Label Content="Dostępne" HorizontalAlignment="Left" Margin="178,36,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+        <Label Content="Aktualnie na grillu" HorizontalAlignment="Center" Margin="0,35,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+        <Label Content="Gotowe" HorizontalAlignment="Left" Margin="933,36,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+        <Button Content="Zakończ grilla" HorizontalAlignment="Left" Margin="832,575,0,0" VerticalAlignment="Top" Height="35" Width="264" Click="ButtonEndGrill_Click" Name="closeButton" RenderTransformOrigin="0.5,0.5">
         </Button>
-        <DataGrid x:Name="allMealsList" AutoGenerateColumns="False" d:ItemsSource="{d:SampleData ItemCount=25}" Margin="36,36,981,229" IsReadOnly="True" CanUserResizeRows="False">
+        <DataGrid x:Name="allMealsList" AutoGenerateColumns="False" d:ItemsSource="{d:SampleData ItemCount=25}" Margin="178,81,838,199" IsReadOnly="True" CanUserResizeRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nazwa" Binding="{Binding Name}" Width="5*"/>
                 <DataGridTextColumn Header="Ilość" Binding="{Binding Amount}" Width="auto"/>
@@ -57,15 +60,40 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="atGrillList" AutoGenerateColumns="False" d:ItemsSource="{d:SampleData ItemCount=25}" Margin="530,36,530,229" IsReadOnly="True" CanUserResizeRows="False">
+        <DataGrid x:Name="atGrillList" AutoGenerateColumns="False" d:ItemsSource="{d:SampleData ItemCount=25}" Margin="508,81,508,199" IsReadOnly="True" CanUserResizeRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nazwa" Binding="{Binding Name}" Width="5*"/>
                 <DataGridTextColumn Header="Ilość" Binding="{Binding Amount}" Width="auto"/>
-                <DataGridTemplateColumn CanUserResize="False" Width="auto">
+                <DataGridTemplateColumn CanUserResize="False" Width="1*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button x:Name="GetFromGrill" Click="ButtonGetFromGrill_Click" Padding="3,0,3,0" Content=" ➜ ">
+                                <Button x:Name="GetFromGrill" Click="ButtonGetFromGrill_Click" Content=" ➜ ">
+                                    <Button.Resources>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="Button">
+                                                        <Border Background="DarkRed" CornerRadius="5" Padding="3,0,3,0">
+                                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                                <ContentPresenter.Resources>
+                                                                    <Style TargetType="TextBlock">
+                                                                        <Setter Property="Foreground" Value="White" />
+                                                                        <Style.Triggers>
+                                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                                <Setter Property="Background" Value="OrangeRed"/>
+                                                                                <Setter Property="Foreground" Value="White"/>
+                                                                            </Trigger>
+                                                                        </Style.Triggers>
+                                                                    </Style>
+                                                                </ContentPresenter.Resources>
+                                                            </ContentPresenter>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </Button.Resources>
                                 </Button>
                             </StackPanel>
                         </DataTemplate>
@@ -73,13 +101,20 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="readyList" AutoGenerateColumns="False" d:ItemsSource="{d:SampleData ItemCount=25}" Margin="998,36,62,229" IsReadOnly="True" CanUserResizeRows="False">
+        <DataGrid x:Name="readyList" AutoGenerateColumns="False" d:ItemsSource="{d:SampleData ItemCount=25}" Margin="832,81,184,199" IsReadOnly="True" CanUserResizeRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nazwa" Binding="{Binding Name}" Width="5*"/>
                 <DataGridTextColumn Header="Ilość" Binding="{Binding Amount}" Width="1*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Nakarm wszystkich" HorizontalAlignment="Left" Margin="304,635,0,0" VerticalAlignment="Top" Height="44" Width="194" Click="ButtonFeedAll_Click" RenderTransformOrigin="0.5,0.5"/>
+        <Button Content="Nakarm wszystkich" HorizontalAlignment="Left" Margin="178,575,0,0" VerticalAlignment="Top" Height="35" Width="264" Click="ButtonFeedAll_Click" RenderTransformOrigin="0.5,0.5"/>
+        <Button Content="Nawodnij gości" HorizontalAlignment="Center" Margin="0,575,0,0" VerticalAlignment="Top" Height="35" Width="264" Click="ButtonServeDrinkAll_Click" RenderTransformOrigin="0.5,0.5"/>
+        <Button Content="Dokup asortyment" HorizontalAlignment="Left" Margin="310,36,0,0" VerticalAlignment="Top" Height="28" Width="132" Click="ButtonAddFood_Click" RenderTransformOrigin="0.5,0.5"/>
+        <Button Content="Zatwierdź" HorizontalAlignment="Left" Margin="832,517,0,0" VerticalAlignment="Top" Height="35" Width="264" Click="ButtonServeToSelectMember_Click" RenderTransformOrigin="0.5,0.5"/>
+        <ComboBox HorizontalAlignment="Left" Margin="178,517,0,0" VerticalAlignment="Top" Width="264" Height="35"/>
+        <ComboBox HorizontalAlignment="Center" Margin="0,517,0,0" VerticalAlignment="Top" Width="264" Height="35"/>
+
+
 
     </Grid>
 </Window>

@@ -40,7 +40,7 @@ namespace GrillFrontend.Views
                 }
             }
             Goscie.ItemsSource = Items;
-            DataContext = grill;        
+            DataContext = grill;
         }
 
         private void ButtonClose_Click(object sender, RoutedEventArgs e)
@@ -60,14 +60,21 @@ namespace GrillFrontend.Views
                     checkedItems.Add(item);
                 }
             }
-            List<GrillMember> pom = new List<GrillMember>();
-            foreach (ViewModels.ListBoxItem item in checkedItems)
+            if (checkedItems.Count != 0)
             {
-                pom.Add((GrillMember)item.Item);
+                List<GrillMember> listaGosci = new List<GrillMember>();
+                foreach (ViewModels.ListBoxItem item in checkedItems)
+                {
+                    listaGosci.Add((GrillMember)item.Item);
+                }
+                MainWindow.grillLogic.EditGrill(Name.Text, Description.Text, data1.Value.Date + time1, listaGosci);
+                Close();
+                Owner.Close();
             }
-            MainWindow.grillLogic.EditGrill(Name.Text, Description.Text, data1.Value.Date + time1, pom);
-            Close();
-            Owner.Close();
+            else
+            {
+                MessageBox.Show("Zaproś kogoś :)");
+            }
         }
 
         private void ButtonNewMember_Click(object sender, RoutedEventArgs e)
