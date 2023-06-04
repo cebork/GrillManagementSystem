@@ -96,25 +96,92 @@ namespace GrillBackend.Logic
             saveUpdatedData();
         }
 
-
-        public void PutMealOnGrill(IGrillable grillable)
+        public void ChangeStack<T>(ref IGrillable sourceMeal, ref List<T> destinationList) where T : Meal, IGrillable // ref moze byc to wywalenia jakby cos nie działało
         {
-
-            ThreadStart threadStart = new ThreadStart(grillable.GrillFood);
-            Thread thread = new Thread(threadStart);
-            GrillableThreadDict.Add(grillable, thread);
-            thread.Start();
-        }
-
-        public void TakeMealFromGrill(IGrillable grillable)
-        {
-            if (GrillableThreadDict.ContainsKey(grillable))
+            if (((Meal)sourceMeal).Amount != 0)
             {
-                GrillableThreadDict.Remove(grillable);
-                GrillableThreadDict.TryGetValue(grillable, out Thread thread);
-                thread.Abort();
+                foreach (var item in destinationList)
+                {
+                    if (item.Name == ((Meal)sourceMeal).Name)
+                    {
+                        item.Amount -= 1;
+                        ((Meal)sourceMeal).Amount += 1;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                throw new NoFoodException(((Meal)sourceMeal).Name + " <- Tego jedzenia nie ma już na grillu");
             }
         }
+
+        public void FeedEveryone()
+        {
+            foreach (var item in CurrentGrill.GrillMembers)
+            {
+                
+            }
+        }
+
+
+        //public void PutMealOnGrill(IGrillable grillable)
+        //{
+        //    if (((Meal)grillable).Amount != 0 )
+        //    {
+        //        foreach (var item in CurrentGrill.MealsAtGrill)
+        //        {
+        //            if (item.Name == ((Meal)grillable).Name)
+        //            {
+        //                item.Amount -= 1;
+        //                ((Meal)grillable).Amount += 1;
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        throw new NoFoodException(((Meal)grillable).Name + " <- To jedzenie skończyło się");
+        //    }
+        //}
+
+        //public void TakeMealFromGrill(IGrillable grillable)
+        //{
+        //    if (((Meal)grillable).Amount != 0)
+        //    {
+        //        foreach (var item in CurrentGrill.MealsGrilled)
+        //        {
+        //            if (item.Name == ((Meal)grillable).Name)
+        //            {
+        //                item.Amount -= 1;
+        //                ((Meal)grillable).Amount += 1;
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        throw new NoFoodException(((Meal)grillable).Name + " <- Tego jedzenia nie ma już na grillu");
+        //    }
+        //}
+
+
+        //public void PutMealOnGrill(IGrillable grillable)
+        //{
+
+        //    ThreadStart threadStart = new ThreadStart(grillable.GrillFood);
+        //    Thread thread = new Thread(threadStart);
+        //    GrillableThreadDict.Add(grillable, thread);
+        //    thread.Start();
+        //}
+
+        //public void TakeMealFromGrill(IGrillable grillable)
+        //{
+        //    if (GrillableThreadDict.ContainsKey(grillable))
+        //    {
+        //        GrillableThreadDict.Remove(grillable);
+        //        GrillableThreadDict.TryGetValue(grillable, out Thread thread);
+        //        thread.Abort();
+        //    }
+        //}
 
         public void saveUpdatedData()
         {

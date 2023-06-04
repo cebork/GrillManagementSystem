@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using GrillBackend.Models.Enums;
+using GrillBackend.Exceptions;
 
 namespace GrillBackend.Models.Meals
 {
@@ -18,7 +20,37 @@ namespace GrillBackend.Models.Meals
         }
         public void GrillFood()
         {
-            throw new NotImplementedException();
+            IsOnGrill = true;
+            while (IsOnGrill)
+            {
+                Thread.Sleep(1000);
+                OnGrillTime += 1;
+                if (OnGrillTime <= 10)
+                {
+                    DonenessLevel = DonenessLevel.notReady;
+                }
+                else if (OnGrillTime > 10 && OnGrillTime <= 20)
+                {
+                    DonenessLevel = DonenessLevel.ready;
+                }
+                else
+                {
+                    DonenessLevel = DonenessLevel.overCooked;
+                }
+                Console.WriteLine(Name + " " + OnGrillTime + " " + DonenessLevel);
+            }
+        }
+
+        public void Feed()
+        {
+            if (Amount > 0)
+            {
+                Amount -= 0;
+            }
+            else
+            {
+                throw new NoFoodException("Nie ma już " + Name);
+            }
         }
     }
 }

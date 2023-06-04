@@ -23,12 +23,6 @@ namespace GrillBackend.Models.GrillStuff
         public List<GrillMember> GrillMembers { get; set; }
         public Status Status { get; set; }
         public int MaxGrillCap { get; set; }
-        //[XmlIgnore]
-        //public Dictionary<Meal, int> MealsPrepared { get; set; }
-        //[XmlIgnore]
-        //public Dictionary<Meal, int> MealsAtGrill { get; set; }
-        //[XmlIgnore]
-        //public Dictionary<Meal, int> MealsGrilled { get; set; }
         public List<Meal> MealsPrepared { get; set; }
         public List<Meal> MealsAtGrill { get; set; }
         public List<Meal> MealsGrilled { get; set; }
@@ -73,18 +67,22 @@ namespace GrillBackend.Models.GrillStuff
 
         public void CreateRandomMealsList()
         {           
-            //MealsPrepared.Add(new BloodPudding("Kaszanka", random.Next(100, 200)), random.Next(GrillMembers.Count, 2 * GrillMembers.Count));
-            //MealsPrepared.Add(new ChuckSteak("Karkówka", random.Next(100, 200)), random.Next(GrillMembers.Count, 2 * GrillMembers.Count));
-            //MealsPrepared.Add(new Kebab("Szaszłyk", random.Next(100, 200)), random.Next(GrillMembers.Count, 2 * GrillMembers.Count));
-            //MealsPrepared.Add(new Sausage("Kiełbaska", random.Next(100, 200)), random.Next(GrillMembers.Count, 2 * GrillMembers.Count));
-            //MealsPrepared.Add(new Tea("Herbata", random.Next(100, 200)), random.Next(GrillMembers.Count, 2 * GrillMembers.Count));
-            //MealsPrepared.Add(new Water("Woda", random.Next(100, 200)), random.Next(GrillMembers.Count, 2 * GrillMembers.Count));
-            MealsPrepared.Add(new BloodPudding("Kaszanka", random.Next(5, 10), random.Next(100, 200)));
-            MealsPrepared.Add(new ChuckSteak("Karkówka", random.Next(5, 10), random.Next(100, 200)));
-            MealsPrepared.Add(new Kebab("Szaszłyk", random.Next(5, 10), random.Next(100, 200)));
-            MealsPrepared.Add(new Sausage("Kiełbaska", random.Next(5, 10), random.Next(100, 200)));
+            MealsPrepared.Add(new BloodPudding("Kaszanka", random.Next(5, 10), 150));
+            MealsPrepared.Add(new ChuckSteak("Karkówka", random.Next(5, 10), 150));
+            MealsPrepared.Add(new Kebab("Szaszłyk", random.Next(5, 10), 150));
+            MealsPrepared.Add(new Sausage("Kiełbaska", random.Next(5, 10), 150));
             MealsPrepared.Add(new Tea("Herbata", random.Next(5, 10)));
             MealsPrepared.Add(new Water("Woda", random.Next(5, 10)));
+
+            MealsAtGrill.Add(new BloodPudding("Kaszanka", 0, 150));
+            MealsAtGrill.Add(new ChuckSteak("Karkówka", 0, 150));
+            MealsAtGrill.Add(new Kebab("Szaszłyk", 0, 150));
+            MealsAtGrill.Add(new Sausage("Kiełbaska", 0, 150));
+
+            MealsGrilled.Add(new BloodPudding("Kaszanka", 0, 150));
+            MealsGrilled.Add(new ChuckSteak("Karkówka", 0, 150));
+            MealsGrilled.Add(new Kebab("Szaszłyk", 0, 150));
+            MealsGrilled.Add(new Sausage("Kiełbaska", 0, 150));
         }
     }
 }
