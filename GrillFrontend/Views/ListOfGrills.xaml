@@ -9,7 +9,6 @@
         Title="ListOfGrills" Height="500"  Width="700" ResizeMode="NoResize">
     <Window.Resources>
         <src:StatusConverter x:Key="statusConverter"/>
-        <!--<src:ButtonVisibilityConverter x:Key="buttonVisibilityConverter"/>-->
     </Window.Resources>
 
     <Grid>
@@ -17,7 +16,7 @@
         <DataGrid Name="lista" AutoGenerateColumns="False" d:ItemsSource="{d:SampleData ItemCount=25}" Margin="5,58,5,58" IsReadOnly="True" CanUserResizeRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nazwa" Binding="{Binding Name}" Width="1*"/>
-                <DataGridTextColumn Header="Data" Binding="{Binding DateOfGrillStart}" SortDirection="Ascending" Width="1*"/>
+                <DataGridTextColumn Header="Data" Binding="{Binding DateOfGrillStart}" Width="1*"/>
                 <DataGridTextColumn Header="Status" Binding="{Binding Path=Status, Converter={StaticResource statusConverter}}" Width="auto"/>
                 <DataGridTemplateColumn CanUserResize="False" Width="1*">
                     <DataGridTemplateColumn.CellTemplate>

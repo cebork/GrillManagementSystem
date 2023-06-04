@@ -25,6 +25,10 @@ namespace GrillFrontend.Views
         {
             Owner = parentWindow;
             InitializeComponent();
+            allMealsList.ItemsSource = MainWindow.grillLogic.CurrentGrill.MealsPrepared;
+            atGrillList.ItemsSource = MainWindow.grillLogic.CurrentGrill.MealsAtGrill;
+            readyList.ItemsSource = MainWindow.grillLogic.CurrentGrill.MealsGrilled;
+
         }
 
         private void ButtonEndGrill_Click(object sender, RoutedEventArgs e)
@@ -32,6 +36,27 @@ namespace GrillFrontend.Views
 
             MainWindow.grillLogic.ChangeStatus(Status.Ended);
             Close();
+        }
+
+        private void ButtonToGrill_Click(object sender, RoutedEventArgs e)
+        {
+            //metoda
+            allMealsList.Items.Refresh();
+            atGrillList.Items.Refresh();
+        }
+
+        private void ButtonGetFromGrill_Click(object sender, RoutedEventArgs e)
+        {
+            //metoda
+            allMealsList.Items.Refresh();
+            atGrillList.Items.Refresh();
+
+        }
+
+        private void MoveWindow(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+            e.Handled = true;
         }
     }
 }
