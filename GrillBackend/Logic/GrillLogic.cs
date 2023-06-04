@@ -22,6 +22,9 @@ namespace GrillBackend.Logic
         private XmlSerializer serializer = new XmlSerializer(typeof(List<Grill>));
         public delegate void MealGrillMemberFeededDelegate(Meal meal, GrillMember grillMember);
         public delegate void MealGrillMemberNotFeededDelegate(GrillMember grillMember);
+        public event MealGrillMemberFeededDelegate MealGrillMemberDrinked;
+        public event MealGrillMemberFeededDelegate MealGrillMemberEatGrilled;
+        public event MealGrillMemberFeededDelegate MealGrillMemberEatNotGrilled;
         public GrillLogic()
         {
             try
@@ -122,6 +125,29 @@ namespace GrillBackend.Logic
             }
         }
 
+        public void ServeDrinkAll(MealGrillMemberFeededDelegate mealGrillMemberFeededDelegate, MealGrillMemberNotFeededDelegate mealGrillMemberNotFeededDelegate)
+        {
+            bool ifDrinked = false;
+            foreach (var item in CurrentGrill.GrillMembers)
+            {
+                foreach (var meal in CurrentGrill.MealsPrepared)
+                {
+                    if (meal.Amount > 0)
+                    {
+                        ((Drink)meal).DrinkSomeDrink();
+                        mealGrillMemberFeededDelegate(meal, item);
+                        ifDrinked = true;
+                        break;
+                    }
+                }
+                if (!ifDrinked)
+                {
+                    mealGrillMemberNotFeededDelegate(item);
+                }
+                ifDrinked = false;
+            }
+        }
+
         public void BuySomeMeals()
         {
             Random random = new Random();
@@ -151,13 +177,23 @@ namespace GrillBackend.Logic
             {
                 result = (Meal)CurrentGrill.MealsGrilled.Where(m => m.Name == meal.Name).Take(1);
                 ((IGrillable)result).Feed();
+                MealGrillMemberEatGrilled.Invoke(meal, grillMember);
             }
-            else if (meal is INotGrillable) 
+            if (meal is INotGrillable) 
             {
                 result = (Meal)CurrentGrill.MealsPrepared.Where(m => m.Name == meal.Name).Take(1);
+                ((INotGrillable)result).Feed();
+                MealGrillMemberEatNotGrilled.Invoke(meal, grillMember);
             }
-           
+            if (meal is Drink)
+            {
+                result = (Meal)CurrentGrill.MealsPrepared.Where(m => m.Name == meal.Name).Take(1);
+                ((Drink)result).DrinkSomeDrink();
+                MealGrillMemberDrinked.Invoke(meal, grillMember);
+            }
         }
+
+
 
         public void ChangeStack(IGrillable sourceMeal, List<Meal> destinationMeals)
         {
@@ -211,26 +247,6 @@ namespace GrillBackend.Logic
                 throw new NoFoodException(((Meal)sourceMeal).Name + " <- To jedzenie skończyło się");
             }
         }
-
-
-        //public void PutMealOnGrill(IGrillable grillable)
-        //{
-
-        //    ThreadStart threadStart = new ThreadStart(grillable.GrillFood);
-        //    Thread thread = new Thread(threadStart);
-        //    GrillableThreadDict.Add(grillable, thread);
-        //    thread.Start();
-        //}
-
-        //public void TakeMealFromGrill(IGrillable grillable)
-        //{
-        //    if (GrillableThreadDict.ContainsKey(grillable))
-        //    {
-        //        GrillableThreadDict.Remove(grillable);
-        //        GrillableThreadDict.TryGetValue(grillable, out Thread thread);
-        //        thread.Abort();
-        //    }
-        //}
 
         public void saveUpdatedData()
         {
