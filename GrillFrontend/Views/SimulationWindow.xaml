@@ -12,7 +12,7 @@
         <src:ImplementsInterfaceConverter x:Key="implementsInterfaceConverter" />
     </Window.Resources>
     <Grid>
-        <Button Content="Zakończ grilla" HorizontalAlignment="Center" Margin="0,635,0,0" VerticalAlignment="Top" Height="44" Width="194" Click="ButtonEndGrill_Click" RenderTransformOrigin="0.5,0.5">
+        <Button Content="Zakończ grilla" HorizontalAlignment="Left" Margin="668,608,0,0" VerticalAlignment="Top" Height="44" Width="194" Click="ButtonEndGrill_Click" RenderTransformOrigin="0.5,0.5">
         </Button>
         <DataGrid x:Name="allMealsList" AutoGenerateColumns="False" d:ItemsSource="{d:SampleData ItemCount=25}" Margin="36,36,981,229" IsReadOnly="True" CanUserResizeRows="False">
             <DataGrid.Columns>
@@ -79,7 +79,7 @@
                 <DataGridTextColumn Header="Ilość" Binding="{Binding Amount}" Width="1*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Nakarm wszystkich" HorizontalAlignment="Left" Margin="304,635,0,0" VerticalAlignment="Top" Height="44" Width="194" Click="ButtonFeedAll_Click" RenderTransformOrigin="0.5,0.5"/>
+        <Button Content="Nakarm wszystkich" HorizontalAlignment="Left" Margin="396,608,0,0" VerticalAlignment="Top" Height="44" Width="194" Click="ButtonFeedAll_Click" RenderTransformOrigin="0.5,0.5"/>
 
     </Grid>
 </Window>

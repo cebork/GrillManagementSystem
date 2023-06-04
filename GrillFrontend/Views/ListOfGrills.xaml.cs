@@ -45,7 +45,7 @@ namespace GrillFrontend
 
         private void ButtonDetails_Click(object sender, RoutedEventArgs e)
         {
-            Grill selectedGrill = ((FrameworkElement)sender).DataContext as Grill; // wyciaganie elementu z data gridu : D
+            Grill selectedGrill = ((FrameworkElement)sender).DataContext as Grill;
             GrillDetailsWindow grillDetailsWindow = new GrillDetailsWindow(this, selectedGrill);
             grillDetailsWindow.ShowDialog();
             lista.Items.Refresh();
@@ -62,7 +62,6 @@ namespace GrillFrontend
         {
             SimulationWindow simulationWindow = new SimulationWindow(this);
             MainWindow.grillLogic.CurrentGrill = ((FrameworkElement)sender).DataContext as Grill;
-            //MainWindow.grillLogic.CurrentGrill.CreateRandomMealsList();
             MainWindow.grillLogic.ChangeStatus(Status.in_progress);
             simulationWindow.ShowDialog();
             lista.Items.Refresh();
