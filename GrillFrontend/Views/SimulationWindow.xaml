@@ -13,7 +13,7 @@
     </Window.Resources>
     <Grid Height="686" VerticalAlignment="Top">
         <Label Content="Dostępne" HorizontalAlignment="Left" Margin="178,36,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-        <Label Content="Aktualnie na grillu" HorizontalAlignment="Center" Margin="0,35,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+        <Label Content="Aktualnie na grillu" HorizontalAlignment="Left" Margin="509,35,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
         <Label Content="Gotowe" HorizontalAlignment="Left" Margin="933,36,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
         <Button Content="Zakończ grilla" HorizontalAlignment="Left" Margin="832,575,0,0" VerticalAlignment="Top" Height="35" Width="264" Click="ButtonEndGrill_Click" Name="closeButton" RenderTransformOrigin="0.5,0.5">
         </Button>
@@ -133,6 +133,8 @@
         </ComboBox>
         <Label Content="Wybór grillowicza:" HorizontalAlignment="Left" Margin="178,503,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
         <Label Content="Wybór jedzonka:" HorizontalAlignment="Left" Margin="508,503,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+        <Label Name="weight" Content="0" HorizontalAlignment="Left" Margin="682,37,0,0" VerticalAlignment="Top"/>
+        <Label Content="/ XXXX" HorizontalAlignment="Left" Margin="725,37,0,0" VerticalAlignment="Top" Width="47"/>
 
 
 
