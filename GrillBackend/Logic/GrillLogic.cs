@@ -2,6 +2,7 @@
 using GrillBackend.Models.Abstractions;
 using GrillBackend.Models.Enums;
 using GrillBackend.Models.GrillStuff;
+using GrillBackend.Models.Meals;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -98,26 +99,6 @@ namespace GrillBackend.Logic
             saveUpdatedData();
         }
 
-        public void ChangeStack<T>(ref IGrillable sourceMeal, ref List<T> destinationList) where T : Meal, IGrillable // ref moze byc to wywalenia jakby cos nie działało
-        {
-            if (((Meal)sourceMeal).Amount != 0)
-            {
-                foreach (var item in destinationList)
-                {
-                    if (item.Name == ((Meal)sourceMeal).Name)
-                    {
-                        item.Amount -= 1;
-                        ((Meal)sourceMeal).Amount += 1;
-                        break;
-                    }
-                }
-            }
-            else
-            {
-                throw new NoFoodException(((Meal)sourceMeal).Name + " <- Tego jedzenia nie ma już na grillu");
-            }
-        }
-
         public void FeedEveryoneWithGrillable(MealGrillMemberFeededDelegate mealGrillMemberFeededDelegate, MealGrillMemberNotFeededDelegate mealGrillMemberNotFeededDelegate)
         {
             bool ifEated = false;
@@ -143,44 +124,91 @@ namespace GrillBackend.Logic
 
         public void BuySomeMeals()
         {
-
+            Random random = new Random();
+            foreach (var item in CurrentGrill.MealsPrepared)
+            {
+                item.Amount += random.Next(2, 4);
+            }
         }
 
-        public void PutMealOnGrill(IGrillable grillable)
+        public bool CheckIfTableContainsElementByName(Meal meal, List<Meal> meals)
         {
-            if (((Meal)grillable).Amount != 0)
+            bool result = false;
+            foreach (var item in meals)
             {
-                foreach (var item in CurrentGrill.MealsAtGrill)
+                if (item.Name == meal.Name)
                 {
-                    if (item.Name == ((Meal)grillable).Name)
+                    result = true;
+                }
+            }
+            return result;
+        }
+
+        public void GiveMealToChosenOne(Meal meal, GrillMember grillMember)
+        {
+            Meal result;
+            if (meal is IGrillable)
+            {
+                result = (Meal)CurrentGrill.MealsGrilled.Where(m => m.Name == meal.Name).Take(1);
+                ((IGrillable)result).Feed();
+            }
+            else if (meal is INotGrillable) 
+            {
+                result = (Meal)CurrentGrill.MealsPrepared.Where(m => m.Name == meal.Name).Take(1);
+            }
+           
+        }
+
+        public void ChangeStack(IGrillable sourceMeal, List<Meal> destinationMeals)
+        {
+            List<Meal> mealsToAdd = new List<Meal>();
+            if (((Meal)sourceMeal).Amount != 0)
+            {
+                if (destinationMeals.Count > 0)
+                {
+                    foreach (var item in destinationMeals)
                     {
-                        item.Amount += 1;
-                        ((Meal)grillable).Amount -= 1;
+
+                        if (CheckIfTableContainsElementByName((Meal)sourceMeal, destinationMeals))
+                        {
+                            foreach (var item2 in destinationMeals)
+                                if (item2.Name == ((Meal)sourceMeal).Name) 
+                                { 
+                                    item2.Amount += 1;
+                                    ((Meal)sourceMeal).Amount -= 1;
+                                }
+                            break;
+                        }
+                        else
+                        {
+                            Meal tempMeal = (Meal)sourceMeal.Clone();
+                            tempMeal.Amount = 0;
+                            mealsToAdd.Add(tempMeal);
+                            tempMeal.Amount += 1;
+                            ((Meal)sourceMeal).Amount -= 1;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    Meal tempMeal = (Meal)sourceMeal.Clone();
+                    tempMeal.Amount = 0;
+                    mealsToAdd.Add(tempMeal);
+                    tempMeal.Amount += 1;
+                    ((Meal)sourceMeal).Amount -= 1;
+                }
+                if (mealsToAdd.Count() != 0 )
+                {
+                    foreach (var mealToAdd in mealsToAdd)
+                    {
+                        destinationMeals.Add(mealToAdd);
                     }
                 }
             }
             else
             {
-                throw new NoFoodException(((Meal)grillable).Name + " <- To jedzenie skończyło się");
-            }
-        }
-
-        public void TakeMealFromGrill(IGrillable grillable)
-        {
-            if (((Meal)grillable).Amount != 0)
-            {
-                foreach (var item in CurrentGrill.MealsGrilled)
-                {
-                    if (item.Name == ((Meal)grillable).Name)
-                    {
-                        item.Amount += 1;
-                        ((Meal)grillable).Amount -= 1;
-                    }
-                }
-            }
-            else
-            {
-                throw new NoFoodException(((Meal)grillable).Name + " <- Tego jedzenia nie ma już na grillu");
+                throw new NoFoodException(((Meal)sourceMeal).Name + " <- To jedzenie skończyło się");
             }
         }
 

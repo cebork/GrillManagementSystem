@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace GrillBackend.Models.Abstractions
 {
-    public interface IGrillable
+    public interface IGrillable : ICloneable
     {
-        public abstract void GrillFood();
         public abstract void Feed();
     }
 }

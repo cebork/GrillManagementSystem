@@ -36,7 +36,15 @@ namespace GrillBackend.Models.GrillStuff
             GrillMembers = new List<GrillMember>();
             Status = Status.preparing;
             Description = description;
-            MealsPrepared = new List<Meal>();
+            MealsPrepared = new List<Meal>() 
+            {
+                new BloodPudding("Kaszanka", random.Next(5, 10), 150),
+                new ChuckSteak("Karkówka", random.Next(5, 10), 150),
+                new Kebab("Szaszłyk", random.Next(5, 10), 150),
+                new Sausage("Kiełbaska", random.Next(5, 10), 150),
+                new Tea("Herbata", random.Next(5, 10)),
+                new Water("Woda", random.Next(5, 10))
+            };
             MealsAtGrill = new List<Meal>();
             MealsGrilled = new List<Meal>();
             MaxGrillCap = random.Next(2500,7500);
@@ -69,22 +77,22 @@ namespace GrillBackend.Models.GrillStuff
 
         public void CreateRandomMealsList()
         {           
-            MealsPrepared.Add(new BloodPudding("Kaszanka", random.Next(5, 10), 150));
-            MealsPrepared.Add(new ChuckSteak("Karkówka", random.Next(5, 10), 150));
-            MealsPrepared.Add(new Kebab("Szaszłyk", random.Next(5, 10), 150));
-            MealsPrepared.Add(new Sausage("Kiełbaska", random.Next(5, 10), 150));
-            MealsPrepared.Add(new Tea("Herbata", random.Next(5, 10)));
-            MealsPrepared.Add(new Water("Woda", random.Next(5, 10)));
+            //MealsPrepared.Add(new BloodPudding("Kaszanka", random.Next(5, 10), 150));
+            //MealsPrepared.Add(new ChuckSteak("Karkówka", random.Next(5, 10), 150));
+            //MealsPrepared.Add(new Kebab("Szaszłyk", random.Next(5, 10), 150));
+            //MealsPrepared.Add(new Sausage("Kiełbaska", random.Next(5, 10), 150));
+            //MealsPrepared.Add(new Tea("Herbata", random.Next(5, 10)));
+            //MealsPrepared.Add(new Water("Woda", random.Next(5, 10)));
 
-            MealsAtGrill.Add(new BloodPudding("Kaszanka", 0, 150));
-            MealsAtGrill.Add(new ChuckSteak("Karkówka", 0, 150));
-            MealsAtGrill.Add(new Kebab("Szaszłyk", 0, 150));
-            MealsAtGrill.Add(new Sausage("Kiełbaska", 0, 150));
+            //MealsAtGrill.Add(new BloodPudding("Kaszanka", 0, 150));
+            //MealsAtGrill.Add(new ChuckSteak("Karkówka", 0, 150));
+            //MealsAtGrill.Add(new Kebab("Szaszłyk", 0, 150));
+            //MealsAtGrill.Add(new Sausage("Kiełbaska", 0, 150));
 
-            MealsGrilled.Add(new BloodPudding("Kaszanka", 0, 150));
-            MealsGrilled.Add(new ChuckSteak("Karkówka", 0, 150));
-            MealsGrilled.Add(new Kebab("Szaszłyk", 0, 150));
-            MealsGrilled.Add(new Sausage("Kiełbaska", 0, 150));
+            //MealsGrilled.Add(new BloodPudding("Kaszanka", 0, 150));
+            //MealsGrilled.Add(new ChuckSteak("Karkówka", 0, 150));
+            //MealsGrilled.Add(new Kebab("Szaszłyk", 0, 150));
+            //MealsGrilled.Add(new Sausage("Kiełbaska", 0, 150));
         }
     }
 }
