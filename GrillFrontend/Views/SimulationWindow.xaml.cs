@@ -1,4 +1,6 @@
-﻿using GrillBackend.Models.Enums;
+﻿using GrillBackend.Models.Abstractions;
+using GrillBackend.Models.Enums;
+using GrillBackend.Models.GrillStuff;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,6 +27,15 @@ namespace GrillFrontend.Views
         {
             Owner = parentWindow;
             InitializeComponent();
+            //List<IGrillable> list = new List<IGrillable>(); 
+            //foreach (var item in MainWindow.grillLogic.CurrentGrill.MealsPrepared)
+            //{
+            //    if(item is IGrillable)
+            //    {
+            //        list.Add((IGrillable)item);
+            //    }
+            //}
+            //allMealsList.ItemsSource = list;
             allMealsList.ItemsSource = MainWindow.grillLogic.CurrentGrill.MealsPrepared;
             atGrillList.ItemsSource = MainWindow.grillLogic.CurrentGrill.MealsAtGrill;
             readyList.ItemsSource = MainWindow.grillLogic.CurrentGrill.MealsGrilled;

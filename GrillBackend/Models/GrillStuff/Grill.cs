@@ -39,6 +39,7 @@ namespace GrillBackend.Models.GrillStuff
             MealsAtGrill = new List<Meal>();
             MealsGrilled = new List<Meal>();
             MaxGrillCap = random.Next(2500,7500);
+            CreateRandomMealsList();
         }
 
         public override bool Equals(object? obj)
