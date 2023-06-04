@@ -9,5 +9,6 @@ namespace GrillBackend.Models.Abstractions
     public interface IGrillable
     {
         public abstract void GrillFood();
+        public abstract void Feed();
     }
 }

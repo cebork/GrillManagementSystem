@@ -40,4 +40,16 @@ namespace GrillBackend.Exceptions
 		  System.Runtime.Serialization.SerializationInfo info,
 		  System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
 	}
+
+
+	[Serializable]
+	public class NoFoodException : Exception
+	{
+		public NoFoodException() { }
+		public NoFoodException(string message) : base(message) { }
+		public NoFoodException(string message, Exception inner) : base(message, inner) { }
+		protected NoFoodException(
+		  System.Runtime.Serialization.SerializationInfo info,
+		  System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+	}
 }
