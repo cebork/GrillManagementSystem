@@ -40,10 +40,12 @@ namespace GrillFrontend.Views
             //    }
             //}
             //allMealsList.ItemsSource = list;
+            
             allMealsList.ItemsSource = MainWindow.grillLogic.CurrentGrill.MealsPrepared;
             atGrillList.ItemsSource = MainWindow.grillLogic.CurrentGrill.MealsAtGrill;
             readyList.ItemsSource = MainWindow.grillLogic.CurrentGrill.MealsGrilled;
-
+            selectMember.ItemsSource = MainWindow.grillLogic.CurrentGrill.GrillMembers;
+            selectMeal.ItemsSource = MainWindow.grillLogic.CurrentGrill.MealsPrepared;
             Closing += SimulationWindow_Closing;
             closeButton.Click += ButtonEndGrill_Click;
         }
@@ -96,12 +98,12 @@ namespace GrillFrontend.Views
                 new GrillBackend.Logic.GrillLogic.MealGrillMemberFeededDelegate((meal, grillMember) =>
                 {
                     readyList.Items.Refresh();
-                    eated += grillMember.Name + " " + grillMember.Surname + " zjadł " + meal.Name + "\n";
+                    eated += grillMember.Name + " " + grillMember.Surname + " zjadł/a " + meal.Name + "\n";
 
                 }),
                 new GrillBackend.Logic.GrillLogic.MealGrillMemberNotFeededDelegate(grillMember =>
                 {
-                    eated += grillMember.Name + " " + grillMember.Surname + " nic nie zjadł bo siem skomczyło :(\n";
+                    eated += grillMember.Name + " " + grillMember.Surname + " nic nie zjadł/a bo siem skomczyło :(\n";
                 })
             );
             MessageBox.Show(eated);
@@ -109,6 +111,20 @@ namespace GrillFrontend.Views
 
         private void ButtonServeDrinkAll_Click(object sender, RoutedEventArgs e)
         {
+            string drinked = "";
+            MainWindow.grillLogic.ServeDrinkAll(
+                new GrillBackend.Logic.GrillLogic.MealGrillMemberFeededDelegate((meal, grillMember) =>
+                {
+                    allMealsList.Items.Refresh();
+                    drinked += grillMember.Name + " " + grillMember.Surname + " wypił/a " + meal.Name + "\n";
+
+                }),
+                new GrillBackend.Logic.GrillLogic.MealGrillMemberNotFeededDelegate(grillMember =>
+                {
+                    drinked += grillMember.Name + " " + grillMember.Surname + " nic nie wypił/a bo siem skomczyło :(\n";
+                })
+            );
+            MessageBox.Show(drinked);
 
         }
 
@@ -120,6 +136,21 @@ namespace GrillFrontend.Views
 
         private void ButtonServeToSelectMember_Click(object sender, RoutedEventArgs e)
         {
+            GrillMember grillMember = (GrillMember)selectMember.SelectedValue;
+            Meal meal = (Meal)selectMeal.SelectedValue;
+
+            MainWindow.grillLogic.MealGrillMemberDrinked += (meal, grillMember)
+                => MessageBox.Show(grillMember.Name + " " + grillMember.Surname + " wypił/a " + meal.Name);
+
+            MainWindow.grillLogic.MealGrillMemberEatGrilled += (meal, grillMember)
+                => MessageBox.Show(grillMember.Name + " " + grillMember.Surname + " zjadł/a z grilla " + meal.Name);
+
+            MainWindow.grillLogic.MealGrillMemberEatNotGrilled += (meal, grillMember)
+                => MessageBox.Show(grillMember.Name + " " + grillMember.Surname + " zjadł/a " + meal.Name);
+
+            MainWindow.grillLogic.GiveMealToChosenOne(meal, grillMember);
+            //MessageBox.Show(selectMember.SelectedValue+"\n"+ selectMeal.SelectedValue);
+
 
         }
 

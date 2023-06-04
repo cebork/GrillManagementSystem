@@ -13,11 +13,11 @@
     </Window.Resources>
     <Grid Height="686" VerticalAlignment="Top">
         <Label Content="Dostępne" HorizontalAlignment="Left" Margin="178,36,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-        <Label Content="Aktualnie na grillu" HorizontalAlignment="Center" Margin="0,35,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+        <Label Content="Aktualnie na grillu" HorizontalAlignment="Left" Margin="509,35,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
         <Label Content="Gotowe" HorizontalAlignment="Left" Margin="933,36,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
         <Button Content="Zakończ grilla" HorizontalAlignment="Left" Margin="832,575,0,0" VerticalAlignment="Top" Height="35" Width="264" Click="ButtonEndGrill_Click" Name="closeButton" RenderTransformOrigin="0.5,0.5">
         </Button>
-        <DataGrid x:Name="allMealsList" AutoGenerateColumns="False" d:ItemsSource="{d:SampleData ItemCount=25}" Margin="178,81,838,199" IsReadOnly="True" CanUserResizeRows="False">
+        <DataGrid x:Name="allMealsList" AutoGenerateColumns="False" d:ItemsSource="{d:SampleData ItemCount=25}" Margin="178,81,827,199" IsReadOnly="True" CanUserResizeRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nazwa" Binding="{Binding Name}" Width="5*"/>
                 <DataGridTextColumn Header="Ilość" Binding="{Binding Amount}" Width="auto"/>
@@ -109,10 +109,32 @@
         </DataGrid>
         <Button Content="Nakarm wszystkich" HorizontalAlignment="Left" Margin="178,575,0,0" VerticalAlignment="Top" Height="35" Width="264" Click="ButtonFeedAll_Click" RenderTransformOrigin="0.5,0.5"/>
         <Button Content="Nawodnij gości" HorizontalAlignment="Center" Margin="0,575,0,0" VerticalAlignment="Top" Height="35" Width="264" Click="ButtonServeDrinkAll_Click" RenderTransformOrigin="0.5,0.5"/>
-        <Button Content="Dokup asortyment" HorizontalAlignment="Left" Margin="310,36,0,0" VerticalAlignment="Top" Height="28" Width="132" Click="ButtonAddFood_Click" RenderTransformOrigin="0.5,0.5"/>
+        <Button Content="Dokup asortyment" HorizontalAlignment="Left" Margin="300,36,0,0" VerticalAlignment="Top" Height="28" Width="132" Click="ButtonAddFood_Click" RenderTransformOrigin="0.5,0.5"/>
         <Button Content="Zatwierdź" HorizontalAlignment="Left" Margin="832,517,0,0" VerticalAlignment="Top" Height="35" Width="264" Click="ButtonServeToSelectMember_Click" RenderTransformOrigin="0.5,0.5"/>
-        <ComboBox HorizontalAlignment="Left" Margin="178,517,0,0" VerticalAlignment="Top" Width="264" Height="35"/>
-        <ComboBox HorizontalAlignment="Center" Margin="0,517,0,0" VerticalAlignment="Top" Width="264" Height="35"/>
+        <ComboBox x:Name="selectMember" HorizontalAlignment="Left" Margin="178,527,0,0" VerticalAlignment="Top" Width="264" Height="24">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}" />
+                        <TextBlock Text=" " />
+                        <TextBlock Text="{Binding Surname}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ComboBox x:Name="selectMeal" HorizontalAlignment="Center" Margin="0,527,0,0" VerticalAlignment="Top" Width="264" Height="24">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Label Content="Wybór grillowicza:" HorizontalAlignment="Left" Margin="178,503,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+        <Label Content="Wybór jedzonka:" HorizontalAlignment="Left" Margin="508,503,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+        <Label Name="weight" Content="0" HorizontalAlignment="Left" Margin="682,37,0,0" VerticalAlignment="Top"/>
+        <Label Content="/ XXXX" HorizontalAlignment="Left" Margin="725,37,0,0" VerticalAlignment="Top" Width="47"/>
 
 
 
