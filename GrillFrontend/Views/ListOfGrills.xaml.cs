@@ -62,7 +62,7 @@ namespace GrillFrontend
         {
             SimulationWindow simulationWindow = new SimulationWindow(this);
             MainWindow.grillLogic.CurrentGrill = ((FrameworkElement)sender).DataContext as Grill;
-            MainWindow.grillLogic.CurrentGrill.CreateRandomMealsList();
+            //MainWindow.grillLogic.CurrentGrill.CreateRandomMealsList();
             MainWindow.grillLogic.ChangeStatus(Status.in_progress);
             simulationWindow.ShowDialog();
             lista.Items.Refresh();
