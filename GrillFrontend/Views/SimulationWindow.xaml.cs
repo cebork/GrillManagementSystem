@@ -5,6 +5,7 @@ using GrillBackend.Models.GrillStuff;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace GrillFrontend.Views
 {
@@ -28,6 +30,7 @@ namespace GrillFrontend.Views
         {
             Owner = parentWindow;
             InitializeComponent();
+            Title = MainWindow.grillLogic.CurrentGrill.Name;
             //List<IGrillable> list = new List<IGrillable>(); 
             //foreach (var item in MainWindow.grillLogic.CurrentGrill.MealsPrepared)
             //{
@@ -41,11 +44,12 @@ namespace GrillFrontend.Views
             atGrillList.ItemsSource = MainWindow.grillLogic.CurrentGrill.MealsAtGrill;
             readyList.ItemsSource = MainWindow.grillLogic.CurrentGrill.MealsGrilled;
 
+            Closing += SimulationWindow_Closing;
+            closeButton.Click += ButtonEndGrill_Click;
         }
 
         private void ButtonEndGrill_Click(object sender, RoutedEventArgs e)
         {
-
             MainWindow.grillLogic.ChangeStatus(Status.Ended);
             Close();
         }
@@ -93,7 +97,7 @@ namespace GrillFrontend.Views
                 {
                     readyList.Items.Refresh();
                     eated += grillMember.Name + " " + grillMember.Surname + " zjadł " + meal.Name + "\n";
-                    
+
                 }),
                 new GrillBackend.Logic.GrillLogic.MealGrillMemberNotFeededDelegate(grillMember =>
                 {
@@ -101,6 +105,27 @@ namespace GrillFrontend.Views
                 })
             );
             MessageBox.Show(eated);
+        }
+
+        private void ButtonServeDrinkAll_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ButtonAddFood_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.grillLogic.BuySomeMeals();
+            allMealsList.Items.Refresh();
+        }
+
+        private void ButtonServeToSelectMember_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SimulationWindow_Closing(object sender, CancelEventArgs e)
+        {
+            MainWindow.grillLogic.ChangeStatus(Status.Ended);
         }
     }
 }
