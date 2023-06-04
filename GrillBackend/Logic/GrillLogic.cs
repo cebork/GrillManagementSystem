@@ -132,7 +132,7 @@ namespace GrillBackend.Logic
             {
                 foreach (var meal in CurrentGrill.MealsPrepared)
                 {
-                    if (meal.Amount > 0)
+                    if (meal.Amount > 0 && meal is Drink)
                     {
                         ((Drink)meal).DrinkSomeDrink();
                         mealGrillMemberFeededDelegate(meal, item);
@@ -157,7 +157,7 @@ namespace GrillBackend.Logic
             }
         }
 
-        public bool CheckIfTableContainsElementByName(Meal meal, List<Meal> meals)
+        public bool CheckIfTableContainsElementByName(Meal meal, List<Food> meals)
         {
             bool result = false;
             foreach (var item in meals)
@@ -175,77 +175,90 @@ namespace GrillBackend.Logic
             Meal result;
             if (meal is IGrillable)
             {
-                result = (Meal)CurrentGrill.MealsGrilled.Where(m => m.Name == meal.Name).Take(1);
+                result = (Meal)CurrentGrill.MealsGrilled.Where(m => m.Name == meal.Name);
                 ((IGrillable)result).Feed();
                 MealGrillMemberEatGrilled.Invoke(meal, grillMember);
             }
             if (meal is INotGrillable) 
             {
-                result = (Meal)CurrentGrill.MealsPrepared.Where(m => m.Name == meal.Name).Take(1);
+                result = (Meal)CurrentGrill.MealsPrepared.Where(m => m.Name == meal.Name);
                 ((INotGrillable)result).Feed();
                 MealGrillMemberEatNotGrilled.Invoke(meal, grillMember);
             }
             if (meal is Drink)
             {
-                result = (Meal)CurrentGrill.MealsPrepared.Where(m => m.Name == meal.Name).Take(1);
+                result = (Meal)CurrentGrill.MealsPrepared.Where(m => m.Name == meal.Name);
                 ((Drink)result).DrinkSomeDrink();
                 MealGrillMemberDrinked.Invoke(meal, grillMember);
             }
         }
 
-
-
-        public void ChangeStack(IGrillable sourceMeal, List<Meal> destinationMeals)
+        public int GetCurrentGrillWeight()
         {
-            List<Meal> mealsToAdd = new List<Meal>();
-            if (((Meal)sourceMeal).Amount != 0)
-            {
-                if (destinationMeals.Count > 0)
-                {
-                    foreach (var item in destinationMeals)
-                    {
+            var result = CurrentGrill.MealsAtGrill.Sum(g => g.Weight);
+            return result;
+        }
 
-                        if (CheckIfTableContainsElementByName((Meal)sourceMeal, destinationMeals))
+        public void ChangeStack(IGrillable sourceMeal, List<Food> destinationMeals)
+        {
+            List<Food> mealsToAdd = new List<Food>();
+            var result = CurrentGrill.MealsAtGrill.Sum(g => g.Weight);
+            if (result <= CurrentGrill.MaxGrillCap)
+            {
+                if (((Food)sourceMeal).Amount != 0)
+                {
+                    if (destinationMeals.Count > 0)
+                    {
+                        foreach (var item in destinationMeals)
                         {
-                            foreach (var item2 in destinationMeals)
-                                if (item2.Name == ((Meal)sourceMeal).Name) 
-                                { 
-                                    item2.Amount += 1;
-                                    ((Meal)sourceMeal).Amount -= 1;
-                                }
-                            break;
+
+                            if (CheckIfTableContainsElementByName((Food)sourceMeal, destinationMeals))
+                            {
+                                foreach (var item2 in destinationMeals)
+                                    if (item2.Name == ((Food)sourceMeal).Name)
+                                    {
+                                        item2.Amount += 1;
+                                        ((Food)sourceMeal).Amount -= 1;
+                                    }
+                                break;
+                            }
+                            else
+                            {
+                                Food tempMeal = (Food)sourceMeal.Clone();
+                                tempMeal.Amount = 0;
+                                mealsToAdd.Add(tempMeal);
+                                tempMeal.Amount += 1;
+                                ((Food)sourceMeal).Amount -= 1;
+                                break;
+                            }
                         }
-                        else
+                    }
+                    else
+                    {
+                        Food tempMeal = (Food)sourceMeal.Clone();
+                        tempMeal.Amount = 0;
+                        mealsToAdd.Add(tempMeal);
+                        tempMeal.Amount += 1;
+                        ((Food)sourceMeal).Amount -= 1;
+                    }
+                    if (mealsToAdd.Count() != 0)
+                    {
+                        foreach (var mealToAdd in mealsToAdd)
                         {
-                            Meal tempMeal = (Meal)sourceMeal.Clone();
-                            tempMeal.Amount = 0;
-                            mealsToAdd.Add(tempMeal);
-                            tempMeal.Amount += 1;
-                            ((Meal)sourceMeal).Amount -= 1;
-                            break;
+                            destinationMeals.Add(mealToAdd);
                         }
                     }
                 }
                 else
                 {
-                    Meal tempMeal = (Meal)sourceMeal.Clone();
-                    tempMeal.Amount = 0;
-                    mealsToAdd.Add(tempMeal);
-                    tempMeal.Amount += 1;
-                    ((Meal)sourceMeal).Amount -= 1;
-                }
-                if (mealsToAdd.Count() != 0 )
-                {
-                    foreach (var mealToAdd in mealsToAdd)
-                    {
-                        destinationMeals.Add(mealToAdd);
-                    }
+                    throw new NoFoodException(((Food)sourceMeal).Name + " <- To jedzenie skończyło się");
                 }
             }
             else
             {
-                throw new NoFoodException(((Meal)sourceMeal).Name + " <- To jedzenie skończyło się");
+                throw new GrillOverflowException("Grill przepełniony nie można dodać więcej rzeczy");
             }
+            
         }
 
         public void saveUpdatedData()

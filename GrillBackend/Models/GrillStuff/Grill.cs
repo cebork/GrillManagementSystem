@@ -27,8 +27,8 @@ namespace GrillBackend.Models.GrillStuff
         public Status Status { get; set; }
         public int MaxGrillCap { get; set; }
         public List<Meal> MealsPrepared { get; set; }
-        public List<Meal> MealsAtGrill { get; set; }
-        public List<Meal> MealsGrilled { get; set; }
+        public List<Food> MealsAtGrill { get; set; }
+        public List<Food> MealsGrilled { get; set; }
         Random random = new Random();
         public Grill() { }
         public Grill(string name, DateTime? dateOfGrillStart, string description)
@@ -49,9 +49,10 @@ namespace GrillBackend.Models.GrillStuff
                 new Tea("Herbata", random.Next(5, 10)),
                 new Water("Woda", random.Next(5, 10))
             };
-            MealsAtGrill = new List<Meal>();
-            MealsGrilled = new List<Meal>();
-            MaxGrillCap = random.Next(2500,7500);
+            MealsAtGrill = new List<Food>();
+            MealsGrilled = new List<Food>();
+            //MaxGrillCap = random.Next(2500,7500);
+            MaxGrillCap = 5000;
             CreateRandomMealsList();
         }
 
