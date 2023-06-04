@@ -3,20 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GrillBackend.Models.Enums;
+
 namespace GrillBackend.Models.Abstractions
 {
-    public abstract class Meal
+    public abstract class Food : Meal
     {
-        public string? Name { get; set; }
-        public int Amount { get; set; }
-        
-        public Meal() { }
+        public int Weight { get; set; }
+        public Food() {}
 
-        public Meal(string name, int amount)
+        protected Food(string name, int amount, int weight) : base(name, amount)
         {
-            Name = name;
-            Amount = amount;
+            Weight = weight;
         }
 
         public override bool Equals(object? obj)
@@ -31,7 +28,7 @@ namespace GrillBackend.Models.Abstractions
 
         public override string? ToString()
         {
-            return $"Name: {Name} Amount: {Amount}";
+            return base.ToString() + $"Weight: {Weight}";
         }
     }
 }

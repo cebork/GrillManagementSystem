@@ -12,6 +12,8 @@ namespace GrillBackend.Models.GrillStuff
     [XmlInclude(typeof(ChuckSteak))]
     [XmlInclude(typeof(Kebab))]
     [XmlInclude(typeof(Sausage))]
+    [XmlInclude(typeof(Bread))]
+    [XmlInclude(typeof(Chipsy))]
     [XmlInclude(typeof(Tea))]
     [XmlInclude(typeof(Water))]
     [XmlInclude(typeof(Random))]
@@ -36,12 +38,14 @@ namespace GrillBackend.Models.GrillStuff
             GrillMembers = new List<GrillMember>();
             Status = Status.preparing;
             Description = description;
-            MealsPrepared = new List<Meal>() 
+            MealsPrepared = new List<Meal>()
             {
                 new BloodPudding("Kaszanka", random.Next(5, 10), 150),
                 new ChuckSteak("Karkówka", random.Next(5, 10), 150),
                 new Kebab("Szaszłyk", random.Next(5, 10), 150),
                 new Sausage("Kiełbaska", random.Next(5, 10), 150),
+                new Bread("Chleb", random.Next(5, 10), 150),
+                new Chipsy("LejsyNieMax", random.Next(5,10), 150),
                 new Tea("Herbata", random.Next(5, 10)),
                 new Water("Woda", random.Next(5, 10))
             };

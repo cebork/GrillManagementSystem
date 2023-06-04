@@ -9,14 +9,10 @@ using GrillBackend.Models.Enums;
 
 namespace GrillBackend.Models.Meals
 {
-    public class Sausage : Meal, IGrillable
+    public class Sausage : Food, IGrillable
     {
-        public int Weight { get; set; }
         public Sausage() { }
-        public Sausage(string name, int amount, int weight) : base(name, amount)
-        {
-            Weight = weight;
-        }
+        public Sausage(string name, int amount, int weight) : base(name, amount, weight) { }
         public void Feed()
         {
             if (Amount > 0)
@@ -33,5 +29,21 @@ namespace GrillBackend.Models.Meals
         {
             return new Sausage(base.Name, base.Amount, Weight);
         }
+
+        public override bool Equals(object? obj)
+        {
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public override string? ToString()
+        {
+            return base.ToString();
+        }
+
     }
 }
