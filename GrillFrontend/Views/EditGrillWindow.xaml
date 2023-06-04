@@ -13,7 +13,7 @@
     </Window.Resources>
 
     <Grid>
-        <Button Content="Anuluj" HorizontalAlignment="Left" Margin="382,442,0,0" VerticalAlignment="Top" Height="28" Width="112" Click="ButtonClose_Click"/>
+        <Button Content="Anuluj" HorizontalAlignment="Left" Margin="382,442,0,0" VerticalAlignment="Top" Height="28" Width="112" Click="ButtonClose_Click" Name="closeButton"/>
         <Label Content="Nazwa:" HorizontalAlignment="Left" Margin="38,37,0,0" VerticalAlignment="Top" Width="87" FontWeight="Bold"/>
         <Label Content="Data:" HorizontalAlignment="Left" Margin="38,68,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <Label Content="Opis:" HorizontalAlignment="Left" Margin="38,130,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
