@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GrillFrontend.Views"
         xmlns:src="clr-namespace:GrillFrontend.Converters"
-        mc:Ignorable="d" WindowStyle="None" MouseDown="MoveWindow" WindowStartupLocation="CenterOwner"
+        mc:Ignorable="d"  MouseDown="MoveWindow" WindowStartupLocation="CenterOwner"
         Title="Symulacja" Height="720" Width="1280" ResizeMode="NoResize">
     <Window.Resources>
         <src:GreaterThanZeroConverter x:Key="greaterThanZeroConverter" />
@@ -17,12 +17,12 @@
         <DataGrid x:Name="allMealsList" AutoGenerateColumns="False" d:ItemsSource="{d:SampleData ItemCount=25}" Margin="36,36,981,229" IsReadOnly="True" CanUserResizeRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nazwa" Binding="{Binding Name}" Width="5*"/>
-                <DataGridTextColumn Header="Ilość" Binding="{Binding Amount}" Width="1*"/>
-                <DataGridTemplateColumn CanUserResize="False" Width="1*">
+                <DataGridTextColumn Header="Ilość" Binding="{Binding Amount}" Width="auto"/>
+                <DataGridTemplateColumn CanUserResize="False" Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button x:Name="ToGrill" Click="ButtonToGrill_Click"  Margin="0,0,10,0" Content="- >">
+                                <Button x:Name="ToGrill" Click="ButtonToGrill_Click" Padding="3,0,3,0" Content=" ➜ ">
                                     <Button.Style>
                                         <Style TargetType="{x:Type Button}">
                                             <Style.Triggers>
@@ -30,16 +30,6 @@
                                                     <Setter Property="Visibility" Value="Visible" />
                                                     <Setter Property="Background" Value="DarkRed" />
                                                     <Setter Property="Foreground" Value="White" />
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding Converter={StaticResource implementsInterfaceConverter}}" Value="False">
-                                                    <Setter Property="Visibility" Value="Hidden" />
-                                                </DataTrigger>
-                                                <!--<DataTrigger Binding="{Binding Amount, Converter={StaticResource greaterThanZeroConverter}}" Value="True">
-                                                    <Setter Property="Visibility" Value="Visible" />
-
-                                                    <Setter Property="Background" Value="DarkRed" />
-                                                    <Setter Property="Foreground" Value="White" />
-                                                    <Setter Property="FontWeight" Value="Bold"/>
                                                     <Setter Property="Template">
                                                         <Setter.Value>
                                                             <ControlTemplate TargetType="{x:Type Button}">
@@ -49,11 +39,10 @@
                                                             </ControlTemplate>
                                                         </Setter.Value>
                                                     </Setter>
-                                                    <Setter Property="Visibility" Value="Visible" />
                                                 </DataTrigger>
-                                                <DataTrigger Binding="{Binding Amount, Converter={StaticResource greaterThanZeroConverter}}" Value="False">
+                                                <DataTrigger Binding="{Binding Converter={StaticResource implementsInterfaceConverter}}" Value="False">
                                                     <Setter Property="Visibility" Value="Hidden" />
-                                                </DataTrigger>-->
+                                                </DataTrigger>
                                                 <Trigger Property="IsMouseOver" Value="True">
                                                     <Setter Property="Background" Value="OrangeRed"/>
                                                     <Setter Property="Foreground" Value="White"/>
@@ -71,42 +60,12 @@
         <DataGrid x:Name="atGrillList" AutoGenerateColumns="False" d:ItemsSource="{d:SampleData ItemCount=25}" Margin="530,36,530,229" IsReadOnly="True" CanUserResizeRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nazwa" Binding="{Binding Name}" Width="5*"/>
-                <DataGridTextColumn Header="Ilość" Binding="{Binding Amount}" Width="1*"/>
-                <DataGridTemplateColumn CanUserResize="False" Width="1*">
+                <DataGridTextColumn Header="Ilość" Binding="{Binding Amount}" Width="auto"/>
+                <DataGridTemplateColumn CanUserResize="False" Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button x:Name="GetFromGrill" Click="ButtonGetFromGrill_Click" Margin="0,0,10,0" Content="- &gt;">
-                                    <Button.Style>
-                                        <Style TargetType="{x:Type Button}">
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Amount, Converter={StaticResource greaterThanZeroConverter}}" Value="True">
-                                                    <Setter Property="Visibility" Value="Visible" />
-
-                                                    <Setter Property="Background" Value="DarkRed" />
-                                                    <Setter Property="Foreground" Value="White" />
-                                                    <Setter Property="FontWeight" Value="Bold"/>
-                                                    <Setter Property="Template">
-                                                        <Setter.Value>
-                                                            <ControlTemplate TargetType="{x:Type Button}">
-                                                                <Border Background="{TemplateBinding Background}" BorderBrush="Transparent" CornerRadius="5">
-                                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
-                                                                </Border>
-                                                            </ControlTemplate>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                    <Setter Property="Visibility" Value="Visible" />
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding Amount, Converter={StaticResource greaterThanZeroConverter}}" Value="False">
-                                                    <Setter Property="Visibility" Value="Hidden" />
-                                                </DataTrigger>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Background" Value="OrangeRed"/>
-                                                    <Setter Property="Foreground" Value="White"/>
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Button.Style>
+                                <Button x:Name="GetFromGrill" Click="ButtonGetFromGrill_Click" Padding="3,0,3,0" Content=" ➜ ">
                                 </Button>
                             </StackPanel>
                         </DataTemplate>
@@ -120,6 +79,7 @@
                 <DataGridTextColumn Header="Ilość" Binding="{Binding Amount}" Width="1*"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Button Content="Nakarm wszystkich" HorizontalAlignment="Left" Margin="304,635,0,0" VerticalAlignment="Top" Height="44" Width="194" Click="ButtonFeedAll_Click" RenderTransformOrigin="0.5,0.5"/>
 
     </Grid>
 </Window>
