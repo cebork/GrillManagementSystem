@@ -14,6 +14,7 @@ namespace GrillBackend.Models.GrillStuff
     [XmlInclude(typeof(Sausage))]
     [XmlInclude(typeof(Tea))]
     [XmlInclude(typeof(Water))]
+    [XmlInclude(typeof(Random))]
     [Serializable]
     public class Grill
     {

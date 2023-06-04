@@ -87,7 +87,20 @@ namespace GrillFrontend.Views
 
         private void ButtonFeedAll_Click(object sender, RoutedEventArgs e)
         {
-
+            string eated = "";
+            MainWindow.grillLogic.FeedEveryoneWithGrillable(
+                new GrillBackend.Logic.GrillLogic.MealGrillMemberFeededDelegate((meal, grillMember) =>
+                {
+                    readyList.Items.Refresh();
+                    eated += grillMember.Name + " " + grillMember.Surname + " zjadł " + meal.Name + "\n";
+                    
+                }),
+                new GrillBackend.Logic.GrillLogic.MealGrillMemberNotFeededDelegate(grillMember =>
+                {
+                    eated += grillMember.Name + " " + grillMember.Surname + " nic nie zjadł bo siem skomczyło :(\n";
+                })
+            );
+            MessageBox.Show(eated);
         }
     }
 }

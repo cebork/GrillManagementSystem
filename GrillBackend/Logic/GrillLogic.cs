@@ -20,7 +20,7 @@ namespace GrillBackend.Logic
         private Dictionary<IGrillable, Thread> GrillableThreadDict = new Dictionary<IGrillable, Thread>();
         private XmlSerializer serializer = new XmlSerializer(typeof(List<Grill>));
         public delegate void MealGrillMemberFeededDelegate(Meal meal, GrillMember grillMember);
-        public delegate void MealGrillMemberNotFeededDelegate(Meal meal, GrillMember grillMember);
+        public delegate void MealGrillMemberNotFeededDelegate(GrillMember grillMember);
         public GrillLogic()
         {
             try
@@ -118,8 +118,9 @@ namespace GrillBackend.Logic
             }
         }
 
-        public void FeedEveryoneWithGrillable(MealGrillMemberFeededDelegate mealGrillMemberFeededDelegate, MealGrillMemberNotFeededDelegate mealGrillMemberNotFededDelegate)
+        public void FeedEveryoneWithGrillable(MealGrillMemberFeededDelegate mealGrillMemberFeededDelegate, MealGrillMemberNotFeededDelegate mealGrillMemberNotFeededDelegate)
         {
+            bool ifEated = false;
             foreach (var item in CurrentGrill.GrillMembers)
             {
                 foreach (var meal in CurrentGrill.MealsGrilled)
@@ -128,16 +129,22 @@ namespace GrillBackend.Logic
                     {
                         ((IGrillable)meal).Feed();
                         mealGrillMemberFeededDelegate(meal, item);
+                        ifEated = true;
                         break;
                     }
-                    else
-                    {
-                        mealGrillMemberNotFededDelegate(meal, item);
-                    }
                 }
+                if (!ifEated)
+                {
+                    mealGrillMemberNotFeededDelegate(item);
+                }
+                ifEated = false;
             }
         }
 
+        public void BuySomeMeals()
+        {
+
+        }
 
         public void PutMealOnGrill(IGrillable grillable)
         {
