@@ -54,7 +54,7 @@ namespace GrillFrontend.Views
         {
             try
             {
-                MainWindow.grillLogic.PutMealOnGrill((IGrillable)((FrameworkElement)sender).DataContext);
+                MainWindow.grillLogic.ChangeStack((IGrillable)((FrameworkElement)sender).DataContext, MainWindow.grillLogic.CurrentGrill.MealsAtGrill);
                 allMealsList.Items.Refresh();
                 atGrillList.Items.Refresh();
             }
@@ -68,7 +68,7 @@ namespace GrillFrontend.Views
         {
             try
             {
-                MainWindow.grillLogic.TakeMealFromGrill((IGrillable)((FrameworkElement)sender).DataContext);
+                MainWindow.grillLogic.ChangeStack((IGrillable)((FrameworkElement)sender).DataContext, MainWindow.grillLogic.CurrentGrill.MealsGrilled);
                 atGrillList.Items.Refresh();
                 readyList.Items.Refresh();
             }

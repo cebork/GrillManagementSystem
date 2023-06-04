@@ -18,28 +18,6 @@ namespace GrillBackend.Models.Meals
         {
             Weight = weight;
         }
-        public void GrillFood()
-        {
-            IsOnGrill = true;
-            while (IsOnGrill)
-            {
-                Thread.Sleep(1000);
-                OnGrillTime += 1;
-                if (OnGrillTime <= 10)
-                {
-                    DonenessLevel = DonenessLevel.notReady;
-                }
-                else if (OnGrillTime > 10 && OnGrillTime <= 20)
-                {
-                    DonenessLevel = DonenessLevel.ready;
-                }
-                else
-                {
-                    DonenessLevel = DonenessLevel.overCooked;
-                }
-                Console.WriteLine(Name + " " + OnGrillTime + " " + DonenessLevel);
-            }
-        }
         public void Feed()
         {
             if (Amount > 0)
@@ -50,6 +28,11 @@ namespace GrillBackend.Models.Meals
             {
                 throw new NoFoodException("Nie ma już " + Name);
             }
+
+        }
+        public object Clone()
+        {
+            return new Kebab(base.Name, base.Amount, Weight);
         }
     }
 }
