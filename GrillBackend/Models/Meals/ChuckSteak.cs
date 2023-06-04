@@ -10,14 +10,10 @@ using GrillBackend.Exceptions;
 
 namespace GrillBackend.Models.Meals
 {
-    public class ChuckSteak : Meal, IGrillable
+    public class ChuckSteak : Food, IGrillable
     {
-        public int Weight { get; set; }
         public ChuckSteak() { }
-        public ChuckSteak(string name, int amount, int weight) : base(name, amount)
-        {
-            Weight = weight;
-        }
+        public ChuckSteak(string name, int amount, int weight) : base(name, amount, weight) { }
 
         public void Feed()
         {
@@ -33,6 +29,21 @@ namespace GrillBackend.Models.Meals
         public object Clone()
         {
             return new ChuckSteak(base.Name, base.Amount, Weight);
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public override string? ToString()
+        {
+            return base.ToString();
         }
     }
 }
