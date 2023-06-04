@@ -19,6 +19,8 @@ namespace GrillBackend.Logic
 
         private Dictionary<IGrillable, Thread> GrillableThreadDict = new Dictionary<IGrillable, Thread>();
         private XmlSerializer serializer = new XmlSerializer(typeof(List<Grill>));
+        public delegate void MealGrillMemberFeededDelegate(Meal meal, GrillMember grillMember);
+        public delegate void MealGrillMemberNotFeededDelegate(Meal meal, GrillMember grillMember);
         public GrillLogic()
         {
             try
@@ -116,52 +118,64 @@ namespace GrillBackend.Logic
             }
         }
 
-        public void FeedEveryone()
+        public void FeedEveryoneWithGrillable(MealGrillMemberFeededDelegate mealGrillMemberFeededDelegate, MealGrillMemberNotFeededDelegate mealGrillMemberNotFededDelegate)
         {
             foreach (var item in CurrentGrill.GrillMembers)
             {
-                
+                foreach (var meal in CurrentGrill.MealsGrilled)
+                {
+                    if (meal.Amount > 0)
+                    {
+                        ((IGrillable)meal).Feed();
+                        mealGrillMemberFeededDelegate(meal, item);
+                        break;
+                    }
+                    else
+                    {
+                        mealGrillMemberNotFededDelegate(meal, item);
+                    }
+                }
             }
         }
 
 
-        //public void PutMealOnGrill(IGrillable grillable)
-        //{
-        //    if (((Meal)grillable).Amount != 0 )
-        //    {
-        //        foreach (var item in CurrentGrill.MealsAtGrill)
-        //        {
-        //            if (item.Name == ((Meal)grillable).Name)
-        //            {
-        //                item.Amount -= 1;
-        //                ((Meal)grillable).Amount += 1;
-        //            }
-        //        }
-        //    }
-        //    else
-        //    {
-        //        throw new NoFoodException(((Meal)grillable).Name + " <- To jedzenie skończyło się");
-        //    }
-        //}
+        public void PutMealOnGrill(IGrillable grillable)
+        {
+            if (((Meal)grillable).Amount != 0)
+            {
+                foreach (var item in CurrentGrill.MealsAtGrill)
+                {
+                    if (item.Name == ((Meal)grillable).Name)
+                    {
+                        item.Amount += 1;
+                        ((Meal)grillable).Amount -= 1;
+                    }
+                }
+            }
+            else
+            {
+                throw new NoFoodException(((Meal)grillable).Name + " <- To jedzenie skończyło się");
+            }
+        }
 
-        //public void TakeMealFromGrill(IGrillable grillable)
-        //{
-        //    if (((Meal)grillable).Amount != 0)
-        //    {
-        //        foreach (var item in CurrentGrill.MealsGrilled)
-        //        {
-        //            if (item.Name == ((Meal)grillable).Name)
-        //            {
-        //                item.Amount -= 1;
-        //                ((Meal)grillable).Amount += 1;
-        //            }
-        //        }
-        //    }
-        //    else
-        //    {
-        //        throw new NoFoodException(((Meal)grillable).Name + " <- Tego jedzenia nie ma już na grillu");
-        //    }
-        //}
+        public void TakeMealFromGrill(IGrillable grillable)
+        {
+            if (((Meal)grillable).Amount != 0)
+            {
+                foreach (var item in CurrentGrill.MealsGrilled)
+                {
+                    if (item.Name == ((Meal)grillable).Name)
+                    {
+                        item.Amount += 1;
+                        ((Meal)grillable).Amount -= 1;
+                    }
+                }
+            }
+            else
+            {
+                throw new NoFoodException(((Meal)grillable).Name + " <- Tego jedzenia nie ma już na grillu");
+            }
+        }
 
 
         //public void PutMealOnGrill(IGrillable grillable)
