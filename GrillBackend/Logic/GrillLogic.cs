@@ -175,19 +175,19 @@ namespace GrillBackend.Logic
             Meal result;
             if (meal is IGrillable)
             {
-                result = (Meal)CurrentGrill.MealsGrilled.Where(m => m.Name == meal.Name);
+                result = CurrentGrill.MealsGrilled.Where(m => m.Name == meal.Name).ToList()[0];
                 ((IGrillable)result).Feed();
                 MealGrillMemberEatGrilled.Invoke(meal, grillMember);
             }
             if (meal is INotGrillable) 
             {
-                result = (Meal)CurrentGrill.MealsPrepared.Where(m => m.Name == meal.Name);
+                result = CurrentGrill.MealsPrepared.Where(m => m.Name == meal.Name).ToList()[0];
                 ((INotGrillable)result).Feed();
                 MealGrillMemberEatNotGrilled.Invoke(meal, grillMember);
             }
             if (meal is Drink)
             {
-                result = (Meal)CurrentGrill.MealsPrepared.Where(m => m.Name == meal.Name);
+                result = CurrentGrill.MealsPrepared.Where(m => m.Name == meal.Name).ToList()[0];
                 ((Drink)result).DrinkSomeDrink();
                 MealGrillMemberDrinked.Invoke(meal, grillMember);
             }
@@ -195,14 +195,18 @@ namespace GrillBackend.Logic
 
         public int GetCurrentGrillWeight()
         {
-            var result = CurrentGrill.MealsAtGrill.Sum(g => g.Weight);
+            var result = CurrentGrill.MealsAtGrill.Sum(g => g.Weight * g.Amount);
             return result;
         }
 
-        public void ChangeStack(IGrillable sourceMeal, List<Food> destinationMeals)
+        public void ChangeStack(IGrillable sourceMeal, List<Food> destinationMeals, bool isZdejmowany)
         {
             List<Food> mealsToAdd = new List<Food>();
-            var result = CurrentGrill.MealsAtGrill.Sum(g => g.Weight);
+            var result = GetCurrentGrillWeight();
+            if (isZdejmowany && result > CurrentGrill.MaxGrillCap)
+            {
+                CurrentGrill.MaxGrillCap -= 150;
+            }
             if (result <= CurrentGrill.MaxGrillCap)
             {
                 if (((Food)sourceMeal).Amount != 0)
