@@ -114,7 +114,8 @@ namespace GrillFrontend.Views
 
         private void ButtonAddFood_Click(object sender, RoutedEventArgs e)
         {
-
+            MainWindow.grillLogic.BuySomeMeals();
+            allMealsList.Items.Refresh();
         }
 
         private void ButtonServeToSelectMember_Click(object sender, RoutedEventArgs e)
