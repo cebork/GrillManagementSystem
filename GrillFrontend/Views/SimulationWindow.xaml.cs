@@ -1,4 +1,5 @@
-﻿using GrillBackend.Models.Abstractions;
+﻿using GrillBackend.Exceptions;
+using GrillBackend.Models.Abstractions;
 using GrillBackend.Models.Enums;
 using GrillBackend.Models.GrillStuff;
 using System;
@@ -52,15 +53,15 @@ namespace GrillFrontend.Views
         private void ButtonToGrill_Click(object sender, RoutedEventArgs e)
         {
             //metoda
-            allMealsList.Items.Refresh();
-            atGrillList.Items.Refresh();
-        }
+                allMealsList.Items.Refresh();
+                atGrillList.Items.Refresh();
+            }
 
         private void ButtonGetFromGrill_Click(object sender, RoutedEventArgs e)
         {
             //metoda
             allMealsList.Items.Refresh();
-            atGrillList.Items.Refresh();
+                atGrillList.Items.Refresh();
 
         }
 
@@ -68,6 +69,11 @@ namespace GrillFrontend.Views
         {
             this.DragMove();
             e.Handled = true;
+        }
+
+        private void ButtonFeedAll_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

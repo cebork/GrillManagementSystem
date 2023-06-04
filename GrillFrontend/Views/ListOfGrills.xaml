@@ -42,8 +42,6 @@
                                                     <Setter Property="Visibility" Value="Visible" />
                                                 </DataTrigger>
                                                 <DataTrigger Binding="{Binding Path=Status, Converter={StaticResource statusConverter}}" Value="Zakończono">
-                                                    <Setter Property="Background" Value="DarkRed" />
-                                                    <Setter Property="Foreground" Value="White" />
                                                     <Setter Property="Visibility" Value="Hidden" />
                                                 </DataTrigger>
                                                 <Trigger Property="IsMouseOver" Value="True">
