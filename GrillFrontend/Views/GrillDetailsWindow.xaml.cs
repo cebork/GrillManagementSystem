@@ -21,29 +21,24 @@ namespace GrillFrontend.Views
     /// </summary>
     public partial class GrillDetailsWindow : Window
     {
-        public GrillDetailsWindow(Window parent,Grill grill)
+        public GrillDetailsWindow(Window parent, Grill grill)
         {
             Owner = parent;
             InitializeComponent();
             DataContext = grill;
             Goscie.ItemsSource = grill.GrillMembers;
             MainWindow.grillLogic.CurrentGrill = grill;
-            //Goscie.ItemsSource = MainWindow.grillLogic.GetGrillList();            
         }
 
         private void ButtonClose_Click(object sender, RoutedEventArgs e)
         {
             Close();
-            
         }
 
         private void ButtonEdit_Click(object sender, RoutedEventArgs e)
         {
             EditGrillWindow editGrillWindow = new EditGrillWindow(this, MainWindow.grillLogic.CurrentGrill);
             editGrillWindow.ShowDialog();
-            //Goscie.Items.Refresh();
-            
-            //Close();
         }
     }
 }

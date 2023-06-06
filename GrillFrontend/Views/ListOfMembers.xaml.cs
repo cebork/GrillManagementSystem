@@ -32,10 +32,5 @@ namespace GrillFrontend.Views
         {
             Close();
         }
-
-        private void ButtonEdit_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

@@ -67,9 +67,14 @@ namespace GrillFrontend.Views
                 {
                     listaGosci.Add((GrillMember)item.Item);
                 }
-                MainWindow.grillLogic.EditGrill(Name.Text, Description.Text, data1.Value.Date + time1, listaGosci);
-                Close();
-                Owner.Close();
+                if (data1 + time1 >= DateTime.Now)
+                {
+                    MainWindow.grillLogic.EditGrill(Name.Text, Description.Text, data1.Value.Date + time1, listaGosci);
+                    Close();
+                    Owner.Close();
+                }
+                else
+                    MessageBox.Show("Grill nie może odbyć się w przyszłości");
             }
             else
             {
