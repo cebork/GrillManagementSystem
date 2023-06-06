@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace GrillBackend.Logic
@@ -34,7 +35,7 @@ namespace GrillBackend.Logic
                     grillList = (List<Grill>)serializer.Deserialize(fileStream);
                 }
             }
-            catch(FileNotFoundException ex)
+            catch (FileNotFoundException ex)
             {
                 saveUpdatedData();
             }
@@ -61,7 +62,7 @@ namespace GrillBackend.Logic
 
         public void AddNewMember(GrillMember grillMember)
         {
-            if ((grillMember.Name == "" || grillMember.Name == null) && (grillMember.Surname == "" || grillMember.Surname == null) && (grillMember.Email == "" || grillMember.Email == null))
+            if (!string.IsNullOrEmpty(grillMember.Name) && !string.IsNullOrEmpty(grillMember.Surname) && !string.IsNullOrEmpty(grillMember.Email))
             {
                 if (!CurrentGrill.GrillMembers.Contains(grillMember))
                 {
@@ -73,15 +74,15 @@ namespace GrillBackend.Logic
                 }
                 else
                 {
-                    throw new GrillMemberAlreadyExistsException("Member już istniej");
+                    throw new GrillMemberAlreadyExistsException("Member już istnieje");
                 }
                 saveUpdatedData();
             }
             else
             {
-                throw new WrongInputsException("Podano niepoprawne dane");
+                throw new WrongInputsException("Wprowadź dane");
             }
-            
+
         }
 
         public void AddNewMemeberToGrill(GrillMember grillMember)
@@ -189,7 +190,7 @@ namespace GrillBackend.Logic
                     }
                 }
             }
-                
+
             return result;
         }
         public Meal FindMealByName(List<Meal> meals, string mealName)
@@ -234,7 +235,7 @@ namespace GrillBackend.Logic
             {
                 throw new MealOrMemberNotSelectedException("Nie wybrano grilowicza lub jedzenia");
             }
-            
+
         }
 
         public int GetCurrentGrillWeight()
@@ -321,7 +322,7 @@ namespace GrillBackend.Logic
             {
                 throw new GrillOverflowException("Grill przepełniony nie można dodać więcej rzeczy");
             }
-            
+
         }
 
         public List<string> CreateListOfMealsToSelect()
