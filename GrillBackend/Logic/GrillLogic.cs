@@ -64,8 +64,6 @@ namespace GrillBackend.Logic
         {
             if (!string.IsNullOrEmpty(grillMember.Name) && !string.IsNullOrEmpty(grillMember.Surname) && !string.IsNullOrEmpty(grillMember.Email))
             {
-                //if ((grillMember.Name == "" || grillMember.Name == null) && (grillMember.Surname == "" || grillMember.Surname == null) && (grillMember.Email == "" || grillMember.Email == null))
-                //{
                 if (!CurrentGrill.GrillMembers.Contains(grillMember))
                 {
                     CurrentGrill.GrillMembers.Add(grillMember);
