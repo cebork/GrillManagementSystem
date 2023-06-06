@@ -63,4 +63,16 @@ namespace GrillBackend.Exceptions
 		  System.Runtime.Serialization.SerializationInfo info,
 		  System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
 	}
+
+
+	[Serializable]
+	public class MealOrMemberNotSelectedException : Exception
+	{
+		public MealOrMemberNotSelectedException() { }
+		public MealOrMemberNotSelectedException(string message) : base(message) { }
+		public MealOrMemberNotSelectedException(string message, Exception inner) : base(message, inner) { }
+		protected MealOrMemberNotSelectedException(
+		  System.Runtime.Serialization.SerializationInfo info,
+		  System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+	}
 }
