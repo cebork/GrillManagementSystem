@@ -36,12 +36,17 @@ namespace GrillFrontend
 
             if (Name.Text != null && Date.SelectedDate.HasValue && Time.Value.HasValue)
             {
-                Grill grill = new Grill(Name.Text, Date.SelectedDate.Value + Time.Value.Value.TimeOfDay, Description.Text);
-                MainWindow.grillLogic.AddNewGrill(grill);
-                MainWindow.grillLogic.CurrentGrill = grill;
-                InvitePeopleWindow invitePeopleWindow = new InvitePeopleWindow(this);
-                invitePeopleWindow.ShowDialog();
-                Close();
+                if (Date.SelectedDate.Value + Time.Value.Value.TimeOfDay >= DateTime.Now)
+                {
+                    Grill grill = new Grill(Name.Text, Date.SelectedDate.Value + Time.Value.Value.TimeOfDay, Description.Text);
+                    MainWindow.grillLogic.AddNewGrill(grill);
+                    MainWindow.grillLogic.CurrentGrill = grill;
+                    InvitePeopleWindow invitePeopleWindow = new InvitePeopleWindow(this);
+                    invitePeopleWindow.ShowDialog();
+                    Close();
+                }
+                else
+                    MessageBox.Show("Grill nie może odbyć się w przyszłości");
             }
             else
                 MessageBox.Show("Wprowadź wymagane dane");

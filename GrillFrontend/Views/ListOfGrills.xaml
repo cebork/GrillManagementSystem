@@ -42,7 +42,16 @@
                                                     <Setter Property="Visibility" Value="Visible" />
                                                 </DataTrigger>
                                                 <DataTrigger Binding="{Binding Path=Status, Converter={StaticResource statusConverter}}" Value="Zakończono">
-                                                    <Setter Property="Visibility" Value="Hidden" />
+                                                    <Setter Property="IsEnabled" Value="False" />
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                                <Border Background="{TemplateBinding Background}" BorderBrush="Transparent" CornerRadius="5">
+                                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
                                                 </DataTrigger>
                                                 <Trigger Property="IsMouseOver" Value="True">
                                                     <Setter Property="Background" Value="OrangeRed"/>
@@ -73,7 +82,16 @@
                                                     <Setter Property="Visibility" Value="Visible" />
                                                 </DataTrigger>
                                                 <DataTrigger Binding="{Binding Path=Status, Converter={StaticResource statusConverter}}" Value="Zakończono">
-                                                    <Setter Property="Visibility" Value="Hidden" />
+                                                    <Setter Property="IsEnabled" Value="False" />
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                                <Border Background="{TemplateBinding Background}" BorderBrush="Transparent" CornerRadius="5">
+                                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
                                                 </DataTrigger>
                                                 <Trigger Property="IsMouseOver" Value="True">
                                                     <Setter Property="Background" Value="OrangeRed"/>

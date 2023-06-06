@@ -123,19 +123,9 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <ComboBox x:Name="selectMeal" HorizontalAlignment="Center" Margin="0,527,0,0" VerticalAlignment="Top" Width="264" Height="24">
-            <!--<ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Name}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>-->
         </ComboBox>
         <Label Content="Wybór grillowicza:" HorizontalAlignment="Left" Margin="178,503,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
         <Label Content="Wybór jedzonka:" HorizontalAlignment="Left" Margin="508,503,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
         <TextBlock Name="weight" HorizontalAlignment="Left" Margin="645,41,0,0" VerticalAlignment="Top" Width="127"/>
-
-
-
     </Grid>
 </Window>

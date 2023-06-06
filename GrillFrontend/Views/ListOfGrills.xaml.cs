@@ -35,7 +35,6 @@ namespace GrillFrontend
             Owner = parentWindow;
             InitializeComponent();
             lista.ItemsSource = MainWindow.grillLogic.grillList;
-            
         }
 
         private void ButtonClose_Click(object sender, RoutedEventArgs e)
@@ -60,7 +59,6 @@ namespace GrillFrontend
 
         private void ButtonSimulation_Click(object sender, RoutedEventArgs e)
         {
-            
             MainWindow.grillLogic.CurrentGrill = ((FrameworkElement)sender).DataContext as Grill;
             SimulationWindow simulationWindow = new SimulationWindow(this);
             simulationWindow.ShowDialog();

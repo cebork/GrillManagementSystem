@@ -32,22 +32,12 @@ namespace GrillFrontend.Views
             Owner = parentWindow;
             InitializeComponent();
             Title = MainWindow.grillLogic.CurrentGrill.Name;
-            //List<IGrillable> list = new List<IGrillable>(); 
-            //foreach (var item in MainWindow.grillLogic.CurrentGrill.MealsPrepared)
-            //{
-            //    if(item is IGrillable)
-            //    {
-            //        list.Add((IGrillable)item);
-            //    }
-            //}
-            //allMealsList.ItemsSource = list;
-
             allMealsList.ItemsSource = MainWindow.grillLogic.CurrentGrill.MealsPrepared;
             atGrillList.ItemsSource = MainWindow.grillLogic.CurrentGrill.MealsAtGrill;
             readyList.ItemsSource = MainWindow.grillLogic.CurrentGrill.MealsGrilled;
             selectMember.ItemsSource = MainWindow.grillLogic.CurrentGrill.GrillMembers;
             selectMeal.ItemsSource = MainWindow.grillLogic.CreateListOfMealsToSelect();
-            //selectMeal.ItemsSource = MainWindow.grillLogic.CurrentGrill.MealsPrepared;
+
             Closing += SimulationWindow_Closing;
             closeButton.Click += ButtonEndGrill_Click;
             weight.Text = "0 / " + (MainWindow.grillLogic.CurrentGrill.MaxGrillCap+150).ToString() + " g";
@@ -148,7 +138,6 @@ namespace GrillFrontend.Views
                 })
             );
             MessageBox.Show(drinked);
-
         }
 
         private void ButtonAddFood_Click(object sender, RoutedEventArgs e)
@@ -176,24 +165,17 @@ namespace GrillFrontend.Views
             {
                 MessageBox.Show(ex.Message);
             }
-            
 
             selectMeal.ItemsSource = MainWindow.grillLogic.CreateListOfMealsToSelect();
             selectMeal.Items.Refresh();
-            
-
         }
 
         private void SimulationWindow_Closing(object sender, CancelEventArgs e)
         {
             MainWindow.grillLogic.ChangeStatus(Status.Ended);
             MainWindow.grillLogic.OnMealGrillMemberDrinked -= ShowComunicateOnMealGrillMemberDrinked;
-
             MainWindow.grillLogic.OnMealGrillMemberEatGrilled -= ShowComunicateOnMealGrillMemberEatGrilled;
-
             MainWindow.grillLogic.OnMealGrillMemberEatNotGrilled -= ShowComunicateOnMealGrillMemberEatNotGrilled;
-
-
         }
     }
 }
