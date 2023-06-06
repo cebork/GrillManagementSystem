@@ -10,10 +10,7 @@ namespace GrillBackend.Models.Enums
 {
     public enum Status
     {
-        [Display(Name = "aaaaaaaaaa")]
         preparing,
-        [Display(Name = "in proggres")]
-        in_progress,
         Ended
 
     }
