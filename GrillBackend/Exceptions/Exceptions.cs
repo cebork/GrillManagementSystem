@@ -75,4 +75,16 @@ namespace GrillBackend.Exceptions
 		  System.Runtime.Serialization.SerializationInfo info,
 		  System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
 	}
+
+
+	[Serializable]
+	public class WrongInputsException : Exception
+	{
+		public WrongInputsException() { }
+		public WrongInputsException(string message) : base(message) { }
+		public WrongInputsException(string message, Exception inner) : base(message, inner) { }
+		protected WrongInputsException(
+		  System.Runtime.Serialization.SerializationInfo info,
+		  System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+	}
 }
