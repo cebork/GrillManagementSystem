@@ -36,6 +36,10 @@ namespace GrillFrontend.Views
                 {
                     MainWindow.grillLogic.AddNewMember(new GrillMember(Name.Text, Surname.Text, Email.Text));
                 }
+                catch (WrongInputsException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
                 catch(GrillMemberAlreadyExistsException ex)
                 {
                     MessageBox.Show(ex.Message);
