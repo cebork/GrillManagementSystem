@@ -60,9 +60,9 @@ namespace GrillFrontend
 
         private void ButtonSimulation_Click(object sender, RoutedEventArgs e)
         {
-            SimulationWindow simulationWindow = new SimulationWindow(this);
+            
             MainWindow.grillLogic.CurrentGrill = ((FrameworkElement)sender).DataContext as Grill;
-            MainWindow.grillLogic.ChangeStatus(Status.in_progress);
+            SimulationWindow simulationWindow = new SimulationWindow(this);
             simulationWindow.ShowDialog();
             lista.Items.Refresh();
         }

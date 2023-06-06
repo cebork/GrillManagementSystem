@@ -52,16 +52,25 @@ namespace GrillFrontend.Views
             closeButton.Click += ButtonEndGrill_Click;
             weight.Text = "0 / " + (MainWindow.grillLogic.CurrentGrill.MaxGrillCap+150).ToString() + " g";
 
-            MainWindow.grillLogic.OnMealGrillMemberDrinked += (meal, grillMember)
-                => MessageBox.Show(grillMember.Name + " " + grillMember.Surname + " wypił/a " + meal.Name);
+            MainWindow.grillLogic.OnMealGrillMemberDrinked += ShowComunicateOnMealGrillMemberDrinked;
 
-            MainWindow.grillLogic.OnMealGrillMemberEatGrilled += (meal, grillMember)
-                => MessageBox.Show(grillMember.Name + " " + grillMember.Surname + " zjadł/a z grilla " + meal.Name);
+            MainWindow.grillLogic.OnMealGrillMemberEatGrilled += ShowComunicateOnMealGrillMemberEatGrilled;
 
-            MainWindow.grillLogic.OnMealGrillMemberEatNotGrilled += (meal, grillMember)
-                => MessageBox.Show(grillMember.Name + " " + grillMember.Surname + " zjadł/a " + meal.Name);
+            MainWindow.grillLogic.OnMealGrillMemberEatNotGrilled += ShowComunicateOnMealGrillMemberEatNotGrilled;
         }
 
+        public void ShowComunicateOnMealGrillMemberDrinked(Meal meal, GrillMember grillMember)
+        {
+            MessageBox.Show(grillMember.Name + " " + grillMember.Surname + " wypił/a " + meal.Name);
+        }
+        public void ShowComunicateOnMealGrillMemberEatGrilled(Meal meal, GrillMember grillMember)
+        {
+            MessageBox.Show(grillMember.Name + " " + grillMember.Surname + " zjadł/a z grilla " + meal.Name);
+        }
+        public void ShowComunicateOnMealGrillMemberEatNotGrilled(Meal meal, GrillMember grillMember)
+        {
+            MessageBox.Show(grillMember.Name + " " + grillMember.Surname + " zjadł/a " + meal.Name);
+        }
         private void ButtonEndGrill_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.grillLogic.ChangeStatus(Status.Ended);
@@ -171,13 +180,20 @@ namespace GrillFrontend.Views
 
             selectMeal.ItemsSource = MainWindow.grillLogic.CreateListOfMealsToSelect();
             selectMeal.Items.Refresh();
-
+            
 
         }
 
         private void SimulationWindow_Closing(object sender, CancelEventArgs e)
         {
             MainWindow.grillLogic.ChangeStatus(Status.Ended);
+            MainWindow.grillLogic.OnMealGrillMemberDrinked -= ShowComunicateOnMealGrillMemberDrinked;
+
+            MainWindow.grillLogic.OnMealGrillMemberEatGrilled -= ShowComunicateOnMealGrillMemberEatGrilled;
+
+            MainWindow.grillLogic.OnMealGrillMemberEatNotGrilled -= ShowComunicateOnMealGrillMemberEatNotGrilled;
+
+
         }
     }
 }

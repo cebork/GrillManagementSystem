@@ -16,7 +16,6 @@ namespace GrillFrontend.Converters
             switch (value)
             {
                 case Status.preparing: return "W trakcie przygotowania"; break;
-                case Status.in_progress: return "W trakcie"; break;
                 case Status.Ended: return "Zakończono"; break;
                 default: return "idk";
             }

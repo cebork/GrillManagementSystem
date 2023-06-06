@@ -72,7 +72,8 @@ namespace GrillBackend.Models.GrillStuff
                 $"Name: {Name}" +
                 $"Description: {Description}" +
                 $"DateOfGrillStart: {DateOfGrillStart}" +
-                $"Status: {Status}";
+                $"Status: {Status}" +
+                $"Members: ";
             foreach (var member in GrillMembers)
             {
                 toString += member.ToString();
