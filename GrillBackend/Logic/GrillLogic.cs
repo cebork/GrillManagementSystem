@@ -61,19 +61,27 @@ namespace GrillBackend.Logic
 
         public void AddNewMember(GrillMember grillMember)
         {
-            if (!CurrentGrill.GrillMembers.Contains(grillMember))
+            if ((grillMember.Name == "" || grillMember.Name == null) && (grillMember.Surname == "" || grillMember.Surname == null) && (grillMember.Email == "" || grillMember.Email == null))
             {
-                CurrentGrill.GrillMembers.Add(grillMember);
-            }
-            if (!MemberList.Contains(grillMember))
-            {
-                MemberList.Add(grillMember);
+                if (!CurrentGrill.GrillMembers.Contains(grillMember))
+                {
+                    CurrentGrill.GrillMembers.Add(grillMember);
+                }
+                if (!MemberList.Contains(grillMember))
+                {
+                    MemberList.Add(grillMember);
+                }
+                else
+                {
+                    throw new GrillMemberAlreadyExistsException("Member już istniej");
+                }
+                saveUpdatedData();
             }
             else
             {
-                throw new GrillMemberAlreadyExistsException("Member już istniej");
+                throw new WrongInputsException("Podano niepoprawne dane");
             }
-            saveUpdatedData();
+            
         }
 
         public void AddNewMemeberToGrill(GrillMember grillMember)
