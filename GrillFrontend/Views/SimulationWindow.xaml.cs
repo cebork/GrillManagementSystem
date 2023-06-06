@@ -2,23 +2,8 @@
 using GrillBackend.Models.Abstractions;
 using GrillBackend.Models.Enums;
 using GrillBackend.Models.GrillStuff;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Xceed.Wpf.Toolkit.Primitives;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace GrillFrontend.Views
 {
@@ -40,7 +25,7 @@ namespace GrillFrontend.Views
 
             Closing += SimulationWindow_Closing;
             closeButton.Click += ButtonEndGrill_Click;
-            weight.Text = "0 / " + (MainWindow.grillLogic.CurrentGrill.MaxGrillCap+150).ToString() + " g";
+            weight.Text = "0 / " + (MainWindow.grillLogic.CurrentGrill.MaxGrillCap + 150).ToString() + " g";
 
             MainWindow.grillLogic.OnMealGrillMemberDrinked += ShowComunicateOnMealGrillMemberDrinked;
 
@@ -155,7 +140,7 @@ namespace GrillFrontend.Views
             try
             {
                 MainWindow.grillLogic.GiveMealToChosenOne(mealNAme, grillMember);
-                
+
             }
             catch (MealOrMemberNotSelectedException ex)
             {

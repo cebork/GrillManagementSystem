@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GrillBackend.Models.Abstractions
+﻿namespace GrillBackend.Models.Abstractions
 {
     public abstract class Food : Meal
     {
         public int Weight { get; set; }
-        public Food() {}
+        public Food() { }
 
         protected Food(string name, int amount, int weight) : base(name, amount)
         {

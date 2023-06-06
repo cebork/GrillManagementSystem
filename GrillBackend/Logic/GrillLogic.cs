@@ -2,13 +2,6 @@
 using GrillBackend.Models.Abstractions;
 using GrillBackend.Models.Enums;
 using GrillBackend.Models.GrillStuff;
-using GrillBackend.Models.Meals;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace GrillBackend.Logic
@@ -19,7 +12,6 @@ namespace GrillBackend.Logic
         public Grill CurrentGrill { get; set; }
         public List<GrillMember> MemberList { get; set; }
 
-        private Dictionary<IGrillable, Thread> GrillableThreadDict = new Dictionary<IGrillable, Thread>();
         private XmlSerializer serializer = new XmlSerializer(typeof(List<Grill>));
         public delegate void MealGrillMemberDelegate(Meal meal, GrillMember grillMember);
         public delegate void GrillMemberDelegate(GrillMember grillMember);
