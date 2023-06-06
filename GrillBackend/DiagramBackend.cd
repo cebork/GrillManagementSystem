@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GrillBackend.Logic.GrillLogic">
+    <Position X="26" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="GrillBackend.Logic.GrillLogic.MealGrillMemberDelegate">
+        <TypeIdentifier>
+          <NewMemberFileName>Logic\GrillLogic.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="GrillBackend.Logic.GrillLogic.GrillMemberDelegate">
+        <TypeIdentifier>
+          <NewMemberFileName>Logic\GrillLogic.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AQAAAQAAIAAAAEICAoABAARAGARUAACAIACAIkEIABA=</HashCode>
+      <FileName>Logic\GrillLogic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GrillBackend.Exceptions.GrillNotExistException">
+    <Position X="10" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\Exceptions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GrillBackend.Exceptions.GrillMemeberNotExistException">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\Exceptions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GrillBackend.Exceptions.GrillMemberAlreadyExistsException">
+    <Position X="10" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\Exceptions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GrillBackend.Exceptions.NoFoodException">
+    <Position X="10" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\Exceptions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GrillBackend.Exceptions.GrillOverflowException">
+    <Position X="10" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\Exceptions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GrillBackend.Exceptions.MealOrMemberNotSelectedException">
+    <Position X="10" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\Exceptions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GrillBackend.Constants.Constants">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Constants\Constants.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GrillBackend.Models.Abstractions.Drink">
+    <Position X="13.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAEgAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Abstractions\Drink.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GrillBackend.Models.Abstractions.Food">
+    <Position X="17.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEgAAAAAAAACAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Abstractions\Food.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GrillBackend.Models.Abstractions.Meal">
+    <Position X="15.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEgAAAAASAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Abstractions\Meal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GrillBackend.Models.GrillStuff.Grill">
+    <Position X="23.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAggAAEgAAAgAQAAAAAKIAAABQAQgAAAAA=</HashCode>
+      <FileName>Models\GrillStuff\Grill.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GrillBackend.Models.GrillStuff.GrillMember">
+    <Position X="21.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAEgAAAAAQgBAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\GrillStuff\GrillMember.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GrillBackend.Models.Meals.BloodPudding">
+    <Position X="15.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAEgAAAAAAAAAAAAIAAAAAAAAAAABA=</HashCode>
+      <FileName>Models\Meals\BloodPudding.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Bottom" Position="0.337" />
+  </Class>
+  <Class Name="GrillBackend.Models.Meals.Bread">
+    <Position X="20.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAEgAAAAAAAAAAAAIAAAAAAAAAAABA=</HashCode>
+      <FileName>Models\Meals\Bread.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Bottom" Position="0.268" />
+  </Class>
+  <Class Name="GrillBackend.Models.Meals.Chipsy">
+    <Position X="22.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAEgAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Meals\Chipsy.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Bottom" Position="0.378" />
+  </Class>
+  <Class Name="GrillBackend.Models.Meals.ChuckSteak">
+    <Position X="24.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAEgAAAAAAAAAAAAIAAAAAAAAAAABA=</HashCode>
+      <FileName>Models\Meals\ChuckSteak.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Bottom" Position="0.255" />
+  </Class>
+  <Class Name="GrillBackend.Models.Meals.Kebab">
+    <Position X="17.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAEgAAAAAAAAAAAAIAAAAAAAAAAABA=</HashCode>
+      <FileName>Models\Meals\Kebab.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Bottom" Position="0.323" />
+  </Class>
+  <Class Name="GrillBackend.Models.Meals.Sausage">
+    <Position X="19" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAEgAAAAAAAAAAAAIAAAAAAAAAAABA=</HashCode>
+      <FileName>Models\Meals\Sausage.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Bottom" Position="0.214" />
+  </Class>
+  <Class Name="GrillBackend.Models.Meals.Tea">
+    <Position X="11.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAEgAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Meals\Tea.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GrillBackend.Models.Meals.Water">
+    <Position X="13.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAEgAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Meals\Water.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="GrillBackend.Models.Abstractions.IGrillable">
+    <Position X="19.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Abstractions\IGrillable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GrillBackend.Models.Abstractions.INotGrillable">
+    <Position X="19.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Abstractions\INotGrillable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="GrillBackend.Models.Enums.Status">
+    <Position X="19.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAAAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Enums\Status.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

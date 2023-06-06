@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrillFrontend", "GrillFront
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackendTests", "BackendTests\BackendTests.csproj", "{907D937D-F0EF-4905-9C29-643F7D690604}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestowaAplikacja", "TestowaAplikacja\TestowaAplikacja.csproj", "{2B3E6769-5F44-4FF1-8980-0E6EACBD53E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestowaAplikacja", "TestowaAplikacja\TestowaAplikacja.csproj", "{2B3E6769-5F44-4FF1-8980-0E6EACBD53E2}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "GRILL", "GRILL\GRILL.vdproj", "{C671241D-EEC3-4E03-AC6B-D53FA7549BDF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,8 @@ Global
 		{2B3E6769-5F44-4FF1-8980-0E6EACBD53E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B3E6769-5F44-4FF1-8980-0E6EACBD53E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B3E6769-5F44-4FF1-8980-0E6EACBD53E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C671241D-EEC3-4E03-AC6B-D53FA7549BDF}.Debug|Any CPU.ActiveCfg = Debug
+		{C671241D-EEC3-4E03-AC6B-D53FA7549BDF}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
