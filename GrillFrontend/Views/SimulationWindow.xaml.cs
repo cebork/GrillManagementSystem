@@ -46,18 +46,19 @@ namespace GrillFrontend.Views
             atGrillList.ItemsSource = MainWindow.grillLogic.CurrentGrill.MealsAtGrill;
             readyList.ItemsSource = MainWindow.grillLogic.CurrentGrill.MealsGrilled;
             selectMember.ItemsSource = MainWindow.grillLogic.CurrentGrill.GrillMembers;
-            selectMeal.ItemsSource = MainWindow.grillLogic.CurrentGrill.MealsPrepared;
+            selectMeal.ItemsSource = MainWindow.grillLogic.CreateListOfMealsToSelect();
+            //selectMeal.ItemsSource = MainWindow.grillLogic.CurrentGrill.MealsPrepared;
             Closing += SimulationWindow_Closing;
             closeButton.Click += ButtonEndGrill_Click;
             weight.Text = "0 / " + (MainWindow.grillLogic.CurrentGrill.MaxGrillCap+150).ToString() + " g";
 
-            MainWindow.grillLogic.MealGrillMemberDrinked += (meal, grillMember)
+            MainWindow.grillLogic.OnMealGrillMemberDrinked += (meal, grillMember)
                 => MessageBox.Show(grillMember.Name + " " + grillMember.Surname + " wypił/a " + meal.Name);
 
-            MainWindow.grillLogic.MealGrillMemberEatGrilled += (meal, grillMember)
+            MainWindow.grillLogic.OnMealGrillMemberEatGrilled += (meal, grillMember)
                 => MessageBox.Show(grillMember.Name + " " + grillMember.Surname + " zjadł/a z grilla " + meal.Name);
 
-            MainWindow.grillLogic.MealGrillMemberEatNotGrilled += (meal, grillMember)
+            MainWindow.grillLogic.OnMealGrillMemberEatNotGrilled += (meal, grillMember)
                 => MessageBox.Show(grillMember.Name + " " + grillMember.Surname + " zjadł/a " + meal.Name);
         }
 
@@ -71,7 +72,7 @@ namespace GrillFrontend.Views
         {
             try
             {
-                MainWindow.grillLogic.ChangeStack((IGrillable)((FrameworkElement)sender).DataContext, MainWindow.grillLogic.CurrentGrill.MealsAtGrill, true);
+                MainWindow.grillLogic.ChangeStack((IGrillable)((FrameworkElement)sender).DataContext, MainWindow.grillLogic.CurrentGrill.MealsAtGrill, false);
                 allMealsList.Items.Refresh();
                 atGrillList.Items.Refresh();
                 weight.Text = MainWindow.grillLogic.GetCurrentGrillWeight().ToString() + " / " + (MainWindow.grillLogic.CurrentGrill.MaxGrillCap + 150).ToString() + " g";
@@ -90,10 +91,12 @@ namespace GrillFrontend.Views
         {
             try
             {
-                MainWindow.grillLogic.ChangeStack((IGrillable)((FrameworkElement)sender).DataContext, MainWindow.grillLogic.CurrentGrill.MealsGrilled, false);
+                MainWindow.grillLogic.ChangeStack((IGrillable)((FrameworkElement)sender).DataContext, MainWindow.grillLogic.CurrentGrill.MealsGrilled, true);
                 atGrillList.Items.Refresh();
                 readyList.Items.Refresh();
                 weight.Text = MainWindow.grillLogic.GetCurrentGrillWeight().ToString() + " / " + (MainWindow.grillLogic.CurrentGrill.MaxGrillCap + 150).ToString() + " g";
+                selectMeal.ItemsSource = MainWindow.grillLogic.CreateListOfMealsToSelect();
+                selectMeal.Items.Refresh();
             }
             catch (NoFoodException ex)
             {
@@ -106,13 +109,13 @@ namespace GrillFrontend.Views
         {
             string eated = "";
             MainWindow.grillLogic.FeedEveryoneWithGrillable(
-                new GrillBackend.Logic.GrillLogic.MealGrillMemberFeededDelegate((meal, grillMember) =>
+                new GrillBackend.Logic.GrillLogic.MealGrillMemberDelegate((meal, grillMember) =>
                 {
                     readyList.Items.Refresh();
                     eated += grillMember.Name + " " + grillMember.Surname + " zjadł/a " + meal.Name + "\n";
 
                 }),
-                new GrillBackend.Logic.GrillLogic.MealGrillMemberNotFeededDelegate(grillMember =>
+                new GrillBackend.Logic.GrillLogic.GrillMemberDelegate(grillMember =>
                 {
                     eated += grillMember.Name + " " + grillMember.Surname + " nic nie zjadł/a bo siem skomczyło :(\n";
                 })
@@ -124,13 +127,13 @@ namespace GrillFrontend.Views
         {
             string drinked = "";
             MainWindow.grillLogic.ServeDrinkAll(
-                new GrillBackend.Logic.GrillLogic.MealGrillMemberFeededDelegate((meal, grillMember) =>
+                new GrillBackend.Logic.GrillLogic.MealGrillMemberDelegate((meal, grillMember) =>
                 {
                     allMealsList.Items.Refresh();
                     drinked += grillMember.Name + " " + grillMember.Surname + " wypił/a " + meal.Name + "\n";
 
                 }),
-                new GrillBackend.Logic.GrillLogic.MealGrillMemberNotFeededDelegate(grillMember =>
+                new GrillBackend.Logic.GrillLogic.GrillMemberDelegate(grillMember =>
                 {
                     drinked += grillMember.Name + " " + grillMember.Surname + " nic nie wypił/a bo siem skomczyło :(\n";
                 })
@@ -148,21 +151,27 @@ namespace GrillFrontend.Views
         private void ButtonServeToSelectMember_Click(object sender, RoutedEventArgs e)
         {
             GrillMember grillMember = (GrillMember)selectMember.SelectedValue;
-            Meal meal = (Meal)selectMeal.SelectedValue;
+            string mealNAme = (string)selectMeal.SelectedValue;
             allMealsList.Items.Refresh();
             readyList.Items.Refresh();
             try
             {
-                MainWindow.grillLogic.GiveMealToChosenOne(meal, grillMember);
+                MainWindow.grillLogic.GiveMealToChosenOne(mealNAme, grillMember);
+                
             }
-            catch(NoFoodException ex)
+            catch (MealOrMemberNotSelectedException ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            //TODO do porawki odświezenie
-            selectMeal.ItemsSource = MainWindow.grillLogic.CurrentGrill.MealsPrepared;
-            selectMeal.Items.Refresh();
+            catch (NoFoodException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             
+
+            selectMeal.ItemsSource = MainWindow.grillLogic.CreateListOfMealsToSelect();
+            selectMeal.Items.Refresh();
+
 
         }
 

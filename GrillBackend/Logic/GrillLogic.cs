@@ -20,11 +20,11 @@ namespace GrillBackend.Logic
 
         private Dictionary<IGrillable, Thread> GrillableThreadDict = new Dictionary<IGrillable, Thread>();
         private XmlSerializer serializer = new XmlSerializer(typeof(List<Grill>));
-        public delegate void MealGrillMemberFeededDelegate(Meal meal, GrillMember grillMember);
-        public delegate void MealGrillMemberNotFeededDelegate(GrillMember grillMember);
-        public event MealGrillMemberFeededDelegate MealGrillMemberDrinked;
-        public event MealGrillMemberFeededDelegate MealGrillMemberEatGrilled;
-        public event MealGrillMemberFeededDelegate MealGrillMemberEatNotGrilled;
+        public delegate void MealGrillMemberDelegate(Meal meal, GrillMember grillMember);
+        public delegate void GrillMemberDelegate(GrillMember grillMember);
+        public event MealGrillMemberDelegate OnMealGrillMemberDrinked;
+        public event MealGrillMemberDelegate OnMealGrillMemberEatGrilled;
+        public event MealGrillMemberDelegate OnMealGrillMemberEatNotGrilled;
         public GrillLogic()
         {
             try
@@ -102,7 +102,7 @@ namespace GrillBackend.Logic
             saveUpdatedData();
         }
 
-        public void FeedEveryoneWithGrillable(MealGrillMemberFeededDelegate mealGrillMemberFeededDelegate, MealGrillMemberNotFeededDelegate mealGrillMemberNotFeededDelegate)
+        public void FeedEveryoneWithGrillable(MealGrillMemberDelegate mealGrillMemberDelegate, GrillMemberDelegate grillMemberDelegate)
         {
             bool ifEated = false;
             foreach (var item in CurrentGrill.GrillMembers)
@@ -112,20 +112,20 @@ namespace GrillBackend.Logic
                     if (meal.Amount > 0)
                     {
                         ((IGrillable)meal).Feed();
-                        mealGrillMemberFeededDelegate(meal, item);
+                        mealGrillMemberDelegate(meal, item);
                         ifEated = true;
                         break;
                     }
                 }
                 if (!ifEated)
                 {
-                    mealGrillMemberNotFeededDelegate(item);
+                    grillMemberDelegate(item);
                 }
                 ifEated = false;
             }
         }
 
-        public void ServeDrinkAll(MealGrillMemberFeededDelegate mealGrillMemberFeededDelegate, MealGrillMemberNotFeededDelegate mealGrillMemberNotFeededDelegate)
+        public void ServeDrinkAll(MealGrillMemberDelegate mealGrillMemberDelegate, GrillMemberDelegate grillMemberDelegate)
         {
             bool ifDrinked = false;
             foreach (var item in CurrentGrill.GrillMembers)
@@ -135,14 +135,14 @@ namespace GrillBackend.Logic
                     if (meal.Amount > 0 && meal is Drink)
                     {
                         ((Drink)meal).DrinkSomeDrink();
-                        mealGrillMemberFeededDelegate(meal, item);
+                        mealGrillMemberDelegate(meal, item);
                         ifDrinked = true;
                         break;
                     }
                 }
                 if (!ifDrinked)
                 {
-                    mealGrillMemberNotFeededDelegate(item);
+                    grillMemberDelegate(item);
                 }
                 ifDrinked = false;
             }
@@ -157,40 +157,76 @@ namespace GrillBackend.Logic
             }
         }
 
-        public bool CheckIfTableContainsElementByName(Meal meal, List<Food> meals)
+        public bool CheckIfTableContainsElementByName(Meal meal, List<Food> meals, bool isZdejmowany)
         {
             bool result = false;
-            foreach (var item in meals)
+            if (isZdejmowany)
             {
-                if (item.Name == meal.Name)
+                foreach (var item in meals)
                 {
-                    result = true;
+                    string destTempLocal = meal.Name + " z grilla";
+                    if (item.Name == destTempLocal)
+                    {
+                        result = true;
+                    }
                 }
             }
+            else
+            {
+                foreach (var item in meals)
+                {
+                    if (item.Name == meal.Name)
+                    {
+                        result = true;
+                    }
+                }
+            }
+                
             return result;
         }
-
-        public void GiveMealToChosenOne(Meal meal, GrillMember grillMember)
+        public Meal FindMealByName(List<Meal> meals, string mealName)
         {
-            Meal result;
-            if (meal is IGrillable)
+            return meals.Where(m => m.Name == mealName).First();
+        }
+        public Food FindFoodByName(List<Food> foods, string foodName)
+        {
+            return foods.Where(m => m.Name == foodName).First();
+        }
+        public void GiveMealToChosenOne(string meal, GrillMember grillMember)
+        {
+            if (meal != null && grillMember != null)
             {
-                result = CurrentGrill.MealsGrilled.Where(m => m.Name == meal.Name).ToList()[0];
-                ((IGrillable)result).Feed();
-                MealGrillMemberEatGrilled.Invoke(meal, grillMember);
+                Meal result;
+                if (meal.Contains(" z grilla"))
+                {
+                    result = FindFoodByName(CurrentGrill.MealsGrilled, meal);
+                }
+                else
+                {
+                    result = FindMealByName(CurrentGrill.MealsPrepared, meal);
+                }
+
+                if (result is Drink)
+                {
+                    ((Drink)result).DrinkSomeDrink();
+                    OnMealGrillMemberDrinked.Invoke(result, grillMember);
+                }
+                else if (result is INotGrillable)
+                {
+                    ((INotGrillable)result).Feed();
+                    OnMealGrillMemberEatNotGrilled.Invoke(result, grillMember);
+                }
+                else if (result is IGrillable)
+                {
+                    ((IGrillable)result).Feed();
+                    OnMealGrillMemberEatGrilled.Invoke(result, grillMember);
+                }
             }
-            if (meal is INotGrillable) 
+            else
             {
-                result = CurrentGrill.MealsPrepared.Where(m => m.Name == meal.Name).ToList()[0];
-                ((INotGrillable)result).Feed();
-                MealGrillMemberEatNotGrilled.Invoke(meal, grillMember);
+                throw new MealOrMemberNotSelectedException("Nie wybrano grilowicza lub jedzenia");
             }
-            if (meal is Drink)
-            {
-                result = CurrentGrill.MealsPrepared.Where(m => m.Name == meal.Name).ToList()[0];
-                ((Drink)result).DrinkSomeDrink();
-                MealGrillMemberDrinked.Invoke(meal, grillMember);
-            }
+            
         }
 
         public int GetCurrentGrillWeight()
@@ -203,44 +239,59 @@ namespace GrillBackend.Logic
         {
             List<Food> mealsToAdd = new List<Food>();
             var result = GetCurrentGrillWeight();
-            if (isZdejmowany && result > CurrentGrill.MaxGrillCap)
-            {
-                CurrentGrill.MaxGrillCap -= 150;
-            }
-            if (result <= CurrentGrill.MaxGrillCap)
+            if (result <= CurrentGrill.MaxGrillCap || (isZdejmowany && result > 0))
             {
                 if (((Food)sourceMeal).Amount != 0)
                 {
                     if (destinationMeals.Count > 0)
                     {
-                        foreach (var item in destinationMeals)
+                        if (CheckIfTableContainsElementByName((Food)sourceMeal, destinationMeals, isZdejmowany))
                         {
-
-                            if (CheckIfTableContainsElementByName((Food)sourceMeal, destinationMeals))
+                            foreach (var item2 in destinationMeals)
                             {
-                                foreach (var item2 in destinationMeals)
+                                if (isZdejmowany)
+                                {
+                                    string tempDest = ((Food)sourceMeal).Name + " z grilla";
+                                    if (item2.Name == tempDest)
+                                    {
+                                        item2.Amount += 1;
+                                        ((Food)sourceMeal).Amount -= 1;
+                                        break;
+                                    }
+                                }
+                                else
+                                {
                                     if (item2.Name == ((Food)sourceMeal).Name)
                                     {
                                         item2.Amount += 1;
                                         ((Food)sourceMeal).Amount -= 1;
+                                        break;
                                     }
-                                break;
+                                }
+
                             }
-                            else
+                        }
+                        else
+                        {
+                            Food tempMeal = (Food)sourceMeal.Clone();
+                            tempMeal.Amount = 0;
+                            if (isZdejmowany)
                             {
-                                Food tempMeal = (Food)sourceMeal.Clone();
-                                tempMeal.Amount = 0;
-                                mealsToAdd.Add(tempMeal);
-                                tempMeal.Amount += 1;
-                                ((Food)sourceMeal).Amount -= 1;
-                                break;
+                                tempMeal.Name += " z grilla";
                             }
+                            mealsToAdd.Add(tempMeal);
+                            tempMeal.Amount += 1;
+                            ((Food)sourceMeal).Amount -= 1;
                         }
                     }
                     else
                     {
                         Food tempMeal = (Food)sourceMeal.Clone();
                         tempMeal.Amount = 0;
+                        if (isZdejmowany)
+                        {
+                            tempMeal.Name += " z grilla";
+                        }
                         mealsToAdd.Add(tempMeal);
                         tempMeal.Amount += 1;
                         ((Food)sourceMeal).Amount -= 1;
@@ -263,6 +314,18 @@ namespace GrillBackend.Logic
                 throw new GrillOverflowException("Grill przepełniony nie można dodać więcej rzeczy");
             }
             
+        }
+
+        public List<string> CreateListOfMealsToSelect()
+        {
+            List<string> resultList = new List<string>();
+            List<string> notGrillableList = CurrentGrill.MealsPrepared.Where(meal => meal is INotGrillable).Select(m => m.Name).ToList();
+            List<string> drinkList = CurrentGrill.MealsPrepared.Where(meal => meal is Drink).Select(m => m.Name).ToList();
+            List<string> mealsGirilledList = CurrentGrill.MealsGrilled.Where(meal => meal is IGrillable).Select(m => m.Name).ToList();
+            resultList.AddRange(notGrillableList);
+            resultList.AddRange(drinkList);
+            resultList.AddRange(mealsGirilledList);
+            return resultList;
         }
 
         public void saveUpdatedData()
